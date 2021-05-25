@@ -8,8 +8,10 @@ use App\Model\Player;
 use App\Model\QInput;
 use App\Model\Question;
 use App\Model\Round;
+use App\Model\Team;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommonController extends Controller
 {
@@ -91,9 +93,65 @@ class CommonController extends Controller
             $question["qinputs"] = QInput::where("qid", "=", $question['id'])->get();
         }
 
-        $data = array('goalkeepers'=>$goalkeepers, 'defender1'=>$defender1, 'defender2'=>$defender2, 'midfielder1'=>$midfielder1, 'midfielder2'=>$midfielder2, 'forward1'=>$forward1, 'forward2'=>$forward2, 'questions'=>$questions);
+        $fixtures = Fixture::where("round", "=", $request->round)->get();
+
+        $data = array(
+            'goalkeepers'=>$goalkeepers, 
+            'defender1'=>$defender1, 
+            'defender2'=>$defender2, 
+            'midfielder1'=>$midfielder1, 
+            'midfielder2'=>$midfielder2, 
+            'forward1'=>$forward1, 
+            'forward2'=>$forward2, 
+            'questions'=>$questions, 
+            'fixtures'=>$fixtures
+        );
 
         return response()->json($data, 200);
+
+    }
+    public function submitsave(Request $request) {
+
+        $record = Team::where("jid", "=", Auth::user()->id)->where("round", "=", $request->round)->first();
+
+        if($record) {
+            $data = ([
+                'g' => $request->g,
+                'd1' => $request->d1,
+                'd2' => $request->d2,
+                'm1' => $request->m1,
+                'm2' => $request->m2,
+                'f1' => $request->f1,
+                'f2' => $request->f2,
+                'q1' => $request->q1,
+                'q2' => $request->q2,
+                'q3' => $request->q3,
+                'q4' => $request->q4,
+                'q5' => $request->q5
+            ]);
+
+            Team::where('id', $record->id)->update($data);
+
+        } else {
+            $new = new Team();
+            $new->jid = Auth::user()->id;
+            $new->round = $request->round;
+            $new->g = $request->g;
+            $new->d1 = $request->d1;
+            $new->d2 = $request->d2;
+            $new->m1 = $request->m1;
+            $new->m2 = $request->m2;
+            $new->f1 = $request->f1;
+            $new->f2 = $request->f2;
+            $new->q1 = $request->q1;
+            $new->q2 = $request->q2;
+            $new->q3 = $request->q3;
+            $new->q4 = $request->q4;
+            $new->q5 = $request->q5;
+            $new->save();
+        }
+
+        return redirect()->route('index');
 
     }
 

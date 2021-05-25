@@ -3881,6 +3881,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .maxwidth-250 {
   max-width: 250px;
 }
+.maxwidth-400 {
+  max-width: 400px;
+}
 .py-4 {
   padding-top: 20px;
   padding-bottom: 20px;

@@ -36,3 +36,4 @@ Route::get('/contact', 'CommonController@contact')->name('contact');
 Route::get('/submit', 'CommonController@submit')->name('submit')->middleware('auth');
 
 Route::post('/submit-data', 'CommonController@submitdata')->name('submitdata');
+Route::post('/submit-save', 'CommonController@submitsave')->name('submitsave');
