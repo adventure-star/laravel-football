@@ -3851,6 +3851,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   margin-left: auto;
   margin-right: 0;
 }
+.text-right-left {
+  text-align: right;
+}
+.mb-0-10 {
+  margin-bottom: 0;
+}
 
 @media screen and (max-width: 768px) {
   .m-left{
@@ -3860,6 +3866,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   .m-right{
     margin-left: auto;
     margin-right: auto;
+  }
+  .text-right-left {
+    text-align: left;
+  }
+  .mb-0-10 {
+    margin-bottom: 10px;
   }
 }
 .player-label {

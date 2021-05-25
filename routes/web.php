@@ -34,3 +34,5 @@ Route::get('/team', 'CommonController@team')->name('team');
 Route::get('/wishlist', 'CommonController@wishlist')->name('wishlist');
 Route::get('/contact', 'CommonController@contact')->name('contact');
 Route::get('/submit', 'CommonController@submit')->name('submit')->middleware('auth');
+
+Route::post('/submit-data', 'CommonController@submitdata')->name('submitdata');
