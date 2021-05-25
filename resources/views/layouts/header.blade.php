@@ -13,13 +13,13 @@
                     <div id="main-menu" class="main-menu float-right">
                         <nav>
                             <ul>
-                                <li class="active"><a href={{route('index')}}>home</a></li>
+                                <li @if(Route::is('index'))class="active"@endif><a href={{route('index')}}>home</a></li>
                                 {{-- <li><a href={{route('about')}}>about</a></li>
                                 <li><a href={{route('team')}}>team</a></li> --}}
                                 @if(Auth::user())
-                                <li><a href={{route('submit')}}>submit</a></li>
+                                <li @if(Route::is('submit'))class="active"@endif><a href={{route('submit')}}>submit</a></li>
                                 @endif
-                                <li><a href={{route('fixture')}}>fixture</a></li>
+                                <li @if(Route::is('fixture'))class="active"@endif><a href={{route('fixture')}}>fixture</a></li>
                                 {{-- <li><a href={{route('pointtable')}}>point table</a></li> --}}
                                 {{-- <li><a href={{route('blog')}}>blog</a>
                                     <ul>
