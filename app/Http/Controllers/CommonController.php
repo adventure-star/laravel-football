@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Fixture;
+use App\Model\QInput;
 use App\Model\Question;
 use Illuminate\Http\Request;
 
@@ -55,11 +56,14 @@ class CommonController extends Controller
     }
     public function submit() {
 
-        // $questions = Question::join('qinputs', 'qinputs.qid'. '=', 'questions.id')->get();
         $questions = Question::all();
+
+        // foreach($questions as $key => $item) {
+        //     $item["qinputs"] = Question::find($item["id"])->qinputs();
+        // }
+        
         return view('submit', compact('questions'));
 
     }
-
 
 }
