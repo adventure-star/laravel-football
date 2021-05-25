@@ -27,7 +27,7 @@
                             <th>match</th>
                             <th>date</th>
                             <th>time</th>
-                            {{-- <th>venue</th> --}}
+                            <th>group</th>
                         </tr>
                         @if(isset($fixtures) && count($fixtures) > 0)
                             @foreach($fixtures as $key => $item)
@@ -35,82 +35,10 @@
                                 <td>{{$item["teama"]}} VS {{$item["teamb"]}}</td>
                                 <td>{{$item["date"]}}</td>
                                 <td>{{$item["cet"]}}</td>
-                                    {{-- <td>Santiago Bernabéu Stadium</td> --}}
+                                <td>{{$item["group"]}}</td>
                                 </tr>
                             @endforeach
                         @endif
-                        {{-- <tr>
-                            <td>Abahani   VS   Brothers</td>
-                            <td>25 jun 2017</td>
-                            <td>9.00 pm</td>
-                            <td>Santiago Bernabéu Stadium</td>
-                        </tr>
-                        <tr>
-                            <td>Brothers   VS   Mohammedan</td>
-                            <td>28 jun 2017</td>
-                            <td>11.00 pm</td>
-                            <td>Mohammedan Stadium</td>
-                        </tr>
-                        <tr>
-                            <td>Arambagh KS   VS   Mohammedan</td>
-                            <td>29 jun 2017</td>
-                            <td>2.00 am</td>
-                            <td>San Siro Stadium</td>
-                        </tr>
-                        <tr>
-                            <td>Arambagh KS   VS   Abahani</td>
-                            <td>02 july 2017</td>
-                            <td>2.00 am</td>
-                            <td>Allianz Arena</td>
-                        </tr>
-                        <tr>
-                            <td>Arambagh KS   VS   Abahani</td>
-                            <td>05 july 2017</td>
-                            <td>11.00 pm</td>
-                            <td>Camp Nou</td>
-                        </tr>
-                        <tr>
-                            <td>Brothers   VS   Barselona</td>
-                            <td>08 july 2017</td>
-                            <td>12.00 pm</td>
-                            <td>Santiago Bernabéu Stadium</td>
-                        </tr>
-                        <tr>
-                            <td>Abahani   VS   Brothers</td>
-                            <td>25 jun 2017</td>
-                            <td>9.00 pm</td>
-                            <td>Santiago Bernabéu Stadium</td>
-                        </tr>
-                        <tr>
-                            <td>Brothers   VS   Mohammedan</td>
-                            <td>28 jun 2017</td>
-                            <td>11.00 pm</td>
-                            <td>Mohammedan Stadium</td>
-                        </tr>
-                        <tr>
-                            <td>Arambagh KS   VS   Mohammedan</td>
-                            <td>29 jun 2017</td>
-                            <td>2.00 am</td>
-                            <td>San Siro Stadium</td>
-                        </tr>
-                        <tr>
-                            <td>Arambagh KS   VS   Abahani</td>
-                            <td>02 july 2017</td>
-                            <td>2.00 am</td>
-                            <td>Allianz Arena</td>
-                        </tr>
-                        <tr>
-                            <td>Arambagh KS   VS   Abahani</td>
-                            <td>05 july 2017</td>
-                            <td>11.00 pm</td>
-                            <td>Camp Nou</td>
-                        </tr>
-                        <tr>
-                            <td>Brothers   VS   Arambagh KS</td>
-                            <td>08 july 2017</td>
-                            <td>12.00 pm</td>
-                            <td>Santiago Bernabéu Stadium</td>
-                        </tr> --}}
                     </table>
                 </div>
             </div>
