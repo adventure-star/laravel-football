@@ -27,7 +27,13 @@
                             <div class="col-md-6 col-md-offset-3 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Goalkeeper</p>
-                                    <input type="text" name="teamname" name="teamname" placeholder="TeamName">
+                                    <select>
+                                        @if(isset($goalkeepers) && count($goalkeepers) > 0)
+                                            @foreach($goalkeepers as $item)
+                                                <option>{{$item['name']}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -35,13 +41,25 @@
                             <div class="col-sm-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Defender 1</p>
-                                    <input type="text" name="teamname" name="teamname" placeholder="TeamName">
+                                    <select>
+                                        @if(isset($defender1) && count($defender1) > 0)
+                                            @foreach($defender1 as $item)
+                                                <option>{{$item['name']}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-xs-12">
                                 <div class="maxwidth-200 mx-auto">
                                     <p class="player-label">Defender 2</p>
-                                    <input type="text" name="teamname" name="teamname" placeholder="TeamName">
+                                    <select>
+                                        @if(isset($defender2) && count($defender2) > 0)
+                                            @foreach($defender2 as $item)
+                                                <option>{{$item['name']}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -49,13 +67,25 @@
                             <div class="col-sm-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 m-left">
                                     <p class="player-label">Midfielder 1</p>
-                                    <input type="text" name="teamname" name="teamname" placeholder="TeamName">
+                                    <select>
+                                        @if(isset($midfielder1) && count($midfielder1) > 0)
+                                            @foreach($midfielder1 as $item)
+                                                <option>{{$item['name']}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 m-right">
                                     <p class="player-label">Midfielder 2</p>
-                                    <input type="text" name="teamname" name="teamname" placeholder="TeamName">
+                                    <select>
+                                        @if(isset($midfielder2) && count($midfielder2) > 0)
+                                            @foreach($midfielder2 as $item)
+                                                <option>{{$item['name']}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -63,13 +93,25 @@
                             <div class="col-sm-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Forward 1</p>
-                                    <input type="text" name="teamname" name="teamname" placeholder="TeamName">
+                                    <select>
+                                        @if(isset($forward1) && count($forward1) > 0)
+                                            @foreach($forward1 as $item)
+                                                <option>{{$item['name']}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Forward 2</p>
-                                    <input type="text" name="teamname" name="teamname" placeholder="TeamName">
+                                    <select>
+                                        @if(isset($forward2) && count($forward2) > 0)
+                                            @foreach($forward2 as $item)
+                                                <option>{{$item['name']}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +123,6 @@
                                     <p class="player-label mt-10">{{$item['number']}}) {{$item['text']}}</p>
                                     </div>
                                     <div class="col-sm-6 col-xs-12 maxwidth-250">
-                                        {{-- <input type="text" name="teamname" name="teamname" placeholder="TeamName"> --}}
                                         <select>
                                             @if(isset($item->qinputs) && count($item->qinputs) > 0)
                                                 @foreach($item->qinputs as $k => $el)

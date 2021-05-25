@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Fixture;
+use App\Model\Player;
 use App\Model\QInput;
 use App\Model\Question;
 use Illuminate\Http\Request;
@@ -56,13 +57,17 @@ class CommonController extends Controller
     }
     public function submit() {
 
-        $questions = Question::all();
+        $goalkeepers = Player::where("position", "=", "G")->get();
+        $defender1 = Player::where("position", "=", "D1")->get();
+        $defender2 = Player::where("position", "=", "D2")->get();
+        $midfielder1 = Player::where("position", "=", "M1")->get();
+        $midfielder2 = Player::where("position", "=", "M2")->get();
+        $forward1 = Player::where("position", "=", "F1")->get();
+        $forward2 = Player::where("position", "=", "F2")->get();
 
-        // foreach($questions as $key => $item) {
-        //     $item["qinputs"] = Question::find($item["id"])->qinputs();
-        // }
+        $questions = Question::all();
         
-        return view('submit', compact('questions'));
+        return view('submit', compact('goalkeepers', 'defender1', 'defender2', 'midfielder1', 'midfielder2', 'forward1', 'forward2', 'questions'));
 
     }
 
