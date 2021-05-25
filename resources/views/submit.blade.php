@@ -82,13 +82,13 @@
                                     </div>
                                     <div class="col-sm-6 col-xs-12 maxwidth-250">
                                         {{-- <input type="text" name="teamname" name="teamname" placeholder="TeamName"> --}}
-                                        <select>
+                                        {{-- <select>
                                             @if(isset($item->qinputs()) && count($item->qinputs()) > 0)
                                                 @foreach($item->qinputs() as $k => $el)
                                                     <option>{{$el['input']}}</option>
                                                 @endforeach
                                             @endif
-                                        </select>
+                                        </select> --}}
                                     </div>
                                 </div>
                             @endforeach
