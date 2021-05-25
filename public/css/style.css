@@ -3498,7 +3498,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   margin-bottom: 30px; }
 .contact-form form {
   margin: 0 -1%; }
-  .contact-form form input[type="text"], .contact-form form input[type="email"] {
+  .contact-form form input[type="text"], .contact-form form input[type="email"], .contact-form form input[type="password"] {
     width: 98%;
     margin: 0 1% 20px;
     display: block;
@@ -3509,7 +3509,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     line-height: 24px;
     color: #444; }
     @media only screen and (max-width: 479px) {
-      .contact-form form input[type="text"], .contact-form form input[type="email"] {
+      .contact-form form input[type="text"], .contact-form form input[type="email"], .contact-form form input[type="password"] {
         width: 98%; } }
   .contact-form form textarea {
     width: 98%;
@@ -3868,4 +3868,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .maxwidth-250 {
   max-width: 250px;
+}
+.py-4 {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }

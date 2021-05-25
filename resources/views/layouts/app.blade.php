@@ -50,6 +50,12 @@
     ============================================ -->
     <script src="{{asset('js/main.js')}}"></script>
 
+    <script>
+        function logout() {
+            document.getElementById("logoutform").submit();
+        }
+    </script>
+
     @yield('scripts')
 
 </body>

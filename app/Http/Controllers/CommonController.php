@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Fixture;
+use App\Model\Joined;
 use App\Model\Player;
 use App\Model\QInput;
 use App\Model\Question;
@@ -52,9 +53,7 @@ class CommonController extends Controller
     public function wishlist() {
         return view('wishlist');
     }
-    public function join() {
-        return view('join');
-    }
+
     public function submit() {
 
         $goalkeepers = Player::where("position", "=", "G")->get();
@@ -70,5 +69,6 @@ class CommonController extends Controller
         return view('submit', compact('goalkeepers', 'defender1', 'defender2', 'midfielder1', 'midfielder2', 'forward1', 'forward2', 'questions'));
 
     }
+
 
 }

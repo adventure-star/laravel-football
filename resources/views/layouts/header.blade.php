@@ -14,17 +14,20 @@
                         <nav>
                             <ul>
                                 <li class="active"><a href={{route('index')}}>home</a></li>
-                                <li><a href={{route('about')}}>about</a></li>
-                                <li><a href={{route('team')}}>team</a></li>
+                                {{-- <li><a href={{route('about')}}>about</a></li>
+                                <li><a href={{route('team')}}>team</a></li> --}}
+                                @if(Auth::user())
+                                <li><a href={{route('submit')}}>submit</a></li>
+                                @endif
                                 <li><a href={{route('fixture')}}>fixture</a></li>
-                                <li><a href={{route('pointtable')}}>point table</a></li>
-                                <li><a href={{route('blog')}}>blog</a>
+                                {{-- <li><a href={{route('pointtable')}}>point table</a></li> --}}
+                                {{-- <li><a href={{route('blog')}}>blog</a>
                                     <ul>
                                         <li><a href={{route('blog')}}>blog</a></li>
                                         <li><a href={{route('blogdetails')}}>blog details</a></li>
                                     </ul>
-                                </li>
-                                <li><a href={{route('shop')}}>shop</a>
+                                </li> --}}
+                                {{-- <li><a href={{route('shop')}}>shop</a>
                                     <ul>
                                         <li><a href={{route('shop')}}>shop</a></li>
                                         <li><a href={{route('productdetails')}}>product details</a></li>
@@ -32,8 +35,18 @@
                                         <li><a href={{route('wishlist')}}>wishlist</a></li>
                                         <li><a href={{route('checkout')}}>checkout</a></li>
                                     </ul>
-                                </li>
-                                <li><a href={{route('contact')}}>contact</a></li>
+                                </li> --}}
+                                {{-- <li><a href={{route('contact')}}>contact</a></li> --}}
+                                @if(Auth::user())
+                                    <li>
+                                        <a href="#" onclick="logout()">logout</a>
+                                        <form id="logoutform" class="w-full" method="post" action="{{ route('logout') }}">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                @else
+                                    <li><a href="{{route('login')}}">login</a></li>
+                                @endif
                             </ul>
                         </nav>
                     </div>

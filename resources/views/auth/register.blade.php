@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="page-banner-title text-center col-xs-12">
-                <h2>join</h2>
+                <h2>register</h2>
             </div>
         </div>
     </div>
@@ -21,14 +21,36 @@
             <!-- Contact Form -->
             <div class="col-sm-8 col-sm-offset-2 col-xs-12 mb-30">
                 <div class="contact-form">
-                    <h4>Get In Tauch</h4>
-                    <form id="contact-form" action="mail.php" method="post">
-                        <input id="name" type="text" name="name" placeholder="Name">
-                        <input type="email" name="email" placeholder="Email">
-                        <input type="text" name="teamname" name="teamname" placeholder="TeamName">
-                        <input type="text" name="loginname" placeholder="LoginName">
+                    <h4>Create New Account!</h4>
+                    <form id="contact-form" action="{{route('register')}}" method="post">
+                        @csrf
+                        <input type="text" class="@error('fullname') is-invalid @enderror" name="fullname" placeholder="FullName" value="{{ old('fullname') }}" required autocomplete="fullname" autofocus>
+                        @error('fullname')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input id="email" type="email" class="@error('email') is-invalid @enderror" name="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email">
+
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input type="text" class="@error('teamname') is-invalid @enderror" name="teamname" placeholder="TeamName" value="{{ old('teamname') }}" required autocomplete="teamname" autofocus>
+                        @error('teamname')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input type="text" class="@error('username') is-invalid @enderror" name="username" placeholder="LoginName" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                        @error('username')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <div class="input-group">
-                            <input id="password" name="loginpassword" type="password" class="form-control-password" placeholder="LoginPassword" />
+                            <input id="password" name="password" type="password" class="form-control-password @error('password') is-invalid @enderror" placeholder="LoginPassword" required autocomplete="new-password"/>
                             <div class="form-control-after cursor-pointer">
                                 <svg id="eye_fill" xmlns="http://www.w3.org/2000/svg" width="25.515" height="16" viewBox="0 0 25.515 16">
                                     <path d="M12.762,27.286c7.539,0,12.753-6.1,12.753-8s-5.224-8-12.753-8C5.28,11.286,0,17.376,0,19.286S5.318,27.286,12.762,27.286Zm0-2.758a5.274,5.274,0,0,1-5.271-5.242,5.266,5.266,0,0,1,10.532,0A5.266,5.266,0,0,1,12.762,24.529Zm0-3.351a1.9,1.9,0,1,0-1.92-1.892A1.914,1.914,0,0,0,12.762,21.178Z" transform="translate(0 -11.286)" fill="#3b3b3a" opacity="0.596"/>
@@ -38,7 +60,13 @@
                                 </svg>
                             </div>
                         </div>
-                        <input type="submit" value="Join">
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input type="submit" value="Register" />
+                        <p class="py-4">If you have an account, please <a href="{{route('login')}}">Log In</a></p>
                     </form>
                 </div>
             </div>
@@ -46,8 +74,6 @@
     </div>
 </div>
 <!-- Contact Area End -->
-
-@include('layouts.breakingnews')
 
 @endsection
 
