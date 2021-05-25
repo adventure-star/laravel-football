@@ -22,6 +22,8 @@ class CreateFixturesTable extends Migration
             $table->string('date');
             $table->string('cet');
             $table->timestamps();
+
+            $table->foreign('round')->references('id')->on('rounds')->onDelete('cascade');
         });
     }
 

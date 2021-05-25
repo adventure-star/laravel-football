@@ -16,6 +16,13 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
 
+        $rounds = [
+            ["id"=>1, "roundno"=>1, "ended"=>0],
+            ["id"=>2, "roundno"=>2, "ended"=>1],
+            ["id"=>3, "roundno"=>3, "ended"=>2],
+            ["id"=>4, "roundno"=>4, "ended"=>0],
+        ];
+
         $players = 
         [
             ["id"=>1, "round"=>1, "position"=>"G", "name"=>"Manuel Neuer", "team"=>"Finland", "value"=> 2],
@@ -58,6 +65,7 @@ class DatabaseSeeder extends Seeder
             ["id"=>5, "round"=>2, "group"=>"C", "teama"=>"England", "teamb"=>"Croatia", "date" =>"13-Jun", "cet"=>"15:00"],
         ];
 
+        DB::table('rounds')->insert($rounds);
         DB::table('players')->insert($players);
         DB::table('questions')->insert($questions);
         DB::table('qinputs')->insert($qinputs);

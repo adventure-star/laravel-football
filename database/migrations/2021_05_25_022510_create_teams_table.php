@@ -31,6 +31,7 @@ class CreateTeamsTable extends Migration
             $table->unsignedBigInteger('q5');
             $table->timestamps();
 
+            $table->foreign('round')->references('id')->on('rounds')->onDelete('cascade');
             $table->foreign('g')->references('id')->on('players')->onDelete('cascade');
             $table->foreign('d1')->references('id')->on('players')->onDelete('cascade');
             $table->foreign('d2')->references('id')->on('players')->onDelete('cascade');

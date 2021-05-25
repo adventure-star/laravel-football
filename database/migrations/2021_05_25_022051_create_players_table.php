@@ -21,6 +21,9 @@ class CreatePlayersTable extends Migration
             $table->string('team');
             $table->string('value');
             $table->timestamps();
+
+            $table->foreign('round')->references('id')->on('rounds')->onDelete('cascade');
+
         });
     }
 

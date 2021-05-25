@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuestionsTable extends Migration
+class CreateRoundsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('rounds', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('round');
-            $table->unsignedBigInteger('number');
-            $table->string('text');
+            $table->unsignedBigInteger('roundno');
+            $table->unsignedBigInteger('ended')->default(0);
             $table->timestamps();
-
-            $table->foreign('round')->references('id')->on('rounds')->onDelete('cascade');
-
         });
     }
 
@@ -32,6 +28,6 @@ class CreateQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('rounds');
     }
 }

@@ -15,22 +15,22 @@ class CommonController extends Controller
         return view('index');
     }
     public function about() {
-        return view('about');
+        return view('origin.about');
     }
     public function blog() {
-        return view('blog');
+        return view('origin.blog');
     }
     public function blogdetails() {
-        return view('blog-details');
+        return view('origin.blog-details');
     }
     public function cart() {
-        return view('cart');
+        return view('origin.cart');
     }
     public function checkout() {
-        return view('checkout');
+        return view('origin.checkout');
     }
     public function contact() {
-        return view('contact');
+        return view('origin.contact');
     }
     public function fixture() {
 
@@ -39,19 +39,19 @@ class CommonController extends Controller
 
     }
     public function pointtable() {
-        return view('point-table');
+        return view('origin.point-table');
     }
     public function productdetails() {
-        return view('product-details');
+        return view('origin.product-details');
     }
     public function shop() {
-        return view('shop');
+        return view('origin.shop');
     }
     public function team() {
-        return view('team');
+        return view('origin.team');
     }
     public function wishlist() {
-        return view('wishlist');
+        return view('origin.wishlist');
     }
 
     public function submit() {
