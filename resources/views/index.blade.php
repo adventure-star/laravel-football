@@ -2,9 +2,6 @@
 
 @section('content')
 
-<!-- Body main wrapper start -->
-<div class="wrapper fix">
-
     <!-- Hero Area Start -->
     <div id="hero-area" class="hero-area section">
         <!-- Hero Slider Start -->
@@ -792,6 +789,6 @@
     
     @include('layouts.breakingnews')
     
-    </div>
+
 
 @endsection

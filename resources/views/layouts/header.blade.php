@@ -19,7 +19,7 @@
                                 @if(Auth::user())
                                 <li @if(Route::is('submit'))class="active"@endif><a href={{route('submit')}}>submit</a></li>
                                 @endif
-                                <li @if(Route::is('fixture'))class="active"@endif><a href={{route('fixture')}}>fixture</a></li>
+                                <li @if(Route::is('fixture'))class="active"@endif><a href={{route('fixture')}}>fixtures</a></li>
                                 {{-- <li><a href={{route('pointtable')}}>point table</a></li> --}}
                                 {{-- <li><a href={{route('blog')}}>blog</a>
                                     <ul>

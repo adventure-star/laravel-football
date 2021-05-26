@@ -28,6 +28,7 @@
                             <th>date</th>
                             <th>time</th>
                             <th>group</th>
+                            <th>round</th>
                         </tr>
                         @if(isset($fixtures) && count($fixtures) > 0)
                             @foreach($fixtures as $key => $item)
@@ -36,6 +37,7 @@
                                 <td>{{$item["date"]}}</td>
                                 <td>{{$item["cet"]}}</td>
                                 <td>{{$item["group"]}}</td>
+                                <td>{{$item["round"]}}</td>
                                 </tr>
                             @endforeach
                         @endif

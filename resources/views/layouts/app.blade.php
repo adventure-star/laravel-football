@@ -30,30 +30,35 @@
 </head>
 
 <body>
-    @include('layouts.header')
+    <!-- Body main wrapper start -->
+    <div class="wrapper fix">
+        
+        @include('layouts.header')
 
-    @yield('content')
+        @yield('content')
 
-    @include('layouts.footer')
+        @include('layouts.footer')
 
-    <script src="{{asset('js/vendor/jquery-1.12.0.min.js')}}"></script>
-    <!-- Bootstrap JS
-    ============================================ -->
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-    <!-- Plugins JS
-    ============================================ -->
-    <script src="{{asset('js/plugins.js')}}"></script>
-    <!-- Main JS
-    ============================================ -->
-    <script src="{{asset('js/main.js')}}"></script>
+        <script src="{{asset('js/vendor/jquery-1.12.0.min.js')}}"></script>
+        <!-- Bootstrap JS
+        ============================================ -->
+        <script src="{{asset('js/bootstrap.min.js')}}"></script>
+        <!-- Plugins JS
+        ============================================ -->
+        <script src="{{asset('js/plugins.js')}}"></script>
+        <!-- Main JS
+        ============================================ -->
+        <script src="{{asset('js/main.js')}}"></script>
 
-    <script>
-        function logout() {
-            document.getElementById("logoutform").submit();
-        }
-    </script>
+        <script>
+            function logout() {
+                document.getElementById("logoutform").submit();
+            }
+        </script>
 
-    @yield('scripts')
+        @yield('scripts')
+
+    </div>
 
 </body>
 
