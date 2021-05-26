@@ -16,12 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-// Route::get('/home', function(){
-//     return redirect()->route('index');
-// });
-
 Route::get('/', 'CommonController@index')->name('index');
-Route::get('/home', 'CommonController@index')->name('index');
 Route::get('/about', 'CommonController@about')->name('about');
 Route::get('/blog', 'CommonController@blog')->name('blog');
 Route::get('/blog-details', 'CommonController@blogdetails')->name('blogdetails');

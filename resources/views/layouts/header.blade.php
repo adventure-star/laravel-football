@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <!-- Logo -->
-                    <a class="logo float-left" href="index.html"><img src="{{asset('img/logo.png')}}" alt=""></a>
+                    <a class="logo float-left" href="{{route('index')}}"><img src="{{asset('img/logo.png')}}" alt=""></a>
                     <!-- Mini Cart -->
                     <div class="mini-cart float-right">
                         <a href={{route('cart')}}><i class="zmdi zmdi-shopping-basket"></i></a>
