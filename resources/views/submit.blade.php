@@ -160,7 +160,7 @@
                     content1 += response["goalkeepers"][index].id;
                     content1 += "'";
                     content1 += ">";
-                    content1 += response["goalkeepers"][index].name;
+                    content1 += response["goalkeepers"][index].name + "(" + response["goalkeepers"][index].team + ", " + response["goalkeepers"][index].value + ")";
                     content1 += "</option>";
 
                 }
@@ -174,7 +174,7 @@
                     content2 += response["defender1"][index].id;
                     content2 += "'";
                     content2 += ">";
-                    content2 += response["defender1"][index].name;
+                    content2 += response["defender1"][index].name + "(" + response["goalkeepers"][index].team + ", " + response["goalkeepers"][index].value + ")";
                     content2 += "</option>";
 
                 }
@@ -188,7 +188,7 @@
                     content3 += response["defender2"][index].id;
                     content3 += "'";
                     content3 += ">";
-                    content3 += response["defender2"][index].name;
+                    content3 += response["defender2"][index].name + "(" + response["goalkeepers"][index].team + ", " + response["goalkeepers"][index].value + ")";
                     content3 += "</option>";
 
                 }
@@ -201,7 +201,7 @@
                     content4 += response["midfielder1"][index].id;
                     content4 += "'";
                     content4 += ">";
-                    content4 += response["midfielder1"][index].name;
+                    content4 += response["midfielder1"][index].name + "(" + response["goalkeepers"][index].team + ", " + response["goalkeepers"][index].value + ")";
                     content4 += "</option>";
 
                 }
@@ -215,7 +215,7 @@
                     content5 += response["midfielder2"][index].id;
                     content5 += "'";
                     content5 += ">";
-                    content5 += response["midfielder2"][index].name;
+                    content5 += response["midfielder2"][index].name + "(" + response["goalkeepers"][index].team + ", " + response["goalkeepers"][index].value + ")";
                     content5 += "</option>";
 
                 }
@@ -229,7 +229,7 @@
                     content6 += response["forward1"][index].id;
                     content6 += "'";
                     content6 += ">";
-                    content6 += response["forward1"][index].name;
+                    content6 += response["forward1"][index].name + "(" + response["goalkeepers"][index].team + ", " + response["goalkeepers"][index].value + ")";
                     content6 += "</option>";
 
                 }
@@ -243,7 +243,7 @@
                     content7 += response["forward2"][index].id;
                     content7 += "'";
                     content7 += ">";
-                    content7 += response["forward2"][index].name;
+                    content7 += response["forward2"][index].name + "(" + response["goalkeepers"][index].team + ", " + response["goalkeepers"][index].value + ")";
                     content7 += "</option>";
 
                 }
@@ -315,6 +315,7 @@
                 $("#forward1").html(preoption + content6);
                 preoption = "<option disabled selected value=\"\">Select Forward2</option>";
                 $("#forward2").html(preoption + content7);
+                // $("#questionarea").html(content8 !== "" ? content8 : "<select name='q1' class='hidden' required></select>");
                 $("#questionarea").html(content8);
                 $("#fixturetable").html(content9);
 

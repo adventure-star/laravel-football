@@ -60,18 +60,8 @@ class CommonController extends Controller
 
     public function submit() {
 
-        $rounds = Round::where("ended", "=", 0)->get();
+        $rounds = Round::where("ended", "=", 1)->get();
 
-        // $goalkeepers = Player::where("position", "=", "G")->get();
-        // $defender1 = Player::where("position", "=", "D1")->get();
-        // $defender2 = Player::where("position", "=", "D2")->get();
-        // $midfielder1 = Player::where("position", "=", "M1")->get();
-        // $midfielder2 = Player::where("position", "=", "M2")->get();
-        // $forward1 = Player::where("position", "=", "F1")->get();
-        // $forward2 = Player::where("position", "=", "F2")->get();
-
-        // $questions = Question::all();
-        
         return view('submit', compact('rounds'));
 
     }
