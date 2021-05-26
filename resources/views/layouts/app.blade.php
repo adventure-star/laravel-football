@@ -43,9 +43,6 @@
     <!-- Plugins JS
     ============================================ -->
     <script src="{{asset('js/plugins.js')}}"></script>
-    <!-- Ajax Mail JS
-    ============================================ -->
-    <script src="{{asset('js/ajax-mail.js')}}"></script>
     <!-- Main JS
     ============================================ -->
     <script src="{{asset('js/main.js')}}"></script>

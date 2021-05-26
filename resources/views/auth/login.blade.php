@@ -24,8 +24,8 @@
                     <h4>Join The Game!</h4>
                     <form id="contact-form" action="{{route('login')}}" method="post">
                         @csrf
-                        <input type="text" class="@error('name') is-invalid @enderror" name="username" placeholder="Name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                        @error('name')
+                        <input type="text" class="@error('username') is-invalid @enderror" name="username" placeholder="Name" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                        @error('username')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
