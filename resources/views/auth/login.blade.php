@@ -25,16 +25,16 @@
                     <form id="contact-form" action="{{route('login')}}" method="post">
                         @csrf
                         <input type="text" class="@error('username') is-invalid @enderror" name="username" placeholder="Name" value="{{ old('username') }}" required autocomplete="username" autofocus>
-                        @error('username')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                         <input type="password" class="@error('password') is-invalid @enderror" name="password" placeholder="Password" required autocomplete="current-password">
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
+                        @error('username')
+                            <p class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
-                            </span>
+                            </p>
+                        @enderror
+                        @error('password')
+                            <p class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </p>
                         @enderror
                         <input type="submit" value="Login" />
                         <p class="py-4">If you don't have an account, please <a href="{{route('register')}}">Register</a></p>
