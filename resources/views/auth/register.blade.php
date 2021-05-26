@@ -26,28 +26,28 @@
                         @csrf
                         <input type="text" class="@error('fullname') is-invalid @enderror" name="fullname" placeholder="FullName" value="{{ old('fullname') }}" required autocomplete="fullname" autofocus>
                         @error('fullname')
-                            <span class="invalid-feedback" role="alert">
+                            <p class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
-                            </span>
+                            </p>
                         @enderror
                         <input id="email" type="email" class="@error('email') is-invalid @enderror" name="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email">
 
                         @error('email')
-                            <span class="invalid-feedback" role="alert">
+                            <p class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
-                            </span>
+                            </p>
                         @enderror
                         <input type="text" class="@error('teamname') is-invalid @enderror" name="teamname" placeholder="TeamName" value="{{ old('teamname') }}" required autocomplete="teamname" autofocus>
                         @error('teamname')
-                            <span class="invalid-feedback" role="alert">
+                            <p class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
-                            </span>
+                            </p>
                         @enderror
                         <input type="text" class="@error('username') is-invalid @enderror" name="username" placeholder="LoginName" value="{{ old('username') }}" required autocomplete="username" autofocus>
                         @error('username')
-                            <span class="invalid-feedback" role="alert">
+                            <p class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
-                            </span>
+                            </p>
                         @enderror
                         <div class="input-group">
                             <input id="password" name="password" type="password" class="form-control-password @error('password') is-invalid @enderror" placeholder="LoginPassword" required autocomplete="new-password"/>
@@ -61,11 +61,13 @@
                             </div>
                         </div>
                         @error('password')
-                            <span class="invalid-feedback" role="alert">
+                            <p class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
-                            </span>
+                            </p>
                         @enderror
-                        <input type="submit" value="Register" />
+                        <div class="row">
+                            <input type="submit" value="Register" />
+                        </div>
                         <p class="py-4">If you have an account, please <a href="{{route('login')}}">Log In</a></p>
                     </form>
                 </div>
