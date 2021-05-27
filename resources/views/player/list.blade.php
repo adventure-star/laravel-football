@@ -24,17 +24,23 @@
                 <div class="table-responsive fixtures-table">
                     <table class="table">
                         <tr>
-                            <th>RoundNo</th>
-                            <th>State</th>
+                            <th>Name</th>
+                            <th>Team</th>
+                            <th>Value</th>
+                            <th>Round</th>
+                            <th>Position</th>
                             <th>Edit</th>
                         </tr>
-                        @if(isset($rounds) && count($rounds) > 0)
-                            @foreach($rounds as $key => $item)
+                        @if(isset($players) && count($players) > 0)
+                            @foreach($players as $key => $item)
                                 <tr>
-                                    <td>{{$item["roundno"]}}</td>
-                                    <td>{{$item["ended"] == 0 ? "Not Opened" : ($item["ended"] == 1 ? "Active" : "Expired")}}</td>
+                                    <td>{{$item["name"]}}</td>
+                                    <td>{{$item["team"]}}</td>
+                                    <td>{{$item["value"]}}</td>
+                                    <td>{{$item["round"]}}</td>
+                                    <td>{{$item["position"]}}</td>
                                     <td>
-                                    <a href="{{route('rounds.edit', $item['id'])}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>
+                                        <a href="{{route('players.edit', $item['id'])}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -46,7 +52,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1 col-xs-12">
                 <p class="text-right py-4">
-                    <a href="{{route('rounds.new')}}" class="underline text-primary text-xl-right">Add New Round</a>
+                    <a href="{{route('players.new')}}" class="underline text-primary text-xl-right">Add New Player</a>
                 </p>
             </div>
         </div>

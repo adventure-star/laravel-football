@@ -20,6 +20,7 @@
                                     <li @if(Route::is('submit'))class="active"@endif><a href={{route('submit')}}>submit</a></li>
                                     @if(Auth::user()->isadmin == 1)
                                         <li @if(Route::is('fixture'))class="active"@endif><a href={{route('fixture')}}>fixtures</a></li>
+                                        <li @if(Route::is('players'))class="active"@endif><a href={{route('players')}}>players</a></li>
                                         <li @if(Route::is('rounds'))class="active"@endif><a href={{route('rounds')}}>rounds</a></li>
                                         <li @if(Route::is('teams'))class="active"@endif><a href={{route('teams')}}>teams</a></li>
                                     @endif

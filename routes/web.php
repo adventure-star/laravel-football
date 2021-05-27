@@ -38,8 +38,20 @@ Route::post('/submit-save', 'CommonController@submitsave')->name('submitsave');
 
 Route::get('/fixture', 'AdminController@fixture')->name('fixture');
 Route::get('/teams', 'AdminController@teams')->name('teams');
+
 Route::get('/rounds', 'AdminController@rounds')->name('rounds');
 Route::get('/rounds/edit/{id}', 'AdminController@roundedit')->name('rounds.edit');
-Route::post('/rounds/edit/save', 'AdminController@roundeditsave')->name('rounds.edit.save');
+Route::post('/rounds/edit/save', 'AdminController@roundupdate')->name('rounds.update');
 Route::get('/rounds/new', 'AdminController@roundnew')->name('rounds.new');
 Route::post('/rounds/new/save', 'AdminController@roundnewsave')->name('rounds.new.save');
+
+Route::get('/players', 'AdminController@players')->name('players');
+Route::get('/players/edit/{id}', 'AdminController@playeredit')->name('players.edit');
+Route::post('/players/edit/save', 'AdminController@playerupdate')->name('players.update');
+Route::get('/players/new', 'AdminController@playernew')->name('players.new');
+Route::post('/players/new/save', 'AdminController@playernewsave')->name('players.new.save');
+
+
+
+
+

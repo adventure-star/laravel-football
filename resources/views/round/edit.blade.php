@@ -21,7 +21,7 @@
             <!-- Contact Form -->
             <div class="col-sm-10 col-sm-offset-1 col-xs-12 mb-30">
                 <div class="submit-form">
-                    <form id="submit-form" action="{{route('rounds.edit.save')}}" method="post">
+                    <form id="submit-form" action="{{route('rounds.update')}}" method="post">
                         @csrf
                         <h4>Edit Round</h4>
                         <input class="hidden" name="id" value={{$id}} />
