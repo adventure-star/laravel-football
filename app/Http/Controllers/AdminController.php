@@ -19,12 +19,7 @@ class AdminController extends Controller
         $this->middleware('admin');
     }
 
-    public function fixture() {
 
-        $fixtures = Fixture::orderBy('round', 'asc')->get();
-        return view('fixture', compact('fixtures'));
-
-    }
     public function teams() {
         
         $teams = Team::orderBy('round', 'asc')->get();
@@ -166,6 +161,83 @@ class AdminController extends Controller
         
         $users = User::where('isadmin', "!=", 1)->get();
         return view('user.list', compact('users'));
+    }
+
+    public function fixture() {
+
+        $fixtures = Fixture::orderBy('round', 'asc')->get();
+        return view('fixture.list', compact('fixtures'));
+
+    }
+    public function fixtureedit($id) {
+        
+        $fixture = Fixture::find($id);
+        return view('fixture.edit', compact('fixture', 'id'));
+    }
+    public function fixtureupdate(Request $request) {
+
+        $validator = Validator::make($request->all(),
+        [
+            'round' => 'required|string',
+            'group' => 'required|string',
+            'teama' => 'required|string',
+            'teamb' => 'required|string',
+            'date' => 'required|string',
+            'cet' => 'required|string',
+        ]);
+
+        $data = ([
+            'round' => $request->round,
+            'group' => $request->group,
+            'teama' => $request->teama,
+            'teamb' => $request->teamb,
+            'date' => $request->date,
+            'cet' => $request->cet,
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $updated = Fixture::where('id', $request->id)->update($data);
+
+        return redirect()->route("fixtures");
+
+    }
+    public function fixturenew() {
+        return view('fixture.new');
+    }
+    public function fixturenewsave(Request $request) {
+
+        $validator = Validator::make($request->all(),
+        [
+            'round' => 'required|string',
+            'group' => 'required|string',
+            'teama' => 'required|string',
+            'teamb' => 'required|string',
+            'date' => 'required|string',
+            'cet' => 'required|string',
+        ]);
+
+        $new = new Fixture();
+        $new->round = $request->round;
+        $new->group = $request->group;
+        $new->teama = $request->teama;
+        $new->teamb = $request->teamb;
+        $new->date = $request->date;
+        $new->cet = $request->cet;
+        $new->save();
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        if($new->id) {
+            return redirect()->route("fixtures");
+        } else {
+            return redirect()->back()->withInput();
+        }
+
     }
     
 }

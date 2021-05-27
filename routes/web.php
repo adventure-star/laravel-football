@@ -36,7 +36,6 @@ Route::post('/submit-save', 'CommonController@submitsave')->name('submitsave');
 
 // Admin Urls
 
-Route::get('/fixture', 'AdminController@fixture')->name('fixture');
 Route::get('/teams', 'AdminController@teams')->name('teams');
 
 Route::get('/rounds', 'AdminController@rounds')->name('rounds');
@@ -52,6 +51,17 @@ Route::get('/players/new', 'AdminController@playernew')->name('players.new');
 Route::post('/players/new/save', 'AdminController@playernewsave')->name('players.new.save');
 
 Route::get('/users', 'AdminController@users')->name('users');
+
+Route::get('/fixtures', 'AdminController@fixture')->name('fixtures');
+Route::get('/fixtures/edit/{id}', 'AdminController@fixtureedit')->name('fixtures.edit');
+Route::post('/fixtures/edit/save', 'AdminController@fixtureupdate')->name('fixtures.update');
+Route::get('/fixtures/new', 'AdminController@fixturenew')->name('fixtures.new');
+Route::post('/fixtures/new/save', 'AdminController@fixturenewsave')->name('fixtures.new.save');
+
+
+
+
+
 
 
 
