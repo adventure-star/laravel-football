@@ -40,6 +40,9 @@
                             @endforeach
                         @endif
                     </table>
+                    <p class="text-right py-4">
+                        <a href="{{route('rounds.new')}}" class="underline text-primary text-xl-right">Add New Round</a>
+                    </p>
                 </div>
             </div>
         </div>

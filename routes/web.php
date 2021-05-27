@@ -41,3 +41,5 @@ Route::get('/teams', 'AdminController@teams')->name('teams');
 Route::get('/rounds', 'AdminController@rounds')->name('rounds');
 Route::get('/rounds/edit/{id}', 'AdminController@roundedit')->name('rounds.edit');
 Route::post('/rounds/edit/save', 'AdminController@roundeditsave')->name('rounds.edit.save');
+Route::get('/rounds/new', 'AdminController@roundnew')->name('rounds.new');
+Route::post('/rounds/new/save', 'AdminController@roundnewsave')->name('rounds.new.save');

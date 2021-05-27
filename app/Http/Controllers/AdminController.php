@@ -31,7 +31,10 @@ class AdminController extends Controller
     public function rounds() {
         
         $rounds = Round::all();
-        return view('rounds', compact('rounds'));
+        return view('round.list', compact('rounds'));
+    }
+    public function roundnew() {
+        return view('round.new');
     }
     public function roundedit($id) {
         
@@ -56,6 +59,26 @@ class AdminController extends Controller
         }
 
         $updated = Round::where('id', $request->id)->update($data);
+
+        return redirect()->route("rounds");
+
+    }
+    public function roundnewsave(Request $request) {
+
+        $validator = Validator::make($request->all(),
+        [
+            'roundno' => 'required|string',
+            'ended' => 'required|string',
+        ]);
+
+        $new = new Round();
+        $new->roundno = $request->roundno;
+        $new->ended = $request->ended;
+        $new->save();
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         return redirect()->route("rounds");
 

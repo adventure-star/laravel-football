@@ -3892,3 +3892,6 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   color: red;
   padding-bottom: 10px;
 }
+.underline {
+  text-decoration: underline;
+}
