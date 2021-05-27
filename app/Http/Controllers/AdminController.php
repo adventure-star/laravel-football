@@ -6,6 +6,7 @@ use App\Model\Fixture;
 use App\Model\Player;
 use App\Model\Round;
 use App\Model\Team;
+use App\User;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
@@ -159,6 +160,12 @@ class AdminController extends Controller
             return redirect()->back()->withInput();
         }
 
+    }
+
+    public function users() {
+        
+        $users = User::where('isadmin', "!=", 1)->get();
+        return view('user.list', compact('users'));
     }
     
 }

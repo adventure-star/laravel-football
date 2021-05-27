@@ -51,6 +51,9 @@ Route::post('/players/edit/save', 'AdminController@playerupdate')->name('players
 Route::get('/players/new', 'AdminController@playernew')->name('players.new');
 Route::post('/players/new/save', 'AdminController@playernewsave')->name('players.new.save');
 
+Route::get('/users', 'AdminController@users')->name('users');
+
+
 
 
 
