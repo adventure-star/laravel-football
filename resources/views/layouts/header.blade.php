@@ -17,9 +17,13 @@
                                 {{-- <li><a href={{route('about')}}>about</a></li>
                                 <li><a href={{route('team')}}>team</a></li> --}}
                                 @if(Auth::user())
-                                <li @if(Route::is('submit'))class="active"@endif><a href={{route('submit')}}>submit</a></li>
+                                    <li @if(Route::is('submit'))class="active"@endif><a href={{route('submit')}}>submit</a></li>
+                                    @if(Auth::user()->isadmin == 1)
+                                        <li @if(Route::is('fixture'))class="active"@endif><a href={{route('fixture')}}>fixtures</a></li>
+                                        <li @if(Route::is('rounds'))class="active"@endif><a href={{route('rounds')}}>rounds</a></li>
+                                        <li @if(Route::is('teams'))class="active"@endif><a href={{route('teams')}}>teams</a></li>
+                                    @endif
                                 @endif
-                                <li @if(Route::is('fixture'))class="active"@endif><a href={{route('fixture')}}>fixtures</a></li>
                                 {{-- <li><a href={{route('pointtable')}}>point table</a></li> --}}
                                 {{-- <li><a href={{route('blog')}}>blog</a>
                                     <ul>

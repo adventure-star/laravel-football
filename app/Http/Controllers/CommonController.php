@@ -36,12 +36,7 @@ class CommonController extends Controller
     public function contact() {
         return view('origin.contact');
     }
-    public function fixture() {
 
-        $fixtures = Fixture::all();
-        return view('fixture', compact('fixtures'));
-
-    }
     public function pointtable() {
         return view('origin.point-table');
     }

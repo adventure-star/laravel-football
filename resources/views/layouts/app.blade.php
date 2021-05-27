@@ -27,12 +27,13 @@
     <!-- Modernizer JS
 	============================================ -->
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
+
 </head>
 
 <body>
     <!-- Body main wrapper start -->
     <div class="wrapper fix">
-        
+
         @include('layouts.header')
 
         @yield('content')
