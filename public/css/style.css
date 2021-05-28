@@ -810,8 +810,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     -webkit-transform: none;
     transform: none; } }
 /*-- Navbar Header --*/
-.header-area {
-  /*-- Logo --*/ }
+
   .header-area .logo {
     height: auto;
     padding: 36px 0; }
@@ -2046,9 +2045,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 /*  13.  Blog Area
 /*----------------------------------------*/
 /*-- Blog Item --*/
-.blog-item {
-  /*-- Blog Image --*/
-  /*-- Blog Content --*/ }
+
   .blog-item .image {
     margin-bottom: 30px; }
     .blog-item .image img {
@@ -2451,8 +2448,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     opacity: 0.9; }
 
 /*-- Breaking News Wrapper --*/
-.news-wrapper {
-  /*-- Breaking News Slider --*/ }
+
   .news-wrapper h4 {
     color: #444;
     float: left;
@@ -2522,8 +2518,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 /*  15.  Shop Page Area
 /*----------------------------------------*/
 /*-- Shop Top Bar --*/
-.shop-top-bar {
-  /*-- Shop View Mood --*/ }
+
   .shop-top-bar .view-mode {
     display: inline-block;
     vertical-align: top; }
