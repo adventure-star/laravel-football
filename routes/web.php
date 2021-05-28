@@ -54,9 +54,32 @@ Route::get('/users', 'AdminController@users')->name('users');
 
 Route::get('/fixtures', 'AdminController@fixture')->name('fixtures');
 Route::get('/fixtures/edit/{id}', 'AdminController@fixtureedit')->name('fixtures.edit');
-Route::post('/fixtures/edit/save', 'AdminController@fixtureupdate')->name('fixtures.update');
+Route::post('/fixtures/update', 'AdminController@fixtureupdate')->name('fixtures.update');
 Route::get('/fixtures/new', 'AdminController@fixturenew')->name('fixtures.new');
 Route::post('/fixtures/new/save', 'AdminController@fixturenewsave')->name('fixtures.new.save');
+
+Route::get('/questions', 'AdminController@question')->name('questions');
+Route::get('/questions/edit/{id}', 'AdminController@questionedit')->name('questions.edit');
+Route::post('/questions/update', 'AdminController@questionupdate')->name('questions.update');
+Route::get('/questions/answers/{id}', 'AdminController@questionanswers')->name('questions.answers');
+Route::get('/questions/round/edit/{id}', 'AdminController@questionroundedit')->name('questions.round.edit');
+Route::post('/questions/delete', 'AdminController@questiondelete')->name('questions.delete');
+Route::get('/questions/new/{id}', 'AdminController@questionnew')->name('questions.new');
+Route::post('/questions/new/save', 'AdminController@questionnewsave')->name('questions.new.save');
+
+
+
+
+Route::post('/qinputs/delete', 'AdminController@qinputdelete')->name('qinputs.delete');
+Route::get('/qinputs/edit/{id}', 'AdminController@qinputedit')->name('qinputs.edit');
+Route::post('/qinputs/update', 'AdminController@qinputupdate')->name('qinputs.update');
+Route::get('/qinputs/new/{id}', 'AdminController@qinputnew')->name('qinputs.new');
+Route::post('/qinputs/new/save', 'AdminController@qinputnewsave')->name('qinputs.new.save');
+
+
+
+
+
 
 
 

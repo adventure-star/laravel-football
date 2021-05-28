@@ -23,6 +23,7 @@
                                         <li @if(Route::is('rounds'))class="active"@endif><a href={{route('rounds')}}>rounds</a></li>
                                         <li @if(Route::is('teams'))class="active"@endif><a href={{route('teams')}}>teams</a></li>
                                         <li @if(Route::is('users'))class="active"@endif><a href={{route('users')}}>users</a></li>
+                                        <li @if(Route::is('questions'))class="active"@endif><a href={{route('questions')}}>questions</a></li>
                                     @else
                                         <li @if(Route::is('submit'))class="active"@endif><a href={{route('submit')}}>submit</a></li>
                                     @endif

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Model\Fixture;
 use App\Model\Player;
+use App\Model\QInput;
+use App\Model\Question;
 use App\Model\Round;
 use App\Model\Team;
 use App\User;
@@ -239,5 +241,167 @@ class AdminController extends Controller
         }
 
     }
-    
+
+    public function question() {
+
+        $questions = Question::all()->groupBy('round');
+
+        $roundwithoutquestions = [];
+     
+        $rounds = Round::all();
+
+        for($x = 0 ; $x < count($rounds) ; $x++) {
+
+            print_r($rounds[$x]['id']);
+
+            $state = true;
+
+            for($y = 1 ; $y <= count($questions) ; $y++) {
+                if($rounds[$x]['id'] == $questions[$y][0]['round']) {
+                    $state = false;
+                }
+            }
+
+            if($state) {
+                array_push($roundwithoutquestions,$rounds[$x]['id'] );
+            }
+
+        }
+        return view('question.list', compact('questions', 'roundwithoutquestions'));
+
+    }
+    public function questionedit($id) {
+        
+        $question = Question::find($id);
+        return view('question.edit', compact('question', 'id'));
+    }
+    public function questionupdate(Request $request) {
+
+        $validator = Validator::make($request->all(),
+        [
+            'text' => 'required|string'
+        ]);
+
+        $data = ([
+            'text' => $request->text
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $updated = Question::where('id', $request->id)->update($data);
+
+        return redirect()->route("questions.round.edit", Question::find($request->id)['round'] );
+
+    }
+    public function questionanswers($id) {
+        
+        $question = Question::find($id);
+        return view('question.answers', compact('question', 'id'));
+    }
+    public function questionroundedit($id) {
+        
+        $questions = Question::where('round', '=', $id)->get();
+        return view('question.roundedit', compact('questions', 'id'));
+    }
+    public function questiondelete(Request $request) {
+
+        $deleted = Question::find($request->id)->delete();
+        return $deleted;
+
+    }
+    public function questionnew($id) {
+        return view('question.new', compact('id'));
+    }
+    public function questionnewsave(Request $request) {
+
+        $questions = Question::where('round', '=', $request->round)->get();
+
+        if(count($questions) >= 5) {
+            return redirect()->back()->withInput();
+        }
+
+        $validator = Validator::make($request->all(),
+        [
+            'number' => 'required|string',
+            'text' => 'required|string',
+        ]);
+
+        $new = new Question();
+        $new->round = $request->round;
+        $new->number = $request->number;
+        $new->text = $request->text;
+        $new->save();
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        if($new->id) {
+            return redirect()->route("questions.round.edit", $request->round);
+        } else {
+            return redirect()->back()->withInput();
+        }
+
+    }
+    public function qinputdelete(Request $request) {
+
+        $deleted = QInput::find($request->id)->delete();
+        return $deleted;
+
+    }
+    public function qinputedit($id) {
+
+        $qinput = QInput::find($id);
+        return view('qinput.edit', compact('qinput', 'id'));
+
+    }
+    public function qinputupdate(Request $request) {
+
+        $validator = Validator::make($request->all(),
+        [
+            'input' => 'required|string'
+        ]);
+
+        $data = ([
+            'input' => $request->input
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $updated = QInput::where('id', $request->id)->update($data);
+
+        return redirect()->route("questions.answers", QInput::find($request->id)->qid);
+
+    }
+    public function qinputnew($id) {
+        return view('qinput.new', compact('id'));
+    }
+    public function qinputnewsave(Request $request) {
+
+        $validator = Validator::make($request->all(),
+        [
+            'qid' => 'required|string',
+            'input' => 'required|string',
+        ]);
+
+        $new = new QInput();
+        $new->qid = $request->qid;
+        $new->input = $request->input;
+        $new->save();
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        if($new->id) {
+            return redirect()->route("questions.answers", $request->qid);
+        } else {
+            return redirect()->back()->withInput();
+        }
+
+    }
 }

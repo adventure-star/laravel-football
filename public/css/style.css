@@ -3856,6 +3856,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .mb-0-10 {
   margin-bottom: 0;
 }
+.text-right-center {
+  text-align: right;
+}
+.text-left-center {
+  text-align: left;
+}
 
 @media screen and (max-width: 768px) {
   .m-left{
@@ -3871,6 +3877,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   }
   .mb-0-10 {
     margin-bottom: 10px;
+  }
+  .text-right-center {
+    text-align: center;
+  }
+  .text-left-center {
+    text-align: center;
   }
 }
 .player-label {
@@ -3893,4 +3905,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .underline {
   text-decoration: underline;
+}
+.question-title {
+  font-size: 16px;
 }
