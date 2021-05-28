@@ -6,9 +6,9 @@
                     <!-- Logo -->
                     <a class="logo float-left" href="{{route('index')}}"><img src="{{asset('img/logo.png')}}" alt=""></a>
                     <!-- Mini Cart -->
-                    <div class="mini-cart float-right">
+                    {{-- <div class="mini-cart float-right">
                         <a href={{route('cart')}}><i class="zmdi zmdi-shopping-basket"></i></a>
-                    </div>
+                    </div> --}}
                     <!---- Menu ---->
                     <div id="main-menu" class="main-menu float-right">
                         <nav>
@@ -18,12 +18,12 @@
                                 <li><a href={{route('team')}}>team</a></li> --}}
                                 @if(Auth::user())
                                     @if(Auth::user()->isadmin == 1)
+                                        <li @if(Route::is('users'))class="active"@endif><a href={{route('users')}}>users</a></li>
+                                        <li @if(Route::is('rounds'))class="active"@endif><a href={{route('rounds')}}>rounds</a></li>
                                         <li @if(Route::is('fixtures'))class="active"@endif><a href={{route('fixtures')}}>fixtures</a></li>
                                         <li @if(Route::is('players'))class="active"@endif><a href={{route('players')}}>players</a></li>
-                                        <li @if(Route::is('rounds'))class="active"@endif><a href={{route('rounds')}}>rounds</a></li>
-                                        <li @if(Route::is('teams'))class="active"@endif><a href={{route('teams')}}>teams</a></li>
-                                        <li @if(Route::is('users'))class="active"@endif><a href={{route('users')}}>users</a></li>
                                         <li @if(Route::is('questions'))class="active"@endif><a href={{route('questions')}}>questions</a></li>
+                                        <li @if(Route::is('teams'))class="active"@endif><a href={{route('teams')}}>teams</a></li>
                                     @else
                                         <li @if(Route::is('submit'))class="active"@endif><a href={{route('submit')}}>submit</a></li>
                                     @endif

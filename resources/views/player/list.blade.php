@@ -37,7 +37,7 @@
                                     <td>{{$item["name"]}}</td>
                                     <td>{{$item["team"]}}</td>
                                     <td>{{$item["value"]}}</td>
-                                    <td>{{$item["round"]}}</td>
+                                    <td>{{App\Model\Round::find($item["round"])['roundno']}}</td>
                                     <td>{{$item["position"]}}</td>
                                     <td>
                                         <a href="{{route('players.edit', $item['id'])}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>

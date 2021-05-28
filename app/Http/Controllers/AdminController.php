@@ -91,13 +91,16 @@ class AdminController extends Controller
         return view('player.list', compact('players'));
     }
     public function playernew() {
-        return view('player.new');
+        $rounds = Round::all();
+        return view('player.new', compact('rounds'));
     }
 
     public function playeredit($id) {
         
         $player = Player::find($id);
-        return view('player.edit', compact('player', 'id'));
+        $rounds = Round::all();
+
+        return view('player.edit', compact('player', 'id', 'rounds'));
     }
 
     public function playerupdate(Request $request) {
@@ -174,7 +177,9 @@ class AdminController extends Controller
     public function fixtureedit($id) {
         
         $fixture = Fixture::find($id);
-        return view('fixture.edit', compact('fixture', 'id'));
+        $rounds = Round::all();
+
+        return view('fixture.edit', compact('fixture', 'id', 'rounds'));
     }
     public function fixtureupdate(Request $request) {
 
@@ -207,7 +212,8 @@ class AdminController extends Controller
 
     }
     public function fixturenew() {
-        return view('fixture.new');
+        $rounds = Round::all();
+        return view('fixture.new', compact('rounds'));
     }
     public function fixturenewsave(Request $request) {
 
@@ -251,8 +257,6 @@ class AdminController extends Controller
         $rounds = Round::all();
 
         for($x = 0 ; $x < count($rounds) ; $x++) {
-
-            print_r($rounds[$x]['id']);
 
             $state = true;
 

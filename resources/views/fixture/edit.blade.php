@@ -29,13 +29,20 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Round</p>
-                                    <input type="text" name="round" @if(isset($fixture)) value={{$fixture["round"]}}@endif />
+                                    <select name="round" required>
+                                        <option disabled selected>Select Round!</option>
+                                        @if(isset($rounds) && count($rounds) > 0)
+                                            @foreach($rounds as $key=>$item)
+                                                <option value={{$item['id']}} @if($fixture["round"] == $item['id'])selected @endif>{{$item['roundno']}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Group</p>
-                                    <input type="text" name="group" @if(isset($fixture)) value={{$fixture["group"]}}@endif />
+                                    <input type="text" name="group" @if(isset($fixture)) value="{{$fixture["group"]}}"@endif />
                                 </div>
                             </div>
                         </div>
@@ -43,13 +50,13 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Team A</p>
-                                    <input type="text" name="teama" @if(isset($fixture)) value={{$fixture["teama"]}}@endif />
+                                    <input type="text" name="teama" @if(isset($fixture)) value="{{$fixture["teama"]}}"@endif />
                                 </div>
                             </div>
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Team B</p>
-                                    <input type="text" name="teamb" @if(isset($fixture)) value={{$fixture["teamb"]}}@endif />
+                                    <input type="text" name="teamb" @if(isset($fixture)) value="{{$fixture["teamb"]}}"@endif />
                                 </div>
                             </div>
                         </div>
@@ -57,13 +64,13 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Date</p>
-                                    <input type="text" name="date" @if(isset($fixture)) value={{$fixture["date"]}}@endif />
+                                    <input type="text" name="date" @if(isset($fixture)) value="{{$fixture["date"]}}"@endif />
                                 </div>
                             </div>
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">CET</p>
-                                    <input type="text" name="cet" @if(isset($fixture)) value={{$fixture["cet"]}}@endif />
+                                    <input type="text" name="cet" @if(isset($fixture)) value="{{$fixture["cet"]}}"@endif />
                                 </div>
                             </div>
                         </div>

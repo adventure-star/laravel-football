@@ -38,7 +38,7 @@
                                     <td>{{$item["date"]}}</td>
                                     <td>{{$item["cet"]}}</td>
                                     <td>{{$item["group"]}}</td>
-                                    <td>{{$item["round"]}}</td>
+                                    <td>{{App\Model\Round::find($item["round"])['roundno']}}</td>
                                     <td>
                                         <a href="{{route('fixtures.edit', $item['id'])}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>
                                     </td>

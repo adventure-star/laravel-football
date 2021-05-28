@@ -42,7 +42,14 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Round</p>
-                                    <input type="text" name="round" required />
+                                    <select name="round" required>
+                                        <option disabled selected>Select Round!</option>
+                                        @if(isset($rounds) && count($rounds) > 0)
+                                            @foreach($rounds as $key=>$item)
+                                                <option value={{$item['id']}}>{{$item['roundno']}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6 col-xs-12">
