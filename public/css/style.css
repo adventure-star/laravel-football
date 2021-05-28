@@ -2511,7 +2511,6 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
       border-top: 1px solid #ececec; }
       .fixtures-table table tr td:nth-child(1) {
         color: #878787;
-        text-transform: capitalize;
         border-left: 1px solid #ececec; }
 
 /*----------------------------------------*/

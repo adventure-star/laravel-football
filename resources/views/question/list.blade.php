@@ -66,13 +66,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1 col-xs-12">
-                <p class="text-right py-4">
-                    <a href="{{route('players.new')}}" class="underline text-primary text-xl-right">Add New Question</a>
-                </p>
-            </div>
-        </div>
     </div>
 </div>
 <!-- Fixtures Area End -->

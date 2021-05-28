@@ -26,13 +26,13 @@
                         <tr>
                             <th>Team</th>
                             <th>round</th>
-                            <th>Goalkeeper</th>
-                            <th>Defender1</th>
-                            <th>Defender2</th>
-                            <th>Midfielder1</th>
-                            <th>Midfielder2</th>
-                            <th>Forward1</th>
-                            <th>Forward2</th>
+                            <th>G</th>
+                            <th>D1</th>
+                            <th>D2</th>
+                            <th>M1</th>
+                            <th>M2</th>
+                            <th>F1</th>
+                            <th>F2</th>
                         </tr>
                         @if(isset($teams) && count($teams) > 0)
                             @foreach($teams as $key => $item)
