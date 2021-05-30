@@ -2489,7 +2489,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
       font-weight: normal;
       height: 38px;
       line-height: 24px;
-      padding: 8px 28px 6px;
+      /* padding: 8px 28px 6px; */
       text-align: center;
       vertical-align: middle;
       text-transform: uppercase;
@@ -2504,7 +2504,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
       font-weight: normal;
       height: 38px;
       line-height: 24px;
-      padding: 8px 28px 6px;
+      /* padding: 8px 28px 6px; */
       text-align: center;
       vertical-align: middle;
       border-right: 1px solid #ececec;
@@ -3902,4 +3902,25 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .question-title {
   font-size: 16px;
+}
+.maxwidth-700 {
+  max-width: 700px;
+}
+.pl-0-vw {
+  padding-left: 0;
+}
+.pb-0-20 {
+  padding-bottom: 0;
+}
+@media screen and (max-width: 768px) {
+  .pl-0-vw {
+    padding-left: 12vw;
+  }
+  .pb-0-20 {
+    padding-bottom: 20px;
+  }
+}
+.px-14 {
+  padding-left: 14px;
+  padding-right: 14px;
 }

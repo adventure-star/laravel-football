@@ -16,112 +16,117 @@
 
 <!-- Contact Area Start -->
 <div id="contact-area" class="contact-area section pb-90 pt-120">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row text-center">
-            <!-- Contact Form -->
-            <div class="col-sm-10 col-sm-offset-1 col-xs-12 mb-30">
-                <div class="submit-form">
-                    <form id="submit-form" action="{{route('submitsave')}}" method="post">
-                        @csrf
-                        <div class="row">
-                            <h4>Round</h4>
-                            <div class="w-100 maxwidth-400 mx-auto">
-                                <select name="round" onchange="onRoundChanged(this)" required>
-                                    <option disabled selected>Select Round</option>
-                                    @if(isset($rounds) && count($rounds) > 0)
-                                        @foreach($rounds as $item)
-                                            <option value={{$item['id']}}>Round {{$item['roundno']}}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
+            <div class="col-md-7 col-sm-12">
+                <div class="row">
+      <!-- Contact Form -->
+                    <div class="col-sm-10 col-sm-offset-1 col-xs-12 mb-30">
+                        <div class="submit-form">
+                            <form id="submit-form" action="{{route('submitsave')}}" method="post">
+                                @csrf
+                                <div class="row">
+                                    <h4>Round</h4>
+                                    <div class="w-100 maxwidth-400 mx-auto px-14">
+                                        <select name="round" onchange="onRoundChanged(this)" required>
+                                            <option disabled selected>Select Round</option>
+                                            @if(isset($rounds) && count($rounds) > 0)
+                                                @foreach($rounds as $item)
+                                                    <option value={{$item['id']}}>Round {{$item['roundno']}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                                <h4>Team</h4>
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-3 col-xs-12">
+                                        <div class="w-100 maxwidth-200 mx-auto">
+                                            <p class="player-label">Goalkeeper</p>
+                                            <select id="goalkeeper" name="g" required>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="w-100 maxwidth-200 mx-auto">
+                                            <p class="player-label">Defender 1</p>
+                                            <select id="defender1" name="d1" required>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="maxwidth-200 mx-auto">
+                                            <p class="player-label">Defender 2</p>
+                                            <select id="defender2" name="d2" required>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="w-100 maxwidth-200 m-left">
+                                            <p class="player-label">Midfielder 1</p>
+                                            <select id="midfielder1" name="m1" required>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="w-100 maxwidth-200 m-right">
+                                            <p class="player-label">Midfielder 2</p>
+                                            <select id="midfielder2" name="m2" required>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="w-100 maxwidth-200 mx-auto">
+                                            <p class="player-label">Forward 1</p>
+                                            <select id="forward1" name="f1" required>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="w-100 maxwidth-200 mx-auto">
+                                            <p class="player-label">Forward 2</p>
+                                            <select id="forward2" name="f2" required>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4>Question</h4>
+                                <div id="questionarea"></div>
+                                <input type="submit" value="Submit">
+                            </form>
                         </div>
-                        <h4>Team</h4>
-                        <div class="row">
-                            <div class="col-md-6 col-md-offset-3 col-xs-12">
-                                <div class="w-100 maxwidth-200 mx-auto">
-                                    <p class="player-label">Goalkeeper</p>
-                                    <select id="goalkeeper" name="g" required>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12">
-                                <div class="w-100 maxwidth-200 mx-auto">
-                                    <p class="player-label">Defender 1</p>
-                                    <select id="defender1" name="d1" required>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xs-12">
-                                <div class="maxwidth-200 mx-auto">
-                                    <p class="player-label">Defender 2</p>
-                                    <select id="defender2" name="d2" required>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12">
-                                <div class="w-100 maxwidth-200 m-left">
-                                    <p class="player-label">Midfielder 1</p>
-                                    <select id="midfielder1" name="m1" required>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xs-12">
-                                <div class="w-100 maxwidth-200 m-right">
-                                    <p class="player-label">Midfielder 2</p>
-                                    <select id="midfielder2" name="m2" required>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12">
-                                <div class="w-100 maxwidth-200 mx-auto">
-                                    <p class="player-label">Forward 1</p>
-                                    <select id="forward1" name="f1" required>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xs-12">
-                                <div class="w-100 maxwidth-200 mx-auto">
-                                    <p class="player-label">Forward 2</p>
-                                    <select id="forward2" name="f2" required>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <h4>Question</h4>
-                        <div id="questionarea"></div>
-                        <input type="submit" value="Submit">
-                    </form>
+                    </div>
                 </div>
+            </div>
+            <div class="col-md-5 col-sm-12">
+                {{-- <!-- Fixtures Area Start -->
+                <div id="fixtures-area" class="fixtures-area section pb-120">
+                    <div class="container"> --}}
+                        <div class="row">
+                            
+                            <div class="col-md-10 col-md-offset-1 col-xs-12 text-center">
+                                <!-- Fixtures Table -->
+                                <h4>Fixtures</h4>
+                                <div class="table-responsive fixtures-table maxwidth-700 mx-auto mt-25">
+                                    <table id="fixturetable" class="table">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    {{-- </div>
+                </div> --}}
+                <!-- Fixtures Area End -->
             </div>
         </div>
     </div>
 </div>
 <!-- Contact Area End -->
-
-<!-- Fixtures Area Start -->
-<div id="fixtures-area" class="fixtures-area section pb-120">
-    <div class="container">
-        <div class="row">
-            
-            <div class="col-md-10 col-md-offset-1 col-xs-12 text-center">
-                <!-- Fixtures Table -->
-                <h4>Fixtures</h4>
-                <div class="table-responsive fixtures-table">
-                    <table id="fixturetable" class="table">
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Fixtures Area End -->
 
 @include('layouts.breakingnews')
 
@@ -141,7 +146,7 @@
         });
 
         $.ajax({
-            url: "/submit-data",
+            url: "{{route('submitdata')}}",
             headers: { 'csrftoken' : '{{ csrf_token() }}' },
             data: JSON.stringify({round: component.value}) ,
             type: 'POST',
@@ -149,17 +154,14 @@
             contentType: 'application/json',
             success: function (response) {
 
-                console.log(response["questions"]);
+                console.log(response);
                 var index;
                 var content1 = "";
                 for ( index = 0 ; index < response["goalkeepers"].length ; index ++ ) {
 
-                    content1 += "<option";
-                    content1 += " value=";
-                    content1 += "'";
+                    content1 += "<option value='";
                     content1 += response["goalkeepers"][index].id;
-                    content1 += "'";
-                    content1 += ">";
+                    content1 += "'>";
                     content1 += response["goalkeepers"][index].name + "(" + response["goalkeepers"][index].team + ", " + response["goalkeepers"][index].value + ")";
                     content1 += "</option>";
 
@@ -168,13 +170,10 @@
                 var content2 = "";
                 for ( index = 0 ; index < response["defender1"].length ; index ++ ) {
 
-                    content2 += "<option";
-                    content2 += " value=";
-                    content2 += "'";
+                    content2 += "<option value='";
                     content2 += response["defender1"][index].id;
-                    content2 += "'";
-                    content2 += ">";
-                    content2 += response["defender1"][index].name + "(" + response["goalkeepers"][index].team + ", " + response["goalkeepers"][index].value + ")";
+                    content2 += "'>";
+                    content2 += response["defender1"][index].name + "(" + response["defender1"][index].team + ", " + response["defender1"][index].value + ")";
                     content2 += "</option>";
 
                 }
@@ -182,26 +181,20 @@
                 var content3 = "";
                 for ( index = 0 ; index < response["defender2"].length ; index ++ ) {
 
-                    content3 += "<option";
-                    content3 += " value=";
-                    content3 += "'";
+                    content3 += "<option value='";
                     content3 += response["defender2"][index].id;
-                    content3 += "'";
-                    content3 += ">";
-                    content3 += response["defender2"][index].name + "(" + response["goalkeepers"][index].team + ", " + response["goalkeepers"][index].value + ")";
+                    content3 += "'>";
+                    content3 += response["defender2"][index].name + "(" + response["defender2"][index].team + ", " + response["defender2"][index].value + ")";
                     content3 += "</option>";
 
                 }
                 var content4 = "";
                 for ( index = 0 ; index < response["midfielder1"].length ; index ++ ) {
 
-                    content4 += "<option";
-                    content4 += " value=";
-                    content4 += "'";
+                    content4 += "<option value='";
                     content4 += response["midfielder1"][index].id;
-                    content4 += "'";
-                    content4 += ">";
-                    content4 += response["midfielder1"][index].name + "(" + response["goalkeepers"][index].team + ", " + response["goalkeepers"][index].value + ")";
+                    content4 += "'>";
+                    content4 += response["midfielder1"][index].name + "(" + response["midfielder1"][index].team + ", " + response["midfielder1"][index].value + ")";
                     content4 += "</option>";
 
                 }
@@ -209,13 +202,10 @@
                 var content5 = "";
                 for ( index = 0 ; index < response["midfielder2"].length ; index ++ ) {
 
-                    content5 += "<option";
-                    content5 += " value=";
-                    content5 += "'";
+                    content5 += "<option value='";
                     content5 += response["midfielder2"][index].id;
-                    content5 += "'";
-                    content5 += ">";
-                    content5 += response["midfielder2"][index].name + "(" + response["goalkeepers"][index].team + ", " + response["goalkeepers"][index].value + ")";
+                    content5 += "'>";
+                    content5 += response["midfielder2"][index].name + "(" + response["midfielder2"][index].team + ", " + response["midfielder2"][index].value + ")";
                     content5 += "</option>";
 
                 }
@@ -223,13 +213,10 @@
                 var content6 = "";
                 for ( index = 0 ; index < response["forward1"].length ; index ++ ) {
 
-                    content6 += "<option";
-                    content6 += " value=";
-                    content6 += "'";
+                    content6 += "<option value='";
                     content6 += response["forward1"][index].id;
-                    content6 += "'";
-                    content6 += ">";
-                    content6 += response["forward1"][index].name + "(" + response["goalkeepers"][index].team + ", " + response["goalkeepers"][index].value + ")";
+                    content6 += "'>";
+                    content6 += response["forward1"][index].name + "(" + response["forward1"][index].team + ", " + response["forward1"][index].value + ")";
                     content6 += "</option>";
 
                 }
@@ -237,13 +224,10 @@
                 var content7 = "";
                 for ( index = 0 ; index < response["forward2"].length ; index ++ ) {
 
-                    content7 += "<option";
-                    content7 += " value=";
-                    content7 += "'";
+                    content7 += "<option value='";
                     content7 += response["forward2"][index].id;
-                    content7 += "'";
-                    content7 += ">";
-                    content7 += response["forward2"][index].name + "(" + response["goalkeepers"][index].team + ", " + response["goalkeepers"][index].value + ")";
+                    content7 += "'>";
+                    content7 += response["forward2"][index].name + "(" + response["forward2"][index].team + ", " + response["forward2"][index].value + ")";
                     content7 += "</option>";
 
                 }
@@ -252,7 +236,7 @@
                 for ( index = 0 ; index < response["questions"].length ; index ++ ) {
 
                     content8 += "<div class='row'>";
-                    content8 += "<div class='col-sm-6 col-xs-12 text-right-left'>";
+                    content8 += "<div class='col-sm-6 col-xs-12 text-right-left pb-0-20 pl-0-vw'>";
                     content8 += "<p class='player-label mt-10 mb-0-10'>";
                     content8 += response["questions"][index].number + ") " + response["questions"][index].text;
                     content8 += "</p></div>";
@@ -285,7 +269,7 @@
 
                     content9 += "<tr>";
                     content9 += "<td>";
-                    content9 += response["fixtures"][index].teama + " VS " + response["fixtures"][index].teamb;
+                    content9 += response["fixtures"][index].teama + "-" + response["fixtures"][index].teamb;
                     content9 += "</td>";
                     content9 += "<td>";
                     content9 += response["fixtures"][index].date;
