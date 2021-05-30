@@ -81,16 +81,22 @@ class CommonController extends Controller
         $fixtures = Fixture::where("round", "=", $request->round)->get();
 
         $data = array(
-            'goalkeepers'=>$goalkeepers, 
-            'defender1'=>$defender1, 
-            'defender2'=>$defender2, 
-            'midfielder1'=>$midfielder1, 
-            'midfielder2'=>$midfielder2, 
-            'forward1'=>$forward1, 
-            'forward2'=>$forward2, 
+            'g'=>$goalkeepers, 
+            'd1'=>$defender1, 
+            'd2'=>$defender2, 
+            'm1'=>$midfielder1, 
+            'm2'=>$midfielder2, 
+            'f1'=>$forward1, 
+            'f2'=>$forward2, 
             'questions'=>$questions, 
             'fixtures'=>$fixtures
         );
+
+        $olddata = Team::where('jid', '=', Auth::id())->where('round', '=', $request->round)->get();
+
+        if(count($olddata) != 0) {
+            $data["old"] = $olddata;
+        }
 
         return response()->json($data, 200);
 

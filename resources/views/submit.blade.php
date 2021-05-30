@@ -157,77 +157,117 @@
                 console.log(response);
                 var index;
                 var content1 = "";
-                for ( index = 0 ; index < response["goalkeepers"].length ; index ++ ) {
+                for ( index = 0 ; index < response["g"].length ; index ++ ) {
 
-                    content1 += "<option value='";
-                    content1 += response["goalkeepers"][index].id;
+                    if(!!response["old"] && response["old"][0]["g"] == response["g"][index].id) {
+                        content1 += "<option selected value='";
+                    } else {
+                        content1 += "<option value='";
+                    }
+
+                    content1 += response["g"][index].id;
                     content1 += "'>";
-                    content1 += response["goalkeepers"][index].name + "(" + response["goalkeepers"][index].team + ", " + response["goalkeepers"][index].value + ")";
+                    content1 += response["g"][index].name + "(" + response["g"][index].team + ", " + response["g"][index].value + ")";
                     content1 += "</option>";
 
                 }
 
                 var content2 = "";
-                for ( index = 0 ; index < response["defender1"].length ; index ++ ) {
+                for ( index = 0 ; index < response["d1"].length ; index ++ ) {
 
-                    content2 += "<option value='";
-                    content2 += response["defender1"][index].id;
+                    if(!!response["old"] && response["old"][0]["d1"] == response["d1"][index].id) {
+                        content2 += "<option selected value='";
+                    } else {
+                        content2 += "<option value='";
+                    }
+
+                    content2 += response["d1"][index].id;
                     content2 += "'>";
-                    content2 += response["defender1"][index].name + "(" + response["defender1"][index].team + ", " + response["defender1"][index].value + ")";
+                    content2 += response["d1"][index].name + "(" + response["d1"][index].team + ", " + response["d1"][index].value + ")";
                     content2 += "</option>";
 
                 }
 
                 var content3 = "";
-                for ( index = 0 ; index < response["defender2"].length ; index ++ ) {
+                for ( index = 0 ; index < response["d2"].length ; index ++ ) {
+
+                    if(!!response["old"] && response["old"][0]["d2"] == response["d2"][index].id) {
+                        content3 += "<option selected value='";
+                    } else {
+                        content3 += "<option value='";
+                    }
 
                     content3 += "<option value='";
-                    content3 += response["defender2"][index].id;
+                    content3 += response["d2"][index].id;
                     content3 += "'>";
-                    content3 += response["defender2"][index].name + "(" + response["defender2"][index].team + ", " + response["defender2"][index].value + ")";
+                    content3 += response["d2"][index].name + "(" + response["d2"][index].team + ", " + response["d2"][index].value + ")";
                     content3 += "</option>";
 
                 }
                 var content4 = "";
-                for ( index = 0 ; index < response["midfielder1"].length ; index ++ ) {
+                for ( index = 0 ; index < response["m1"].length ; index ++ ) {
+
+                    if(!!response["old"] && response["old"][0]["m1"] == response["m1"][index].id) {
+                        content4 += "<option selected value='";
+                    } else {
+                        content4 += "<option value='";
+                    }
 
                     content4 += "<option value='";
-                    content4 += response["midfielder1"][index].id;
+                    content4 += response["m1"][index].id;
                     content4 += "'>";
-                    content4 += response["midfielder1"][index].name + "(" + response["midfielder1"][index].team + ", " + response["midfielder1"][index].value + ")";
+                    content4 += response["m1"][index].name + "(" + response["m1"][index].team + ", " + response["m1"][index].value + ")";
                     content4 += "</option>";
 
                 }
 
                 var content5 = "";
-                for ( index = 0 ; index < response["midfielder2"].length ; index ++ ) {
+                for ( index = 0 ; index < response["m2"].length ; index ++ ) {
+
+                    if(!!response["old"] && response["old"][0]["m2"] == response["m2"][index].id) {
+                        content5 += "<option selected value='";
+                    } else {
+                        content5 += "<option value='";
+                    }
 
                     content5 += "<option value='";
-                    content5 += response["midfielder2"][index].id;
+                    content5 += response["m2"][index].id;
                     content5 += "'>";
-                    content5 += response["midfielder2"][index].name + "(" + response["midfielder2"][index].team + ", " + response["midfielder2"][index].value + ")";
+                    content5 += response["m2"][index].name + "(" + response["m2"][index].team + ", " + response["m2"][index].value + ")";
                     content5 += "</option>";
 
                 }
 
                 var content6 = "";
-                for ( index = 0 ; index < response["forward1"].length ; index ++ ) {
+                for ( index = 0 ; index < response["f1"].length ; index ++ ) {
+
+                    if(!!response["old"] && response["old"][0]["f1"] == response["f1"][index].id) {
+                        content6 += "<option selected value='";
+                    } else {
+                        content6 += "<option value='";
+                    }
 
                     content6 += "<option value='";
-                    content6 += response["forward1"][index].id;
+                    content6 += response["f1"][index].id;
                     content6 += "'>";
-                    content6 += response["forward1"][index].name + "(" + response["forward1"][index].team + ", " + response["forward1"][index].value + ")";
+                    content6 += response["f1"][index].name + "(" + response["f1"][index].team + ", " + response["f1"][index].value + ")";
                     content6 += "</option>";
 
                 }
 
                 var content7 = "";
-                for ( index = 0 ; index < response["forward2"].length ; index ++ ) {
+                for ( index = 0 ; index < response["f2"].length ; index ++ ) {
+
+                    if(!!response["old"] && response["old"][0]["f2"] == response["f2"][index].id) {
+                        content7 += "<option selected value='";
+                    } else {
+                        content7 += "<option value='";
+                    }
 
                     content7 += "<option value='";
-                    content7 += response["forward2"][index].id;
+                    content7 += response["f2"][index].id;
                     content7 += "'>";
-                    content7 += response["forward2"][index].name + "(" + response["forward2"][index].team + ", " + response["forward2"][index].value + ")";
+                    content7 += response["f2"][index].name + "(" + response["f2"][index].team + ", " + response["f2"][index].value + ")";
                     content7 += "</option>";
 
                 }
@@ -251,7 +291,13 @@
                     var jindex;
 
                     for( jindex = 0 ; jindex < response["questions"][index].qinputs.length ; jindex ++) {
-                        content8 += "<option value='";
+
+                        if(!!response["old"] && response["old"][0]["q" + (index + 1)] == response["questions"][index].qinputs[jindex].id) {
+                            content8 += "<option selected value='";
+                        } else {
+                            content8 += "<option value='";
+                        }
+
                         content8 += response["questions"][index].qinputs[jindex].id;
                         content8 += "'>";
                         content8 += response["questions"][index].qinputs[jindex].input;
@@ -285,19 +331,19 @@
 
                 var preoption;
 
-                preoption = "<option disabled selected value=\"\">Select GoalKeeper</option>";
+                preoption = "<option disabled selected>Select GoalKeeper</option>";
                 $("#goalkeeper").html(preoption + content1);
-                preoption = "<option disabled selected value=\"\">Select Defender1</option>";
+                preoption = "<option disabled selected>Select Defender1</option>";
                 $("#defender1").html(preoption + content2);
-                preoption = "<option disabled selected value=\"\">Select Defender2</option>";
+                preoption = "<option disabled selected>Select Defender2</option>";
                 $("#defender2").html(preoption + content3);
-                preoption = "<option disabled selected value=\"\">Select Midfielder1</option>";
+                preoption = "<option disabled selected>Select Midfielder1</option>";
                 $("#midfielder1").html(preoption + content4);
-                preoption = "<option disabled selected value=\"\">Select Midfielder2</option>";
+                preoption = "<option disabled selected>Select Midfielder2</option>";
                 $("#midfielder2").html(preoption + content5);
-                preoption = "<option disabled selected value=\"\">Select Forward1</option>";
+                preoption = "<option disabled selected>Select Forward1</option>";
                 $("#forward1").html(preoption + content6);
-                preoption = "<option disabled selected value=\"\">Select Forward2</option>";
+                preoption = "<option disabled selected>Select Forward2</option>";
                 $("#forward2").html(preoption + content7);
                 // $("#questionarea").html(content8 !== "" ? content8 : "<select name='q1' class='hidden' required></select>");
                 $("#questionarea").html(content8);
