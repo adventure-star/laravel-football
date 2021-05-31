@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,10 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 // Common routes
-Route::get('/', 'CommonController@index')->name('index');
+Route::get('/', function(Request $request) {
+    return redirect()->route('login');
+})->name('index');
+
 Route::get('/about', 'CommonController@about')->name('about');
 Route::get('/blog', 'CommonController@blog')->name('blog');
 Route::get('/blog-details', 'CommonController@blogdetails')->name('blogdetails');
