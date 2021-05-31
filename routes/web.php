@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Auth routes
 Auth::routes();
 
+// Common routes
 Route::get('/', 'CommonController@index')->name('index');
 Route::get('/about', 'CommonController@about')->name('about');
 Route::get('/blog', 'CommonController@blog')->name('blog');
@@ -29,65 +30,49 @@ Route::get('/shop', 'CommonController@shop')->name('shop');
 Route::get('/team', 'CommonController@team')->name('team');
 Route::get('/wishlist', 'CommonController@wishlist')->name('wishlist');
 Route::get('/contact', 'CommonController@contact')->name('contact');
+
+// Guest routes
 Route::get('/submit', 'CommonController@submit')->name('submit')->middleware('auth');
 
-Route::post('/submit-data', 'CommonController@submitdata')->name('submitdata');
-Route::post('/submit-save', 'CommonController@submitsave')->name('submitsave');
+Route::post('/submit-data', 'CommonController@submitdata')->name('submitdata')->middleware('auth');
+Route::post('/submit-save', 'CommonController@submitsave')->name('submitsave')->middleware('auth');
 
-// Admin Urls
+Route::get('/profile', 'CommonController@profile')->name('profile')->middleware('auth');
 
+// Admin routes
 Route::get('/teams', 'AdminController@teams')->name('teams');
 
 Route::get('/rounds', 'AdminController@rounds')->name('rounds');
-Route::get('/rounds/edit/{id}', 'AdminController@roundedit')->name('rounds.edit');
-Route::post('/rounds/edit/save', 'AdminController@roundupdate')->name('rounds.update');
 Route::get('/rounds/new', 'AdminController@roundnew')->name('rounds.new');
-Route::post('/rounds/new/save', 'AdminController@roundnewsave')->name('rounds.new.save');
+Route::post('/rounds/add', 'AdminController@roundadd')->name('rounds.new.save');
+Route::get('/rounds/edit/{id}', 'AdminController@roundedit')->name('rounds.edit');
+Route::post('/rounds/update', 'AdminController@roundupdate')->name('rounds.update');
 
 Route::get('/players', 'AdminController@players')->name('players');
-Route::get('/players/edit/{id}', 'AdminController@playeredit')->name('players.edit');
-Route::post('/players/edit/save', 'AdminController@playerupdate')->name('players.update');
 Route::get('/players/new', 'AdminController@playernew')->name('players.new');
-Route::post('/players/new/save', 'AdminController@playernewsave')->name('players.new.save');
+Route::post('/players/add', 'AdminController@playeradd')->name('players.new.save');
+Route::get('/players/edit/{id}', 'AdminController@playeredit')->name('players.edit');
+Route::post('/players/update', 'AdminController@playerupdate')->name('players.update');
 
 Route::get('/users', 'AdminController@users')->name('users');
 
 Route::get('/fixtures', 'AdminController@fixture')->name('fixtures');
+Route::get('/fixtures/new', 'AdminController@fixturenew')->name('fixtures.new');
+Route::post('/fixtures/add', 'AdminController@fixtureadd')->name('fixtures.new.save');
 Route::get('/fixtures/edit/{id}', 'AdminController@fixtureedit')->name('fixtures.edit');
 Route::post('/fixtures/update', 'AdminController@fixtureupdate')->name('fixtures.update');
-Route::get('/fixtures/new', 'AdminController@fixturenew')->name('fixtures.new');
-Route::post('/fixtures/new/save', 'AdminController@fixturenewsave')->name('fixtures.new.save');
 
 Route::get('/questions', 'AdminController@question')->name('questions');
+Route::get('/questions/new/{id}', 'AdminController@questionnew')->name('questions.new');
+Route::post('/questions/add', 'AdminController@questionadd')->name('questions.new.save');
 Route::get('/questions/edit/{id}', 'AdminController@questionedit')->name('questions.edit');
 Route::post('/questions/update', 'AdminController@questionupdate')->name('questions.update');
 Route::get('/questions/answers/{id}', 'AdminController@questionanswers')->name('questions.answers');
 Route::get('/questions/round/edit/{id}', 'AdminController@questionroundedit')->name('questions.round.edit');
 Route::post('/questions/delete', 'AdminController@questiondelete')->name('questions.delete');
-Route::get('/questions/new/{id}', 'AdminController@questionnew')->name('questions.new');
-Route::post('/questions/new/save', 'AdminController@questionnewsave')->name('questions.new.save');
 
-
-
-
-Route::post('/qinputs/delete', 'AdminController@qinputdelete')->name('qinputs.delete');
+Route::get('/qinputs/new/{id}', 'AdminController@qinputnew')->name('qinputs.new');
+Route::post('/qinputs/add', 'AdminController@qinputadd')->name('qinputs.new.save');
 Route::get('/qinputs/edit/{id}', 'AdminController@qinputedit')->name('qinputs.edit');
 Route::post('/qinputs/update', 'AdminController@qinputupdate')->name('qinputs.update');
-Route::get('/qinputs/new/{id}', 'AdminController@qinputnew')->name('qinputs.new');
-Route::post('/qinputs/new/save', 'AdminController@qinputnewsave')->name('qinputs.new.save');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::post('/qinputs/delete', 'AdminController@qinputdelete')->name('qinputs.delete');

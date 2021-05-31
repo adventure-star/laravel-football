@@ -25,22 +25,22 @@ class AdminController extends Controller
     public function teams() {
         
         $teams = Team::orderBy('round', 'asc')->get();
-        return view('teams', compact('teams'));
+        return view('admin.team.list', compact('teams'));
     }
 
 
     public function rounds() {
         
         $rounds = Round::all();
-        return view('round.list', compact('rounds'));
+        return view('admin.round.list', compact('rounds'));
     }
     public function roundnew() {
-        return view('round.new');
+        return view('admin.round.new');
     }
     public function roundedit($id) {
         
         $round = Round::find($id);
-        return view('round.edit', compact('round', 'id'));
+        return view('admin.round.edit', compact('round', 'id'));
     }
     public function roundupdate(Request $request) {
 
@@ -64,7 +64,7 @@ class AdminController extends Controller
         return redirect()->route("rounds");
 
     }
-    public function roundnewsave(Request $request) {
+    public function roundadd(Request $request) {
 
         $validator = Validator::make($request->all(),
         [
@@ -88,11 +88,11 @@ class AdminController extends Controller
     public function players() {
         
         $players = Player::orderBy('round', 'asc')->get();
-        return view('player.list', compact('players'));
+        return view('admin.player.list', compact('players'));
     }
     public function playernew() {
         $rounds = Round::all();
-        return view('player.new', compact('rounds'));
+        return view('admin.player.new', compact('rounds'));
     }
 
     public function playeredit($id) {
@@ -100,7 +100,7 @@ class AdminController extends Controller
         $player = Player::find($id);
         $rounds = Round::all();
 
-        return view('player.edit', compact('player', 'id', 'rounds'));
+        return view('admin.player.edit', compact('player', 'id', 'rounds'));
     }
 
     public function playerupdate(Request $request) {
@@ -131,7 +131,7 @@ class AdminController extends Controller
         return redirect()->route("players");
 
     }
-    public function playernewsave(Request $request) {
+    public function playeradd(Request $request) {
 
         $validator = Validator::make($request->all(),
         [
@@ -165,13 +165,13 @@ class AdminController extends Controller
     public function users() {
         
         $users = User::where('isadmin', "!=", 1)->get();
-        return view('user.list', compact('users'));
+        return view('admin.user.list', compact('users'));
     }
 
     public function fixture() {
 
         $fixtures = Fixture::orderBy('round', 'asc')->get();
-        return view('fixture.list', compact('fixtures'));
+        return view('admin.fixture.list', compact('fixtures'));
 
     }
     public function fixtureedit($id) {
@@ -179,7 +179,7 @@ class AdminController extends Controller
         $fixture = Fixture::find($id);
         $rounds = Round::all();
 
-        return view('fixture.edit', compact('fixture', 'id', 'rounds'));
+        return view('admin.fixture.edit', compact('fixture', 'id', 'rounds'));
     }
     public function fixtureupdate(Request $request) {
 
@@ -213,9 +213,9 @@ class AdminController extends Controller
     }
     public function fixturenew() {
         $rounds = Round::all();
-        return view('fixture.new', compact('rounds'));
+        return view('admin.fixture.new', compact('rounds'));
     }
-    public function fixturenewsave(Request $request) {
+    public function fixtureadd(Request $request) {
 
         $validator = Validator::make($request->all(),
         [
@@ -271,13 +271,13 @@ class AdminController extends Controller
             }
 
         }
-        return view('question.list', compact('questions', 'roundwithoutquestions'));
+        return view('admin.question.list', compact('questions', 'roundwithoutquestions'));
 
     }
     public function questionedit($id) {
         
         $question = Question::find($id);
-        return view('question.edit', compact('question', 'id'));
+        return view('admin.question.edit', compact('question', 'id'));
     }
     public function questionupdate(Request $request) {
 
@@ -302,12 +302,12 @@ class AdminController extends Controller
     public function questionanswers($id) {
         
         $question = Question::find($id);
-        return view('question.answers', compact('question', 'id'));
+        return view('admin.question.answers', compact('question', 'id'));
     }
     public function questionroundedit($id) {
         
         $questions = Question::where('round', '=', $id)->get();
-        return view('question.roundedit', compact('questions', 'id'));
+        return view('admin.question.roundedit', compact('questions', 'id'));
     }
     public function questiondelete(Request $request) {
 
@@ -316,9 +316,9 @@ class AdminController extends Controller
 
     }
     public function questionnew($id) {
-        return view('question.new', compact('id'));
+        return view('admin.question.new', compact('id'));
     }
-    public function questionnewsave(Request $request) {
+    public function questionadd(Request $request) {
 
         $questions = Question::where('round', '=', $request->round)->get();
 
@@ -358,7 +358,7 @@ class AdminController extends Controller
     public function qinputedit($id) {
 
         $qinput = QInput::find($id);
-        return view('qinput.edit', compact('qinput', 'id'));
+        return view('admin.qinput.edit', compact('qinput', 'id'));
 
     }
     public function qinputupdate(Request $request) {
@@ -382,9 +382,9 @@ class AdminController extends Controller
 
     }
     public function qinputnew($id) {
-        return view('qinput.new', compact('id'));
+        return view('admin.qinput.new', compact('id'));
     }
-    public function qinputnewsave(Request $request) {
+    public function qinputadd(Request $request) {
 
         $validator = Validator::make($request->all(),
         [

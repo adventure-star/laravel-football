@@ -19,10 +19,10 @@
                                 @if(Auth::user())
                                     @if(Auth::user()->isadmin == 1)
                                         <li @if(Route::is('users'))class="active"@endif><a href={{route('users')}}>users</a></li>
-                                        <li @if(Route::is('rounds'))class="active"@endif><a href={{route('rounds')}}>rounds</a></li>
-                                        <li @if(Route::is('fixtures'))class="active"@endif><a href={{route('fixtures')}}>fixtures</a></li>
-                                        <li @if(Route::is('players'))class="active"@endif><a href={{route('players')}}>players</a></li>
-                                        <li @if(Route::is('questions'))class="active"@endif><a href={{route('questions')}}>questions</a></li>
+                                        <li @if(Route::is('rounds') || Route::is('rounds.new') || Route::is('rounds.edit'))class="active"@endif><a href={{route('rounds')}}>rounds</a></li>
+                                        <li @if(Route::is('fixtures') || Route::is('fixtures.new') || Route::is('fixtures.edit'))class="active"@endif><a href={{route('fixtures')}}>fixtures</a></li>
+                                        <li @if(Route::is('players') || Route::is('players.new') || Route::is('players.edit'))class="active"@endif><a href={{route('players')}}>players</a></li>
+                                        <li @if(Route::is('questions') || Route::is('questions.new') || Route::is('questions.edit') || Route::is('questions.answers') || Route::is('questions.round.edit') || Route::is('qinputs.new') || Route::is('qinputs.edit'))class="active"@endif><a href={{route('questions')}}>questions</a></li>
                                         <li @if(Route::is('teams'))class="active"@endif><a href={{route('teams')}}>teams</a></li>
                                     @else
                                         <li @if(Route::is('submit'))class="active"@endif><a href={{route('submit')}}>submit</a></li>
@@ -46,14 +46,21 @@
                                 </li> --}}
                                 {{-- <li><a href={{route('contact')}}>contact</a></li> --}}
                                 @if(Auth::user())
-                                    <li>
-                                        <a href="#" onclick="logout()">logout</a>
-                                        <form id="logoutform" class="w-full" method="post" action="{{ route('logout') }}">
-                                            @csrf
-                                        </form>
+                                    <li @if(Route::is('profile'))class="active"@endif><a href={{route('profile')}}>{{Auth::user()->fullname}}</a>
+                                        <ul>
+                                            @if(Auth::user()->isadmin != 1)
+                                                <li><a href={{route('profile')}}>profile</a></li>
+                                            @endif
+                                            <li>
+                                                <a href="#" onclick="logout()">logout</a>
+                                                <form id="logoutform" class="w-full" method="post" action="{{ route('logout') }}">
+                                                    @csrf
+                                                </form>
+                                            </li>
+                                        </ul>
                                     </li>
                                 @else
-                                    <li><a href="{{route('login')}}">login</a></li>
+                                    <li @if(Route::is('login'))class="active"@endif><a href="{{route('login')}}">login</a></li>
                                 @endif
                             </ul>
                         </nav>

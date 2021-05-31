@@ -57,7 +57,7 @@ class CommonController extends Controller
 
         $rounds = Round::where("ended", "=", 1)->get();
 
-        return view('submit', compact('rounds'));
+        return view('guest.submit', compact('rounds'));
 
     }
 
@@ -144,6 +144,11 @@ class CommonController extends Controller
 
         return redirect()->route('index');
 
+    }
+    public function profile() {
+
+        $user = Auth::user();
+        return view('guest.profile', compact('user'));
     }
 
 

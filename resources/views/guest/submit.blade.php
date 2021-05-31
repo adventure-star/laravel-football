@@ -197,7 +197,6 @@
                         content3 += "<option value='";
                     }
 
-                    content3 += "<option value='";
                     content3 += response["d2"][index].id;
                     content3 += "'>";
                     content3 += response["d2"][index].name + "(" + response["d2"][index].team + ", " + response["d2"][index].value + ")";
@@ -213,7 +212,6 @@
                         content4 += "<option value='";
                     }
 
-                    content4 += "<option value='";
                     content4 += response["m1"][index].id;
                     content4 += "'>";
                     content4 += response["m1"][index].name + "(" + response["m1"][index].team + ", " + response["m1"][index].value + ")";
@@ -230,7 +228,6 @@
                         content5 += "<option value='";
                     }
 
-                    content5 += "<option value='";
                     content5 += response["m2"][index].id;
                     content5 += "'>";
                     content5 += response["m2"][index].name + "(" + response["m2"][index].team + ", " + response["m2"][index].value + ")";
@@ -247,7 +244,6 @@
                         content6 += "<option value='";
                     }
 
-                    content6 += "<option value='";
                     content6 += response["f1"][index].id;
                     content6 += "'>";
                     content6 += response["f1"][index].name + "(" + response["f1"][index].team + ", " + response["f1"][index].value + ")";
@@ -264,7 +260,6 @@
                         content7 += "<option value='";
                     }
 
-                    content7 += "<option value='";
                     content7 += response["f2"][index].id;
                     content7 += "'>";
                     content7 += response["f2"][index].name + "(" + response["f2"][index].team + ", " + response["f2"][index].value + ")";
