@@ -19,7 +19,7 @@ Auth::routes();
 
 // Common routes
 Route::get('/', function(Request $request) {
-    return redirect()->route('login');
+    return Auth::user() ? (Auth::user()->isadmin == 1 ? redirect()->route('teams') : redirect()->route('submit')) : redirect()->route('login');
 })->name('index');
 
 Route::get('/about', 'CommonController@about')->name('about');
@@ -44,13 +44,19 @@ Route::post('/submit-save', 'CommonController@submitsave')->name('submitsave')->
 Route::get('/profile', 'CommonController@profile')->name('profile')->middleware('auth');
 
 // Admin routes
-Route::get('/teams', 'AdminController@teams')->name('teams');
+Route::get('/userteams', 'AdminController@userteams')->name('userteams');
 
 Route::get('/rounds', 'AdminController@rounds')->name('rounds');
 Route::get('/rounds/new', 'AdminController@roundnew')->name('rounds.new');
 Route::post('/rounds/add', 'AdminController@roundadd')->name('rounds.new.save');
 Route::get('/rounds/edit/{id}', 'AdminController@roundedit')->name('rounds.edit');
 Route::post('/rounds/update', 'AdminController@roundupdate')->name('rounds.update');
+
+Route::get('/teams', 'AdminController@teams')->name('teams');
+Route::get('/teams/new', 'AdminController@teamnew')->name('teams.new');
+Route::post('/teams/add', 'AdminController@teamadd')->name('teams.new.save');
+Route::get('/teams/edit/{id}', 'AdminController@teamedit')->name('teams.edit');
+Route::post('/teams/update', 'AdminController@teamupdate')->name('teams.update');
 
 Route::get('/players', 'AdminController@players')->name('players');
 Route::get('/players/new', 'AdminController@playernew')->name('players.new');

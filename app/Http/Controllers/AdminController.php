@@ -6,6 +6,7 @@ use App\Model\Fixture;
 use App\Model\Player;
 use App\Model\QInput;
 use App\Model\Question;
+use App\Model\RealTeam;
 use App\Model\Round;
 use App\Model\Team;
 use App\User;
@@ -22,10 +23,10 @@ class AdminController extends Controller
     }
 
 
-    public function teams() {
+    public function userteams() {
         
         $teams = Team::orderBy('round', 'asc')->get();
-        return view('admin.team.list', compact('teams'));
+        return view('admin.userteam.list', compact('teams'));
     }
 
 
@@ -82,6 +83,58 @@ class AdminController extends Controller
         }
 
         return redirect()->route("rounds");
+
+    }
+
+    public function teams() {
+        
+        $teams = RealTeam::all();
+        return view('admin.team.list', compact('teams'));
+    }
+    public function teamnew() {
+        return view('admin.team.new');
+    }
+    public function teamedit($id) {
+        
+        $team = RealTeam::find($id);
+        return view('admin.team.edit', compact('team', 'id'));
+    }
+    public function teamupdate(Request $request) {
+
+        $validator = Validator::make($request->all(),
+        [
+            'name' => 'required|string',
+        ]);
+
+        $data = ([
+            'name' => $request->name,
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $updated = RealTeam::where('id', $request->id)->update($data);
+
+        return redirect()->route("teams");
+
+    }
+    public function teamadd(Request $request) {
+
+        $validator = Validator::make($request->all(),
+        [
+            'name' => 'required|string',
+        ]);
+
+        $new = new RealTeam();
+        $new->name = $request->name;
+        $new->save();
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        return redirect()->route("teams");
 
     }
 
@@ -178,8 +231,9 @@ class AdminController extends Controller
         
         $fixture = Fixture::find($id);
         $rounds = Round::all();
+        $teams = RealTeam::all();
 
-        return view('admin.fixture.edit', compact('fixture', 'id', 'rounds'));
+        return view('admin.fixture.edit', compact('fixture', 'id', 'rounds', 'teams'));
     }
     public function fixtureupdate(Request $request) {
 
@@ -213,7 +267,8 @@ class AdminController extends Controller
     }
     public function fixturenew() {
         $rounds = Round::all();
-        return view('admin.fixture.new', compact('rounds'));
+        $teams = RealTeam::all();
+        return view('admin.fixture.new', compact('rounds', 'teams'));
     }
     public function fixtureadd(Request $request) {
 

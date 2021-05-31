@@ -49,13 +49,27 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Team A</p>
-                                    <input type="text" name="teama" required />
+                                    <select name="teama" required>
+                                        <option disabled selected>Select Team</option>
+                                        @if(isset($teams) && count($teams) > 0)
+                                            @foreach($teams as $key=>$item)
+                                                <option value={{$item['id']}}>{{$item['name']}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Team B</p>
-                                    <input type="text" name="teamb" required />
+                                    <select name="teamb" required>
+                                        <option disabled selected>Select Team</option>
+                                        @if(isset($teams) && count($teams) > 0)
+                                            @foreach($teams as $key=>$item)
+                                                <option value={{$item['id']}}>{{$item['name']}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
                         </div>
