@@ -1,11 +1,10 @@
     
     <!-- Footer Top Area Start -->
     <div class="footer-top-area section pb-70 pt-100">
-        <div class="footer-top-left-bg overlay"></div>
          <div class="container">
              <div class="row">
                  <!-- Footer About -->
-                 <div class="col-md-5 col-xs-12 mb-30">
+                 <div class="col-md-12 col-xs-12 mb-30">
                      <div class="footer-about">
                          <img src="{{asset('img/logo.png')}}" alt="">
                          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proiden</p>
@@ -18,35 +17,6 @@
                          </div>
                      </div>
                  </div>
-                 <!-- Footer Twitter -->
-                 <div class="col-md-4 col-sm-6 col-xs-12 mb-30">
-                     <div class="twitter-widget">
-                         <h3 class="title">Latest Tweets</h3>
-                         <div class="single-twite">
-                             <p>Duis aute irure <a href="#">@dolor</a> in rderiin voluptate velit esse cillum dolore eu ft nulla pariatur. Excepteur <a href="#">@sint</a> occaecat..</p>
-                             <span>30 minutes ago</span>
-                         </div>
-                         <div class="single-twite">
-                             <p>Duis aute irure <a href="#">@dolor</a> in rderiin voluptate velit esse cillum dolore eu ft </p>
-                             <span>15 minutes ago</span>
-                         </div>
-                     </div>
-                 </div>
-                 <!-- Footer Subscribe -->
-                 <div class="col-md-3 col-sm-6 col-xs-12 mb-30">
-                     <div class="subscribe-widget">
-                         <h3 class="title">Newsletters</h3>
-                         <div class="subscribe-form">
-                             <form action="#">
-                                 <input type="text" placeholder="your email address">
-                                 <button class="submit"><i class="zmdi zmdi-mail-send"></i></button>
-                             </form>
-                         </div>
-                         <p><span>Phone:</span> +98 996 554 658</p>
-                         <p><span>email:</span> sport@email.com</p>
-                     </div>
-                 </div>
-                 
              </div>
          </div>
      </div>
