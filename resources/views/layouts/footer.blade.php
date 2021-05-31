@@ -59,7 +59,7 @@
                 
                  <!-- Copyright -->
                  <div class="copyright text-left col-sm-6 col-xs-12">
-                     <p>Copyright &copy; <span>Supar Sport</span>. 2016.All right reserved</p>
+                     <p>Copyright &copy; <span>Sofa League</span>. 2021.All right reserved</p>
                  </div>
                  <!-- Author Credit -->
                  <div class="author-credit text-right col-sm-6 col-xs-12">
