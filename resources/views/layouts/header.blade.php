@@ -13,7 +13,7 @@
                     <div id="main-menu" class="main-menu float-right">
                         <nav>
                             <ul>
-                                <li @if(Route::is('index'))class="active"@endif><a href={{route('index')}}>home</a></li>
+                                {{-- <li @if(Route::is('index'))class="active"@endif><a href={{route('index')}}>home</a></li> --}}
                                 {{-- <li><a href={{route('about')}}>about</a></li>
                                 <li><a href={{route('team')}}>team</a></li> --}}
                                 @if(Auth::user())
