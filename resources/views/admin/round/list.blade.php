@@ -27,6 +27,7 @@
                             <th>RoundNo</th>
                             <th>State</th>
                             <th>Edit</th>
+                            <th>Remove</th>
                         </tr>
                         @if(isset($rounds) && count($rounds) > 0)
                             @foreach($rounds as $key => $item)
@@ -34,7 +35,10 @@
                                     <td>{{$item["roundno"]}}</td>
                                     <td>{{$item["ended"] == 0 ? "Not Opened" : ($item["ended"] == 1 ? "Active" : "Expired")}}</td>
                                     <td>
-                                    <a href="{{route('rounds.edit', $item['id'])}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>
+                                        <a href="{{route('rounds.edit', $item['id'])}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success-rgba" onclick="deleteRound({{$item['id']}})"><i class="fa fa-remove"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -55,5 +59,36 @@
 <!-- Fixtures Area End -->
 
 @include('layouts.breakingnews')
+
+@endsection
+
+@section('scripts')
+    <script>
+        function deleteRound(id) {
+
+            $.ajax({
+                method: "post",
+                url: "{{route('rounds.delete')}}",
+                headers: {
+                    'X-CSRF-TOKEN': '<?= csrf_token() ?>'
+                },
+
+                data : JSON.stringify({id : id}),
+                datatype: 'JSON',
+                contentType: 'application/json',
+
+                async: true,
+                success: function (data) {
+                    console.log(data);
+                    if(data) {
+                        window.location = "{{route('rounds')}}";
+                    }
+                },
+                error: function () {
+                    console.log("error");
+                }
+            });
+        }
+    </script>
 
 @endsection

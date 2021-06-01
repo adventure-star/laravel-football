@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="page-banner-title text-center col-xs-12">
-                <h2>rounds</h2>
+                <h2>players</h2>
             </div>
         </div>
     </div>
@@ -35,6 +35,7 @@
                             @foreach($players as $key => $item)
                                 <tr>
                                     <td>{{$item["name"]}}</td>
+                                    {{-- <td>{{App\Model\RealTeam::find($item["team"])['name']}}</td> --}}
                                     <td>{{$item["team"]}}</td>
                                     <td>{{$item["value"]}}</td>
                                     <td>{{App\Model\Round::find($item["round"])['roundno']}}</td>

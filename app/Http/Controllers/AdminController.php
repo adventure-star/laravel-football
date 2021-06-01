@@ -86,10 +86,16 @@ class AdminController extends Controller
         return redirect()->route("rounds");
 
     }
+    public function rounddelete(Request $request) {
+
+        $deleted = Round::find($request->id)->delete();
+        return $deleted;
+
+    }
 
     public function teams() {
         
-        $teams = RealTeam::all();
+        $teams = RealTeam::orderBy('name', 'asc')->get();
         return view('admin.team.list', compact('teams'));
     }
     public function teamnew() {
@@ -104,14 +110,14 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(),
         [
-            'name' => 'required|string',
+            'name' => 'required|string|unique:realteams',
         ]);
 
         $data = ([
             'name' => $request->name,
         ]);
 
-        if ($validator->fails()) {
+        if ($validator->fails() && $request->id != RealTeam::where('name', '=',$request->name)->first()->id) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
@@ -124,37 +130,39 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(),
         [
-            'name' => 'required|string',
+            'name' => 'required|string|unique:realteams',
         ]);
-
-        $new = new RealTeam();
-        $new->name = $request->name;
-        $new->save();
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        $new = new RealTeam();
+        $new->name = $request->name;
+        $new->save();
+  
         return redirect()->route("teams");
 
     }
 
     public function players() {
         
-        $players = Player::orderBy('round', 'asc')->get();
+        $players = Player::orderBy('round', 'asc')->orderBy('team', 'asc')->orderBy('position', 'asc')->get();
         return view('admin.player.list', compact('players'));
     }
     public function playernew() {
         $rounds = Round::all();
-        return view('admin.player.new', compact('rounds'));
+        $teams = RealTeam::all();
+        return view('admin.player.new', compact('rounds', 'teams'));
     }
 
     public function playeredit($id) {
         
         $player = Player::find($id);
         $rounds = Round::all();
+        $teams = RealTeam::all();
 
-        return view('admin.player.edit', compact('player', 'id', 'rounds'));
+        return view('admin.player.edit', compact('player', 'id', 'rounds', 'teams'));
     }
 
     public function playerupdate(Request $request) {
@@ -481,20 +489,41 @@ class AdminController extends Controller
                     $array[strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $key))] = $value;
                     array_push($keys, strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $key)));
                 }
+                
     
                 if($keys != ['round', 'position', 'name', 'team', 'value']) {
                     return redirect()->back()->withInput();
                 }
     
-                if(!Player::where($array)->first()) {
+                if(!Player::where(['name' =>  $array['name'], 'position' =>  $array['position'], 'value' =>  $array['value']])->first()) {
+
                     $new = new Player();
     
                     foreach($customerArr[$i] as $key => $value) {
-                        $new[strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $key))] = $value;
+                        
+                        if(str_contains($key, 'Round')) {
+                            $round = Round::where('roundno', '=', number_format($value))->first();
+                            if(!!$round) {
+                                $new[strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $key))] = $round->id;
+                            } else {
+                                continue 2;
+                            }
+                        } else {
+                            // if($key === 'Team') {
+                            //     $team = RealTeam::where('name', '=', trim($value))->first();
+                            //     if(!!$team) {
+                            //         $new[strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $key))] = $team->id;
+                            //     } else {
+                            //         continue 2;
+                            //     }
+                            // } else {
+                            //     $new[strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $key))] = $value;
+                            // }
+                            $new[strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $key))] = $value;
+
+                        }
                     }
-                    if(!!!$new->exists) {
-                        $new->saveOrFail();
-                    }
+                    $new->saveOrFail();
                 }
                 
             }

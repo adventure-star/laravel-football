@@ -7,6 +7,7 @@ use App\Model\Joined;
 use App\Model\Player;
 use App\Model\QInput;
 use App\Model\Question;
+use App\Model\RealTeam;
 use App\Model\Round;
 use App\Model\Team;
 use Facade\FlareClient\Http\Response;
@@ -71,6 +72,12 @@ class CommonController extends Controller
         $midfielder2 = Player::where("position", "=", "M2")->where("round", "=", $request->round)->get();
         $forward1 = Player::where("position", "=", "F1")->where("round", "=", $request->round)->get();
         $forward2 = Player::where("position", "=", "F2")->where("round", "=", $request->round)->get();
+
+        // foreach($goalkeepers as $key=>$value) {
+        //     if($key == 'team') {
+        //         $goalkeepers->$key = RealTeam::find($value)->name;
+        //     }
+        // }
 
         $questions = Question::where("round", "=", $request->round)->get();
 

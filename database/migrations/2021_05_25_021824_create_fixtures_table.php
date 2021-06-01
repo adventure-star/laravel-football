@@ -17,13 +17,15 @@ class CreateFixturesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('round');
             $table->string('group');
-            $table->string('teama');
-            $table->string('teamb');
+            $table->unsignedBigInteger('teama');
+            $table->unsignedBigInteger('teamb');
             $table->string('date');
             $table->string('cet');
             $table->timestamps();
 
             $table->foreign('round')->references('id')->on('rounds')->onDelete('cascade');
+            $table->foreign('teama')->references('id')->on('realteams')->onDelete('cascade');
+            $table->foreign('teamb')->references('id')->on('realteams')->onDelete('cascade');
         });
     }
 

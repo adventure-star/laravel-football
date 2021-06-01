@@ -35,6 +35,14 @@
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Team</p>
                                     <input type="text" name="team" required />
+                                    {{-- <select name="team" required>
+                                        <option disabled selected>Select Team!</option>
+                                        @if(isset($teams) && count($teams) > 0)
+                                            @foreach($teams as $key=>$item)
+                                                <option value={{$item['id']}}>{{$item['name']}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select> --}}
                                 </div>
                             </div>
                         </div>
