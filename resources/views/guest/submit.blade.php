@@ -279,7 +279,7 @@
                     content8 += "<div class='w-100 maxwidth-250 mx-auto'>"
                     content8 += "<select name='q";
                     content8 += index + 1;
-                    content8 += "' required>";
+                    content8 += "'>";
 
                     content8 += "<option disabled selected>Please Select!</option>"
 

@@ -23,11 +23,11 @@ class AdminController extends Controller
         $this->middleware('admin');
     }
 
+    public function userteamdelete(Request $request) {
 
-    public function userteams() {
-        
-        $teams = Team::orderBy('round', 'asc')->get();
-        return view('admin.userteam.list', compact('teams'));
+        $deleted = Team::find($request->id)->delete();
+        return $deleted;
+
     }
 
 
@@ -48,7 +48,7 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(),
         [
-            'roundno' => 'required|string',
+            'roundno' => 'required|string|unique:rounds',
             'ended' => 'required|string',
         ]);
 
@@ -70,7 +70,7 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(),
         [
-            'roundno' => 'required|string',
+            'roundno' => 'required|string|unique:rounds',
             'ended' => 'required|string',
         ]);
 
@@ -142,6 +142,12 @@ class AdminController extends Controller
         $new->save();
   
         return redirect()->route("teams");
+
+    }
+    public function teamdelete(Request $request) {
+
+        $deleted = RealTeam::find($request->id)->delete();
+        return $deleted;
 
     }
 
@@ -235,6 +241,12 @@ class AdminController extends Controller
         $users = User::where('isadmin', "!=", 1)->get();
         return view('admin.user.list', compact('users'));
     }
+    public function userdelete(Request $request) {
+
+        $deleted = User::find($request->id)->delete();
+        return $deleted;
+
+    }
 
     public function fixture() {
 
@@ -261,6 +273,10 @@ class AdminController extends Controller
             'date' => 'required|string',
             'cet' => 'required|string',
         ]);
+
+        if($request->teama == $request->teamb) {
+            return redirect()->back()->withInput();
+        }
 
         $data = ([
             'round' => $request->round,
@@ -297,6 +313,10 @@ class AdminController extends Controller
             'cet' => 'required|string',
         ]);
 
+        if($request->teama == $request->teamb) {
+            return redirect()->back()->withInput();
+        }
+
         $new = new Fixture();
         $new->round = $request->round;
         $new->group = $request->group;
@@ -315,6 +335,12 @@ class AdminController extends Controller
         } else {
             return redirect()->back()->withInput();
         }
+
+    }
+    public function fixturedelete(Request $request) {
+
+        $deleted = Fixture::find($request->id)->delete();
+        return $deleted;
 
     }
 

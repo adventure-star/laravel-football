@@ -24,10 +24,10 @@
                                         <li @if(Route::is('fixtures') || Route::is('fixtures.new') || Route::is('fixtures.edit'))class="active"@endif><a href={{route('fixtures')}}>fixtures</a></li>
                                         <li @if(Route::is('players') || Route::is('players.new') || Route::is('players.edit'))class="active"@endif><a href={{route('players')}}>players</a></li>
                                         <li @if(Route::is('questions') || Route::is('questions.new') || Route::is('questions.edit') || Route::is('questions.answers') || Route::is('questions.round.edit') || Route::is('qinputs.new') || Route::is('qinputs.edit'))class="active"@endif><a href={{route('questions')}}>questions</a></li>
-                                        <li @if(Route::is('userteams'))class="active"@endif><a href={{route('userteams')}}>userteams</a></li>
                                     @else
                                         <li @if(Route::is('submit'))class="active"@endif><a href={{route('submit')}}>submit</a></li>
                                     @endif
+                                    <li @if(Route::is('userteams'))class="active"@endif><a href={{route('userteams')}}>userteams</a></li>
                                 @endif
                                 {{-- <li><a href={{route('pointtable')}}>point table</a></li> --}}
                                 {{-- <li><a href={{route('blog')}}>blog</a>

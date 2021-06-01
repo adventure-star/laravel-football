@@ -32,7 +32,7 @@
                                         <option disabled selected>Select Round!</option>
                                         @if(isset($rounds) && count($rounds) > 0)
                                             @foreach($rounds as $key=>$item)
-                                                <option value={{$item['id']}}>{{$item['roundno']}}</option>
+                                                <option value={{$item['id']}} @if(old('round') == $item['id'])selected @endif>{{$item['roundno']}}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -41,7 +41,7 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Group</p>
-                                    <input type="text" name="group" required />
+                                    <input type="text" name="group" value="{{old('group')}}" required />
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                                         <option disabled selected>Select Team</option>
                                         @if(isset($teams) && count($teams) > 0)
                                             @foreach($teams as $key=>$item)
-                                                <option value={{$item['id']}}>{{$item['name']}}</option>
+                                                <option value={{$item['id']}} @if(old('teama') == $item['id'])selected @endif>{{$item['name']}}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -62,11 +62,11 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Team B</p>
-                                    <select name="teamb" required>
+                                    <select name="teamb" value="{{old('teamb')}}" required>
                                         <option disabled selected>Select Team</option>
                                         @if(isset($teams) && count($teams) > 0)
                                             @foreach($teams as $key=>$item)
-                                                <option value={{$item['id']}}>{{$item['name']}}</option>
+                                                <option value={{$item['id']}} @if(old('teamb') == $item['id'])selected @endif>{{$item['name']}}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -77,13 +77,13 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Date</p>
-                                    <input type="text" name="date" required />
+                                    <input type="text" name="date" value="{{old('date')}}" required />
                                 </div>
                             </div>
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">CET</p>
-                                    <input type="text" name="cet" required />
+                                    <input type="text" name="cet" value="{{old('cet')}}" required />
                                 </div>
                             </div>
                         </div>

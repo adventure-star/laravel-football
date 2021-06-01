@@ -28,7 +28,7 @@
                             <div class="col-md-6 col-md-offset-3 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">RoundNo</p>
-                                    <input type="text" name="roundno" required/>
+                                    <input type="text" name="roundno" value="{{old('roundno')}}" required/>
                                 </div>
                             </div>
                         </div>
@@ -38,9 +38,9 @@
                                     <p class="player-label">State</p>
                                     <select name="ended" required>
                                         <option disabled selected>Select Status</option>
-                                        <option value="0">Not Opened</option>
-                                        <option value="1">Active</option>
-                                        <option value="2">Expired</option>
+                                        <option value="0" @if(old('ended') == 0) selected @endif>Not Opened</option>
+                                        <option value="1" @if(old('ended') == 1) selected @endif>Active</option>
+                                        <option value="2" @if(old('ended') == 2) selected @endif>Expired</option>
                                     </select>
                                 </div>
                             </div>

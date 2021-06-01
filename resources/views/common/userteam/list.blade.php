@@ -33,6 +33,7 @@
                             <th>M2</th>
                             <th>F1</th>
                             <th>F2</th>
+                            <th>Remove</th>
                         </tr>
                         @if(isset($teams) && count($teams) > 0)
                             @foreach($teams as $key => $item)
@@ -46,6 +47,9 @@
                                     <td>{{App\Model\Player::find($item["m2"])["name"]}}</td>
                                     <td>{{App\Model\Player::find($item["f1"])["name"]}}</td>
                                     <td>{{App\Model\Player::find($item["f2"])["name"]}}</td>
+                                    <td>
+                                        <a class="btn btn-success-rgba" onclick="deleteUserTeam({{$item['id']}})"><i class="fa fa-remove"></i></a>
+                                    </td>
                                 </tr>
                             @endforeach
                         @endif
@@ -58,5 +62,36 @@
 <!-- Fixtures Area End -->
 
 @include('layouts.breakingnews')
+
+@endsection
+
+@section('scripts')
+    <script>
+        function deleteUserTeam(id) {
+
+            $.ajax({
+                method: "post",
+                url: "{{route('userteams.delete')}}",
+                headers: {
+                    'X-CSRF-TOKEN': '<?= csrf_token() ?>'
+                },
+
+                data : JSON.stringify({id : id}),
+                datatype: 'JSON',
+                contentType: 'application/json',
+
+                async: true,
+                success: function (data) {
+                    console.log(data);
+                    if(data) {
+                        window.location = "{{route('userteams')}}";
+                    }
+                },
+                error: function () {
+                    console.log("error");
+                }
+            });
+        }
+    </script>
 
 @endsection

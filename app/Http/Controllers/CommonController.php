@@ -149,13 +149,23 @@ class CommonController extends Controller
             $new->save();
         }
 
-        return redirect()->route('index');
+        return redirect()->route('userteams');
 
     }
     public function profile() {
 
         $user = Auth::user();
         return view('guest.profile', compact('user'));
+    }
+    public function userteams() {
+
+        if(Auth::user()->isadmin == 1) {
+            $teams = Team::orderBy('round', 'asc')->get();
+        } else {
+            $teams = Team::where('jid', '=', Auth::id())->orderBy('round', 'asc')->get();
+        }
+        
+        return view('common.userteam.list', compact('teams'));
     }
 
 

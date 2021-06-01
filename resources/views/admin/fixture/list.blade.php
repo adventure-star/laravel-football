@@ -30,6 +30,7 @@
                             <th>group</th>
                             <th>round</th>
                             <th>Edit</th>
+                            <th>Remove</th>
                         </tr>
                         @if(isset($fixtures) && count($fixtures) > 0)
                             @foreach($fixtures as $key => $item)
@@ -41,6 +42,9 @@
                                     <td>{{App\Model\Round::find($item["round"])['roundno']}}</td>
                                     <td>
                                         <a href="{{route('fixtures.edit', $item['id'])}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success-rgba" onclick="deleteFixture({{$item['id']}})"><i class="fa fa-remove"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -61,5 +65,36 @@
 <!-- Fixtures Area End -->
 
 @include('layouts.breakingnews')
+
+@endsection
+
+@section('scripts')
+    <script>
+        function deleteFixture(id) {
+
+            $.ajax({
+                method: "post",
+                url: "{{route('fixtures.delete')}}",
+                headers: {
+                    'X-CSRF-TOKEN': '<?= csrf_token() ?>'
+                },
+
+                data : JSON.stringify({id : id}),
+                datatype: 'JSON',
+                contentType: 'application/json',
+
+                async: true,
+                success: function (data) {
+                    console.log(data);
+                    if(data) {
+                        window.location = "{{route('fixtures')}}";
+                    }
+                },
+                error: function () {
+                    console.log("error");
+                }
+            });
+        }
+    </script>
 
 @endsection

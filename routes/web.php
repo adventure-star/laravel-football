@@ -43,8 +43,12 @@ Route::post('/submit-save', 'CommonController@submitsave')->name('submitsave')->
 
 Route::get('/profile', 'CommonController@profile')->name('profile')->middleware('auth');
 
+// Common routes
+Route::get('/userteams', 'CommonController@userteams')->name('userteams')->middleware('auth');
+
+
 // Admin routes
-Route::get('/userteams', 'AdminController@userteams')->name('userteams');
+Route::post('/userteams/delete', 'AdminController@userteamdelete')->name('userteams.delete');
 
 Route::get('/rounds', 'AdminController@rounds')->name('rounds');
 Route::get('/rounds/new', 'AdminController@roundnew')->name('rounds.new');
@@ -58,6 +62,7 @@ Route::get('/teams/new', 'AdminController@teamnew')->name('teams.new');
 Route::post('/teams/add', 'AdminController@teamadd')->name('teams.new.save');
 Route::get('/teams/edit/{id}', 'AdminController@teamedit')->name('teams.edit');
 Route::post('/teams/update', 'AdminController@teamupdate')->name('teams.update');
+Route::post('/teams/delete', 'AdminController@teamdelete')->name('teams.delete');
 
 Route::get('/players', 'AdminController@players')->name('players');
 Route::get('/players/new', 'AdminController@playernew')->name('players.new');
@@ -67,12 +72,14 @@ Route::post('/players/update', 'AdminController@playerupdate')->name('players.up
 Route::post('/players/delete', 'AdminController@playerdelete')->name('players.delete');
 
 Route::get('/users', 'AdminController@users')->name('users');
+Route::post('/users/delete', 'AdminController@userdelete')->name('users.delete');
 
 Route::get('/fixtures', 'AdminController@fixture')->name('fixtures');
 Route::get('/fixtures/new', 'AdminController@fixturenew')->name('fixtures.new');
 Route::post('/fixtures/add', 'AdminController@fixtureadd')->name('fixtures.new.save');
 Route::get('/fixtures/edit/{id}', 'AdminController@fixtureedit')->name('fixtures.edit');
 Route::post('/fixtures/update', 'AdminController@fixtureupdate')->name('fixtures.update');
+Route::post('/fixtures/delete', 'AdminController@fixturedelete')->name('fixtures.delete');
 
 Route::get('/questions', 'AdminController@question')->name('questions');
 Route::get('/questions/new/{id}', 'AdminController@questionnew')->name('questions.new');

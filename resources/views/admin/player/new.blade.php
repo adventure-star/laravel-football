@@ -28,13 +28,13 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Name</p>
-                                    <input type="text" name="name" required />
+                                    <input type="text" name="name" value="{{old('name')}}" required />
                                 </div>
                             </div>
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Team</p>
-                                    <input type="text" name="team" required />
+                                    <input type="text" name="team" value="{{old('team')}}" required />
                                     {{-- <select name="team" required>
                                         <option disabled selected>Select Team!</option>
                                         @if(isset($teams) && count($teams) > 0)
@@ -54,7 +54,7 @@
                                         <option disabled selected>Select Round!</option>
                                         @if(isset($rounds) && count($rounds) > 0)
                                             @foreach($rounds as $key=>$item)
-                                                <option value={{$item['id']}}>{{$item['roundno']}}</option>
+                                                <option value={{$item['id']}} @if(old('round') == $item['id'])selected @endif>{{$item['roundno']}}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -63,7 +63,7 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Position</p>
-                                    <input type="text" name="position" required />
+                                    <input type="text" name="position" value="{{old('position')}}" required />
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                             <div class="col-md-6 col-md-offset-3 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Value</p>
-                                    <input type="text" name="value" required />
+                                    <input type="text" name="value" value="{{old('value')}}" required />
                                 </div>
                             </div>
                         </div>

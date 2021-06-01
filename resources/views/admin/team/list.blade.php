@@ -26,13 +26,17 @@
                         <tr>
                             <th>Name</th>
                             <th>Edit</th>
+                            <th>Remove</th>
                         </tr>
                         @if(isset($teams) && count($teams) > 0)
                             @foreach($teams as $key => $item)
                                 <tr>
                                     <td>{{$item["name"]}}</td>
                                     <td>
-                                    <a href="{{route('teams.edit', $item['id'])}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>
+                                        <a href="{{route('teams.edit', $item['id'])}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success-rgba" onclick="deleteTeam({{$item['id']}})"><i class="fa fa-remove"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -53,5 +57,36 @@
 <!-- Fixtures Area End -->
 
 @include('layouts.breakingnews')
+
+@endsection
+
+@section('scripts')
+    <script>
+        function deleteTeam(id) {
+
+            $.ajax({
+                method: "post",
+                url: "{{route('teams.delete')}}",
+                headers: {
+                    'X-CSRF-TOKEN': '<?= csrf_token() ?>'
+                },
+
+                data : JSON.stringify({id : id}),
+                datatype: 'JSON',
+                contentType: 'application/json',
+
+                async: true,
+                success: function (data) {
+                    console.log(data);
+                    if(data) {
+                        window.location = "{{route('teams')}}";
+                    }
+                },
+                error: function () {
+                    console.log("error");
+                }
+            });
+        }
+    </script>
 
 @endsection

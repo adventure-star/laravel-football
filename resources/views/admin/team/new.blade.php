@@ -28,7 +28,7 @@
                             <div class="col-md-6 col-md-offset-3 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Name</p>
-                                    <input type="text" name="name" required/>
+                                    <input type="text" name="name" value="{{old('name')}}" required/>
                                 </div>
                             </div>
                         </div>
