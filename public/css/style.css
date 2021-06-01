@@ -3924,3 +3924,24 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   padding-left: 14px;
   padding-right: 14px;
 }
+.custom-file-upload {
+  border: 1px solid #ddd;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: #333;
+  font-weight: 100;
+  padding-left: 35px;
+  padding-right: 35px;
+}
+.custom-file-upload:hover {
+  border: 1px solid #f8c42b;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.3s, ease 0s;
+  background-color: #f8c42b;
+  color: white;
+  padding-left: 35px;
+  padding-right: 35px;
+}

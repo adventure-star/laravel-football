@@ -80,3 +80,6 @@ Route::post('/qinputs/add', 'AdminController@qinputadd')->name('qinputs.new.save
 Route::get('/qinputs/edit/{id}', 'AdminController@qinputedit')->name('qinputs.edit');
 Route::post('/qinputs/update', 'AdminController@qinputupdate')->name('qinputs.update');
 Route::post('/qinputs/delete', 'AdminController@qinputdelete')->name('qinputs.delete');
+
+Route::post('/uploads/player', 'AdminController@uploadplayer')->name('uploads.player');
+

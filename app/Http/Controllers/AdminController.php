@@ -9,6 +9,7 @@ use App\Model\Question;
 use App\Model\Round;
 use App\Model\Team;
 use App\User;
+use Exception;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
@@ -407,5 +408,74 @@ class AdminController extends Controller
             return redirect()->back()->withInput();
         }
 
+    }
+
+    public function uploadplayer(Request $request) {
+
+        $path = $request->file('file')->getRealPath();
+
+        $customerArr = $this->csvToArray($path);
+
+        try {
+            for ($i = 0; $i < count($customerArr); $i ++)
+            {
+                $array = [];
+                $keys = [];
+    
+                foreach($customerArr[$i] as $key => $value) {
+                    $array[strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $key))] = $value;
+                    array_push($keys, strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $key)));
+                }
+    
+                if($keys != ['round', 'position', 'name', 'team', 'value']) {
+                    return redirect()->back()->withInput();
+                }
+    
+                if(!Player::where($array)->first()) {
+                    $new = new Player();
+    
+                    foreach($customerArr[$i] as $key => $value) {
+                        $new[strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $key))] = $value;
+                    }
+                    if(!!!$new->exists) {
+                        $new->saveOrFail();
+                    }
+                }
+                
+            }
+        } catch(Exception $e) {
+            return redirect()->back()->withInput();
+        }
+     
+        return redirect()->route('players');
+    }
+
+    public function csvToArray($filename = '', $delimiter = ',') {
+
+        if (!file_exists($filename) || !is_readable($filename))
+            return false;
+
+        $header = null;
+        $data = array();
+        try {
+
+            if (($handle = fopen($filename, 'r')) !== false)
+            {
+                while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
+                {
+                    if (!$header)
+                        $header = $row;
+                    else
+                        $data[] = array_combine($header, $row);
+                }
+                fclose($handle);
+            }
+
+        } catch(Exception $e) {
+
+            return redirect()->route('players.new');
+        }
+        
+        return $data;
     }
 }

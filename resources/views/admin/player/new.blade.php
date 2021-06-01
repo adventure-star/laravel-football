@@ -69,6 +69,16 @@
                         </div>
                         <input type="submit" value="Submit">
                     </form>
+                    <div class="mt-40">
+                        <h4>Import CSV file for Players</h4>
+                        <form id="playeruploadform" action="{{route('uploads.player')}}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <label class="custom-file-upload">
+                                <input onchange="upload()" class="hidden" type="file" name="file" />
+                                Import
+                            </label>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -78,4 +88,12 @@
 
 @include('layouts.breakingnews')
 
+@endsection
+
+@section('scripts')
+    <script>
+        function upload() {
+            document.getElementById("playeruploadform").submit();
+        }
+    </script>
 @endsection
