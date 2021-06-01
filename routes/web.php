@@ -19,7 +19,7 @@ Auth::routes();
 
 // Common routes
 Route::get('/', function(Request $request) {
-    return redirect()->route('login');
+    return Auth::user() ? (Auth::user()->isadmin == 1 ? redirect()->route('teams') : redirect()->route('submit')) : redirect()->route('login');
 })->name('index');
 
 Route::get('/about', 'CommonController@about')->name('about');
