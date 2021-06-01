@@ -30,6 +30,7 @@
                             <th>Round</th>
                             <th>Position</th>
                             <th>Edit</th>
+                            <th>Remove</th>
                         </tr>
                         @if(isset($players) && count($players) > 0)
                             @foreach($players as $key => $item)
@@ -42,6 +43,9 @@
                                     <td>{{$item["position"]}}</td>
                                     <td>
                                         <a href="{{route('players.edit', $item['id'])}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success-rgba" onclick="deletePlayer({{$item['id']}})"><i class="fa fa-remove"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -62,5 +66,36 @@
 <!-- Fixtures Area End -->
 
 @include('layouts.breakingnews')
+
+@endsection
+
+@section('scripts')
+    <script>
+        function deletePlayer(id) {
+
+            $.ajax({
+                method: "post",
+                url: "{{route('players.delete')}}",
+                headers: {
+                    'X-CSRF-TOKEN': '<?= csrf_token() ?>'
+                },
+
+                data : JSON.stringify({id : id}),
+                datatype: 'JSON',
+                contentType: 'application/json',
+
+                async: true,
+                success: function (data) {
+                    console.log(data);
+                    if(data) {
+                        window.location = "{{route('players')}}";
+                    }
+                },
+                error: function () {
+                    console.log("error");
+                }
+            });
+        }
+    </script>
 
 @endsection

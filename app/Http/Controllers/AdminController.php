@@ -223,6 +223,12 @@ class AdminController extends Controller
         }
 
     }
+    public function playerdelete(Request $request) {
+
+        $deleted = Player::find($request->id)->delete();
+        return $deleted;
+
+    }
 
     public function users() {
         

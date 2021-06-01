@@ -64,6 +64,7 @@ Route::get('/players/new', 'AdminController@playernew')->name('players.new');
 Route::post('/players/add', 'AdminController@playeradd')->name('players.new.save');
 Route::get('/players/edit/{id}', 'AdminController@playeredit')->name('players.edit');
 Route::post('/players/update', 'AdminController@playerupdate')->name('players.update');
+Route::post('/players/delete', 'AdminController@playerdelete')->name('players.delete');
 
 Route::get('/users', 'AdminController@users')->name('users');
 
