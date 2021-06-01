@@ -34,7 +34,7 @@
                         @if(isset($fixtures) && count($fixtures) > 0)
                             @foreach($fixtures as $key => $item)
                                 <tr>
-                                    <td>{{$item["teama"]}} VS {{$item["teamb"]}}</td>
+                                    <td>{{App\Model\RealTeam::find($item["teama"])['name']}}-{{App\Model\RealTeam::find($item["teamb"])['name']}}</td>
                                     <td>{{$item["date"]}}</td>
                                     <td>{{$item["cet"]}}</td>
                                     <td>{{$item["group"]}}</td>

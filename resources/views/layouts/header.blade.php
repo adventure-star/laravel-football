@@ -20,10 +20,11 @@
                                     @if(Auth::user()->isadmin == 1)
                                         <li @if(Route::is('users'))class="active"@endif><a href={{route('users')}}>users</a></li>
                                         <li @if(Route::is('rounds') || Route::is('rounds.new') || Route::is('rounds.edit'))class="active"@endif><a href={{route('rounds')}}>rounds</a></li>
+                                        <li @if(Route::is('teams') || Route::is('teams.new') || Route::is('teams.edit'))class="active"@endif><a href={{route('teams')}}>teams</a></li>
                                         <li @if(Route::is('fixtures') || Route::is('fixtures.new') || Route::is('fixtures.edit'))class="active"@endif><a href={{route('fixtures')}}>fixtures</a></li>
                                         <li @if(Route::is('players') || Route::is('players.new') || Route::is('players.edit'))class="active"@endif><a href={{route('players')}}>players</a></li>
                                         <li @if(Route::is('questions') || Route::is('questions.new') || Route::is('questions.edit') || Route::is('questions.answers') || Route::is('questions.round.edit') || Route::is('qinputs.new') || Route::is('qinputs.edit'))class="active"@endif><a href={{route('questions')}}>questions</a></li>
-                                        <li @if(Route::is('teams'))class="active"@endif><a href={{route('teams')}}>teams</a></li>
+                                        <li @if(Route::is('userteams'))class="active"@endif><a href={{route('userteams')}}>userteams</a></li>
                                     @else
                                         <li @if(Route::is('submit'))class="active"@endif><a href={{route('submit')}}>submit</a></li>
                                     @endif

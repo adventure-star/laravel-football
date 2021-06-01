@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="page-banner-title text-center col-xs-12">
-                <h2>joined teams</h2>
+                <h2>teams</h2>
             </div>
         </div>
     </div>
@@ -19,38 +19,33 @@
     <div class="container">
         <div class="row">
             
-            <div class="col-md-12 col-xs-12 text-center">
+            <div class="col-md-10 col-md-offset-1 col-xs-12 text-center">
                 <!-- Fixtures Table -->
                 <div class="table-responsive fixtures-table">
                     <table class="table">
                         <tr>
-                            <th>Team</th>
-                            <th>round</th>
-                            <th>G</th>
-                            <th>D1</th>
-                            <th>D2</th>
-                            <th>M1</th>
-                            <th>M2</th>
-                            <th>F1</th>
-                            <th>F2</th>
+                            <th>Name</th>
+                            <th>Edit</th>
                         </tr>
                         @if(isset($teams) && count($teams) > 0)
                             @foreach($teams as $key => $item)
                                 <tr>
-                                    <td>{{App\User::find($item["jid"])["teamname"]}}</td>
-                                    <td>{{$item["round"]}}</td>
-                                    <td>{{App\Model\Player::find($item["g"])["name"]}}</td>
-                                    <td>{{App\Model\Player::find($item["d1"])["name"]}}</td>
-                                    <td>{{App\Model\Player::find($item["d2"])["name"]}}</td>
-                                    <td>{{App\Model\Player::find($item["m1"])["name"]}}</td>
-                                    <td>{{App\Model\Player::find($item["m2"])["name"]}}</td>
-                                    <td>{{App\Model\Player::find($item["f1"])["name"]}}</td>
-                                    <td>{{App\Model\Player::find($item["f2"])["name"]}}</td>
+                                    <td>{{$item["name"]}}</td>
+                                    <td>
+                                    <a href="{{route('teams.edit', $item['id'])}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>
+                                    </td>
                                 </tr>
                             @endforeach
                         @endif
                     </table>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 col-xs-12">
+                <p class="text-right py-4">
+                    <a href="{{route('teams.new')}}" class="underline text-primary text-xl-right">Add New Team</a>
+                </p>
             </div>
         </div>
     </div>
