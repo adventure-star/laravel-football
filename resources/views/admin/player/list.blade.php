@@ -21,9 +21,11 @@
                         <tr>
                             <th>Name</th>
                             <th>Team</th>
+                            <th>Club</th>
+                            <th>No</th>
+                            <th>Position</th>
                             <th>Value</th>
                             <th>Round</th>
-                            <th>Position</th>
                             <th>Edit</th>
                             <th>Remove</th>
                         </tr>
@@ -33,9 +35,11 @@
                                     <td>{{$item["name"]}}</td>
                                     {{-- <td>{{App\Model\RealTeam::find($item["team"])['name']}}</td> --}}
                                     <td>{{$item["team"]}}</td>
+                                    <td>{{$item["club"]}}</td>
+                                    <td>{{$item["no"]}}</td>
+                                    <td>{{$item["position"]}}</td>
                                     <td>{{$item["value"]}}</td>
                                     <td>{{App\Model\Round::find($item["round"])['roundno']}}</td>
-                                    <td>{{$item["position"]}}</td>
                                     <td>
                                         <a href="{{route('players.edit', $item['id'])}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>
                                     </td>

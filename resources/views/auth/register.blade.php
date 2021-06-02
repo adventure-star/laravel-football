@@ -60,6 +60,13 @@
                                 <strong>{{ $message }}</strong>
                             </p>
                         @enderror
+                        <div class="px-10">
+                            <label class="checkbox-container">Email Marketing, received email regarding this game and coming games.
+                                <input type="checkbox" name="ismarketing" value="1">
+                                <span class="checkbox-checkmark"></span>
+                            </label>
+                        </div>
+                   
                         <div class="row">
                             <input type="submit" value="Register" />
                         </div>

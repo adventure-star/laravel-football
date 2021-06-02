@@ -20,10 +20,11 @@ class CreatePlayersTable extends Migration
             $table->string('name');
             $table->string('team');
             $table->string('value');
+            $table->string('no');
+            $table->string('club');
             $table->timestamps();
 
             $table->foreign('round')->references('id')->on('rounds')->onDelete('cascade');
-            $table->foreign('team')->references('id')->on('realteams')->onDelete('cascade');
 
         });
     }

@@ -23,6 +23,7 @@
                             <th>TeamName</th>
                             <th>UserName</th>
                             <th>Email</th>
+                            <th>Marketing</th>
                             <th>Remove</th>
                         </tr>
                         @if(isset($users) && count($users) > 0)
@@ -32,6 +33,7 @@
                                     <td>{{$item["teamname"]}}</td>
                                     <td>{{$item["username"]}}</td>
                                     <td>{{$item["email"]}}</td>
+                                    <td>{{$item["ismarketing"] == 1 ? "Yes" : "No"}}</td>
                                     <td>
                                         <a class="btn btn-success-rgba" onclick="deleteUser({{$item['id']}})"><i class="fa fa-remove"></i></a>
                                     </td>

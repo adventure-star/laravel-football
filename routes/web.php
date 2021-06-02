@@ -36,9 +36,9 @@ Route::get('/wishlist', 'CommonController@wishlist')->name('wishlist');
 Route::get('/contact', 'CommonController@contact')->name('contact');
 
 // Guest routes
-Route::get('/submit', 'CommonController@submit')->name('submit')->middleware('auth');
+Route::get('/submit', 'CommonController@submit')->name('submit');
 
-Route::post('/submit-data', 'CommonController@submitdata')->name('submitdata')->middleware('auth');
+Route::post('/submit-data', 'CommonController@submitdata')->name('submitdata');
 Route::post('/submit-save', 'CommonController@submitsave')->name('submitsave')->middleware('auth');
 
 Route::get('/profile', 'CommonController@profile')->name('profile')->middleware('auth');

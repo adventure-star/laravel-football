@@ -74,15 +74,16 @@ class AdminController extends Controller
             'ended' => 'required|string',
         ]);
 
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $new = new Round();
         $new->roundno = $request->roundno;
         $new->ended = $request->ended;
         $new->save();
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
+ 
         return redirect()->route("rounds");
 
     }
@@ -210,6 +211,10 @@ class AdminController extends Controller
             'value' => 'required|string',
         ]);
 
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $new = new Player();
         $new->name = $request->name;
         $new->team = $request->team;
@@ -217,10 +222,6 @@ class AdminController extends Controller
         $new->position = $request->position;
         $new->value = $request->value;
         $new->save();
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
 
         if($new->id) {
             return redirect()->route("players");
@@ -317,6 +318,10 @@ class AdminController extends Controller
             return redirect()->back()->withInput();
         }
 
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $new = new Fixture();
         $new->round = $request->round;
         $new->group = $request->group;
@@ -325,10 +330,6 @@ class AdminController extends Controller
         $new->date = $request->date;
         $new->cet = $request->cet;
         $new->save();
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
 
         if($new->id) {
             return redirect()->route("fixtures");
@@ -428,15 +429,15 @@ class AdminController extends Controller
             'text' => 'required|string',
         ]);
 
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $new = new Question();
         $new->round = $request->round;
         $new->number = $request->number;
         $new->text = $request->text;
         $new->save();
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
 
         if($new->id) {
             return redirect()->route("questions.round.edit", $request->round);
@@ -488,14 +489,14 @@ class AdminController extends Controller
             'input' => 'required|string',
         ]);
 
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $new = new QInput();
         $new->qid = $request->qid;
         $new->input = $request->input;
         $new->save();
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
 
         if($new->id) {
             return redirect()->route("questions.answers", $request->qid);
@@ -523,7 +524,7 @@ class AdminController extends Controller
                 }
                 
     
-                if($keys != ['round', 'position', 'name', 'team', 'value']) {
+                if($keys != ['round', 'team', 'position', 'no', 'name', 'club', 'value']) {
                     return redirect()->back()->withInput();
                 }
     
