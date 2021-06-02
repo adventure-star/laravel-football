@@ -5,11 +5,6 @@
 <!-- Page Banner Area Start -->
 <div id="page-banner-area" class="page-banner-area section">
     <div class="container">
-        <div class="row">
-            <div class="page-banner-title text-center col-xs-12">
-                <h2>rounds</h2>
-            </div>
-        </div>
     </div>
 </div>
 <!-- Page Banner Area End -->
