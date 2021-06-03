@@ -13,6 +13,9 @@ use App\Model\Team;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDO;
+use SimpleXLSX;
+use Illuminate\Support\Facades\Validator;
 
 class CommonController extends Controller
 {
@@ -62,6 +65,10 @@ class CommonController extends Controller
 
     }
 
+    public function rule() {
+        return view('guest.rule');
+    }
+
     public function submitdata(Request $request)
     {
 
@@ -87,6 +94,8 @@ class CommonController extends Controller
 
         $fixtures = Fixture::where("round", "=", $request->round)->get();
 
+        $teams = RealTeam::all();
+
         $data = array(
             'g'=>$goalkeepers, 
             'd1'=>$defender1, 
@@ -96,7 +105,8 @@ class CommonController extends Controller
             'f1'=>$forward1, 
             'f2'=>$forward2, 
             'questions'=>$questions, 
-            'fixtures'=>$fixtures
+            'fixtures'=>$fixtures,
+            'teams'=>$teams
         );
 
         $olddata = Team::where('jid', '=', Auth::id())->where('round', '=', $request->round)->get();
@@ -108,7 +118,29 @@ class CommonController extends Controller
         return response()->json($data, 200);
 
     }
+    public function getteamname(Request $request) {
+        $record = RealTeam::find($request->id);
+
+        $data['name'] = $record ? $record->name : 0;
+
+        return response()->json($data, 200);
+    }
     public function submitsave(Request $request) {
+
+        $validator = Validator::make($request->all(),
+        [
+            'g' => 'required|string',
+            'd1' => 'required|string',
+            'd2' => 'required|string',
+            'm1' => 'required|string',
+            'm2' => 'required|string',
+            'f1' => 'required|string',
+            'f2' => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $record = Team::where("jid", "=", Auth::user()->id)->where("round", "=", $request->round)->first();
 
@@ -167,6 +199,19 @@ class CommonController extends Controller
         
         return view('common.userteam.list', compact('teams'));
     }
+
+    // public function test() {
+
+    //     if ( $xlsx = SimpleXLSX::parse('uploads/points.xlsx') ) {
+    //         if($xlsx->rows(1)) {
+    //             dd($xlsx->rows(1));
+    //         } else {
+    //             echo $xlsx->toHTML();
+    //         }
+    //     } else {
+    //         echo SimpleXLSX::parseError();
+    //     }
+    // }
 
 
 }
