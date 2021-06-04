@@ -41,6 +41,4 @@
 </div>
 <!-- Profile Area End -->
 
-@include('layouts.breakingnews')
-
 @endsection

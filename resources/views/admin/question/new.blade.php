@@ -24,7 +24,7 @@
                             <div class="col-md-6 col-md-offset-3 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Number</p>
-                                    <input type="text" name="number" value="{{route('number')}}" required />
+                                    <input type="text" name="number" value="{{old('number')}}" required />
                                 </div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                             <div class="col-md-12 col-xs-12">
                                 <div class="w-100 mx-auto">
                                     <p class="player-label">Text</p>
-                                    <input type="text" name="text" value="{{route('text')}}" required />
+                                    <input type="text" name="text" value="{{old('text')}}" required />
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,5 @@
     </div>
 </div>
 <!-- Contact Area End -->
-
-@include('layouts.breakingnews')
 
 @endsection

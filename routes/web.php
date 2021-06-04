@@ -37,6 +37,7 @@ Route::get('/contact', 'CommonController@contact')->name('contact');
 
 // Guest routes
 Route::get('/submit', 'CommonController@submit')->name('submit');
+Route::get('/rule', 'CommonController@rule')->name('rule');
 
 Route::post('/submit-data', 'CommonController@submitdata')->name('submitdata');
 Route::post('/submit-save', 'CommonController@submitsave')->name('submitsave')->middleware('auth');
@@ -97,4 +98,8 @@ Route::post('/qinputs/update', 'AdminController@qinputupdate')->name('qinputs.up
 Route::post('/qinputs/delete', 'AdminController@qinputdelete')->name('qinputs.delete');
 
 Route::post('/uploads/player', 'AdminController@uploadplayer')->name('uploads.player');
+
+
+
+// Route::get('/test', 'CommonController@test')->name('test');
 

@@ -93,7 +93,11 @@
                                 </div>
                                 <h4>Question</h4>
                                 <div id="questionarea"></div>
-                                <input type="submit" value="Submit">
+                                @if(Auth::user())
+                                    <input type="submit" value="Submit">
+                                @else
+                                    <h5>You have to Login to submit team</h5>
+                                @endif
                             </form>
                         </div>
                     </div>
@@ -123,8 +127,6 @@
 </div>
 <!-- Contact Area End -->
 
-@include('layouts.breakingnews')
-
 @endsection
 
 @section('scripts')
@@ -149,7 +151,7 @@
             contentType: 'application/json',
             success: function (response) {
 
-                console.log(response);
+                console.log(response['teams']);
                 var index;
                 var content1 = "";
                 for ( index = 0 ; index < response["g"].length ; index ++ ) {
@@ -305,7 +307,7 @@
 
                     content9 += "<tr>";
                     content9 += "<td>";
-                    content9 += response["fixtures"][index].teama + "-" + response["fixtures"][index].teamb;
+                    content9 += getTeamName(response['teams'], response["fixtures"][index].teama) + "-" + getTeamName(response['teams'], response["fixtures"][index].teamb);
                     content9 += "</td>";
                     content9 += "<td>";
                     content9 += response["fixtures"][index].date;
@@ -344,6 +346,17 @@
                 $('#errormessage').html(response.message);
             }
         });
+    }
+
+    function getTeamName(teams, id) {
+
+        let i;
+        for(i = 0 ; i < teams.length ; i ++) {
+            if(teams[i].id === id) {
+                return teams[i].name;
+            }
+        }
+        
     }
 
 </script>

@@ -49,7 +49,7 @@
                         @if(isset($roundwithoutquestions) && count($roundwithoutquestions) > 0)
                             @foreach($roundwithoutquestions as $key => $item)
                                 <tr>
-                                    <td>{{$item}}</td>
+                                    <td>{{App\Model\Round::find($item)->roundno}}</td>
                                     <td colspan="3">No Questions</td>
                                     <td>
                                         <a href="{{route('questions.round.edit', $item)}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>
@@ -64,7 +64,5 @@
     </div>
 </div>
 <!-- Fixtures Area End -->
-
-@include('layouts.breakingnews')
 
 @endsection

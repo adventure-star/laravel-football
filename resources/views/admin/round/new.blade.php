@@ -49,6 +49,4 @@
 </div>
 <!-- Contact Area End -->
 
-@include('layouts.breakingnews')
-
 @endsection

@@ -24,7 +24,7 @@
                             <div class="col-md-6 col-md-offset-3 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Content</p>
-                                    <input type="text" name="input" value="{{route('input')}}" required />
+                                    <input type="text" name="input" value="{{old('input')}}" required />
                                 </div>
                             </div>
                         </div>
@@ -36,7 +36,5 @@
     </div>
 </div>
 <!-- Contact Area End -->
-
-@include('layouts.breakingnews')
 
 @endsection

@@ -32,7 +32,7 @@
 
 <body>
     <!-- Body main wrapper start -->
-    <div class="wrapper fix">
+    <div class="wrapper fix minheight-100vh">
 
         @include('layouts.header')
 

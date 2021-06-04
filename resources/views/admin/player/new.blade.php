@@ -89,8 +89,6 @@
 </div>
 <!-- Contact Area End -->
 
-@include('layouts.breakingnews')
-
 @endsection
 
 @section('scripts')

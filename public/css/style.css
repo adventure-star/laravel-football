@@ -43,7 +43,8 @@
 /*@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700');*/
 /*-- Common Style --*/
 html, body {
-  height: 100%; }
+  height: 100%; 
+}
 
 body {
   line-height: 24px;
@@ -616,7 +617,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     .page-banner-area {
       padding-top: 40px;
       padding-bottom: 40px; } }
-  .page-banner-area::before {
+  /* .page-banner-area::before {
     background: #000000;
     background: -moz-linear-gradient(left, #000000 0%, #8c8c8c 100%);
     background: -webkit-gradient(left top, right top, color-stop(0%, #000000), color-stop(100%, #8c8c8c));
@@ -631,7 +632,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     right: 0;
     bottom: 0;
     opacity: 0.75;
-    content: ""; }
+    content: ""; } */
 
 /*-- Page Banner Title --*/
 .page-banner-title h2 {
@@ -724,7 +725,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   right: 0;
   top: 0;
   z-index: 9999;
-  border-bottom: 1px solid #737373; }
+  /* border-bottom: 1px solid #737373;  */
+}
   @media only screen and (max-width: 767px) {
     .header-area {
       position: static;
@@ -3753,6 +3755,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .footer-bottom-area {
   background-color: #313131;
   padding: 13px 0;
+  position: absolute;
+  bottom:0;
   /*-- Copyright --*/
   /*-- Author Credit --*/ }
   @media only screen and (max-width: 767px) {
@@ -4017,4 +4021,17 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .px-10 {
   padding-left: 10px;
   padding-right: 10px;
+}
+.color-red {
+  color: red;
+}
+.minheight-100vh {
+  min-height: 100vh;
+}
+.wrapper {
+  position: relative;
+}
+.rule-subheader {
+  font-size: 15px;
+  font-weight: 600;
 }

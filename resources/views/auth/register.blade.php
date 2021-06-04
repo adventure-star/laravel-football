@@ -61,7 +61,7 @@
                             </p>
                         @enderror
                         <div class="px-10">
-                            <label class="checkbox-container">Email Marketing, received email regarding this game and coming games.
+                            <label class="checkbox-container">I want to receive email regarding this game and coming games.
                                 <input type="checkbox" name="ismarketing" value="1">
                                 <span class="checkbox-checkmark"></span>
                             </label>
@@ -70,7 +70,7 @@
                         <div class="row">
                             <input type="submit" value="Register" />
                         </div>
-                        <p class="py-4">If you have an account, please <a href="{{route('login')}}">Log In</a></p>
+                        <p class="py-4">If you have an account, please <a href="{{route('login')}}" class="color-red">Log In</a></p>
                     </form>
                 </div>
             </div>

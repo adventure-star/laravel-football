@@ -32,7 +32,7 @@
                             </p>
                         @enderror
                         <input type="submit" value="Login" />
-                        <p class="py-4">If you don't have an account, please <a href="{{route('register')}}">Register</a></p>
+                        <p class="py-4">If you don't have an account, please <a href="{{route('register')}}" class="color-red">Register</a></p>
                     </form>
                 </div>
             </div>
