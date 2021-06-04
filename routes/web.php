@@ -74,6 +74,7 @@ Route::post('/players/delete', 'AdminController@playerdelete')->name('players.de
 
 Route::get('/users', 'AdminController@users')->name('users');
 Route::post('/users/delete', 'AdminController@userdelete')->name('users.delete');
+Route::post('/users/paid', 'AdminController@userpaidstatechange')->name('users.paid');
 
 Route::get('/fixtures', 'AdminController@fixture')->name('fixtures');
 Route::get('/fixtures/new', 'AdminController@fixturenew')->name('fixtures.new');

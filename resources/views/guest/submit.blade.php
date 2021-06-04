@@ -134,8 +134,6 @@
 <script>
     function onRoundChanged(component) {
 
-        console.log(component.value)
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': '<?= csrf_token() ?>'
@@ -151,7 +149,6 @@
             contentType: 'application/json',
             success: function (response) {
 
-                console.log(response['teams']);
                 var index;
                 var content1 = "";
                 for ( index = 0 ; index < response["g"].length ; index ++ ) {
@@ -274,8 +271,8 @@
                     content8 += "</p></div>";
                     content8 += "<div class='col-sm-6 col-xs-12'>";
                     content8 += "<div class='w-100 maxwidth-250 mx-auto'>"
-                    content8 += "<select name='q";
-                    content8 += index + 1;
+                    content8 += "<select name='question_";
+                    content8 += response["questions"][index].id;
                     content8 += "'>";
 
                     content8 += "<option disabled selected>Please Select!</option>"
@@ -284,7 +281,7 @@
 
                     for( jindex = 0 ; jindex < response["questions"][index].qinputs.length ; jindex ++) {
 
-                        if(!!response["old"] && response["old"][0]["q" + (index + 1)] == response["questions"][index].qinputs[jindex].id) {
+                        if(getOldAnswer(response["oldanswers"], response["questions"][index].qinputs[jindex].id)) {
                             content8 += "<option selected value='";
                         } else {
                             content8 += "<option value='";
@@ -357,6 +354,19 @@
             }
         }
         
+    }
+
+    function getOldAnswer(answers, id) {
+        if(answers) {
+            let i;
+            for(i = 0 ; i < answers.length ; i ++) {
+                if(answers[i].qinput === id) {
+                    return true;
+                }
+            }
+        }
+      
+        return false;
     }
 
 </script>

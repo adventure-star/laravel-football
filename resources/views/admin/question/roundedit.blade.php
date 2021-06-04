@@ -47,13 +47,11 @@
                             <a href="{{route('questions')}}" class="underline text-primary text-xl-right">All Questions</a>
                         </p>
                     </div>
-                    @if(count($questions) < 5)
-                        <div class="col-sm-6 col-xs-12">
-                            <p class="text-right-center py-4">
-                                <a href="{{route('questions.new', $id)}}" class="underline text-primary text-xl-right">Add New Question to This Round</a>
-                            </p>
-                        </div>
-                    @endif
+                    <div class="col-sm-6 col-xs-12">
+                        <p class="text-right-center py-4">
+                            <a href="{{route('questions.new', $id)}}" class="underline text-primary text-xl-right">Add New Question to This Round</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,7 +78,6 @@
 
                 async: true,
                 success: function (data) {
-                    console.log(data);
                     if(data) {
                         let roundid = $("#roundid").val();
                         window.location = "/questions/round/edit/" + roundid;

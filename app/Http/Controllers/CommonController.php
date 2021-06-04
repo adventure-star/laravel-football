@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Answer;
 use App\Model\Fixture;
 use App\Model\Joined;
 use App\Model\Player;
@@ -111,8 +112,13 @@ class CommonController extends Controller
 
         $olddata = Team::where('jid', '=', Auth::id())->where('round', '=', $request->round)->get();
 
+        $oldanswers = Answer::where('jid', '=', Auth::id())->where('round', '=', $request->round)->get();
+
         if(count($olddata) != 0) {
             $data["old"] = $olddata;
+        }
+        if(count($oldanswers) != 0) {
+            $data["oldanswers"] = $oldanswers;
         }
 
         return response()->json($data, 200);
@@ -152,12 +158,7 @@ class CommonController extends Controller
                 'm1' => $request->m1,
                 'm2' => $request->m2,
                 'f1' => $request->f1,
-                'f2' => $request->f2,
-                'q1' => $request->q1,
-                'q2' => $request->q2,
-                'q3' => $request->q3,
-                'q4' => $request->q4,
-                'q5' => $request->q5
+                'f2' => $request->f2
             ]);
 
             Team::where('id', $record->id)->update($data);
@@ -173,12 +174,35 @@ class CommonController extends Controller
             $new->m2 = $request->m2;
             $new->f1 = $request->f1;
             $new->f2 = $request->f2;
-            $new->q1 = $request->q1;
-            $new->q2 = $request->q2;
-            $new->q3 = $request->q3;
-            $new->q4 = $request->q4;
-            $new->q5 = $request->q5;
             $new->save();
+        }
+
+        $pattern = '/^question_/';
+
+        foreach($request->all() as $key=>$value) {
+
+            if(preg_match($pattern, $key)) {
+
+                print_r(number_format(substr($key, 9)));
+
+                $record = Answer::where('jid', '=', Auth::user()->id)->where('round', '=', $request->round)->where('question', '=', number_format(substr($key, 9)))->first();
+                if($record) {
+                    $data = ([
+                            'qinput' => $value
+                        ]);
+                        
+                    Answer::where('id', $record->id)->update($data);
+                } else {
+                    $newanswer = new Answer();
+                    $newanswer->jid = Auth::user()->id;
+                    $newanswer->round = $request->round;
+                    $newanswer->question = number_format(substr($key, 9));
+                    $newanswer->qinput = $value;
+                    $newanswer->save();
+                }
+
+            }
+
         }
 
         return redirect()->route('userteams');

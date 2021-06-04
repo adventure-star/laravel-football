@@ -76,7 +76,6 @@
 
                 async: true,
                 success: function (data) {
-                    console.log(data);
                     if(data) {
                         let qid = $("#questionid").val();
                         window.location = "/questions/answers/" + qid;

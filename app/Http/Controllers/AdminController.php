@@ -249,6 +249,20 @@ class AdminController extends Controller
 
     }
 
+    public function userpaidstatechange(Request $request) {
+
+        $user = User::find($request->id);
+
+        $data = ([
+            'ispaid' => $user->ispaid == 1 ? 0 : 1
+        ]);
+
+        $update = User::where('id', $request->id)->update($data);
+
+        return $update;
+
+    }
+
     public function fixture() {
 
         $fixtures = Fixture::orderBy('round', 'asc')->get();
@@ -418,10 +432,6 @@ class AdminController extends Controller
     public function questionadd(Request $request) {
 
         $questions = Question::where('round', '=', $request->round)->get();
-
-        if(count($questions) >= 5) {
-            return redirect()->back()->withInput();
-        }
 
         $validator = Validator::make($request->all(),
         [

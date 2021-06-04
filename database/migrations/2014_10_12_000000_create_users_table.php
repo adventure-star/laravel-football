@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('ismarketing')->default(0);
             $table->integer('isadmin')->default(0);
+            $table->integer('ispaid')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

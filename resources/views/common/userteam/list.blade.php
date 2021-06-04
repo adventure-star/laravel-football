@@ -28,7 +28,9 @@
                             <th>M2</th>
                             <th>F1</th>
                             <th>F2</th>
-                            <th>Remove</th>
+                            @if(Auth::user()->isadmin == 1)
+                                <th>Remove</th>
+                            @endif
                         </tr>
                         @if(isset($teams) && count($teams) > 0)
                             @foreach($teams as $key => $item)
@@ -42,9 +44,11 @@
                                     <td>{{App\Model\Player::find($item["m2"])["name"]}}</td>
                                     <td>{{App\Model\Player::find($item["f1"])["name"]}}</td>
                                     <td>{{App\Model\Player::find($item["f2"])["name"]}}</td>
-                                    <td>
-                                        <a class="btn btn-success-rgba" onclick="deleteUserTeam({{$item['id']}})"><i class="fa fa-remove"></i></a>
-                                    </td>
+                                    @if(Auth::user()->isadmin == 1)
+                                        <td>
+                                            <a class="btn btn-success-rgba" onclick="deleteUserTeam({{$item['id']}})"><i class="fa fa-remove"></i></a>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         @endif
@@ -75,7 +79,6 @@
 
                 async: true,
                 success: function (data) {
-                    console.log(data);
                     if(data) {
                         window.location = "{{route('userteams')}}";
                     }

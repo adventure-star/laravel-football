@@ -78,7 +78,6 @@
 
                 async: true,
                 success: function (data) {
-                    console.log(data);
                     if(data) {
                         window.location = "{{route('fixtures')}}";
                     }

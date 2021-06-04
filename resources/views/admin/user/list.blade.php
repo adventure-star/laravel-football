@@ -24,6 +24,7 @@
                             <th>UserName</th>
                             <th>Email</th>
                             <th>Marketing</th>
+                            <th>Paid</th>
                             <th>Remove</th>
                         </tr>
                         @if(isset($users) && count($users) > 0)
@@ -34,6 +35,9 @@
                                     <td>{{$item["username"]}}</td>
                                     <td>{{$item["email"]}}</td>
                                     <td>{{$item["ismarketing"] == 1 ? "Yes" : "No"}}</td>
+                                    <td>
+                                        <input type="checkbox" class="cursor-pointer" @if($item["ispaid"] == 1) checked @endif onchange="changepaidstate({{$item['id']}})" />
+                                    </td>
                                     <td>
                                         <a class="btn btn-success-rgba" onclick="deleteUser({{$item['id']}})"><i class="fa fa-remove"></i></a>
                                     </td>
@@ -67,7 +71,6 @@
 
                 async: true,
                 success: function (data) {
-                    console.log(data);
                     if(data) {
                         window.location = "{{route('users')}}";
                     }
@@ -76,6 +79,31 @@
                     console.log("error");
                 }
             });
+        }
+        function changepaidstate(id) {
+            console.log("id-----", id);
+            $.ajax({
+                method: "post",
+                url: "{{route('users.paid')}}",
+                headers: {
+                    'X-CSRF-TOKEN': '<?= csrf_token() ?>'
+                },
+
+                data : JSON.stringify({id : id}),
+                datatype: 'JSON',
+                contentType: 'application/json',
+
+                async: true,
+                success: function (data) {
+                    if(data) {
+                        window.location = "{{route('users')}}";
+                    }
+                },
+                error: function () {
+                    console.log("error");
+                }
+            });
+
         }
     </script>
 
