@@ -27,7 +27,7 @@
                                         <li @if(Route::is('userteams'))class="active"@endif><a href={{route('userteams')}}>userteams</a></li>
                                     @else
                                         <li @if(Route::is('submit'))class="active"@endif><a href={{route('submit')}}>game</a></li>
-                                        <li @if(Route::is('rule'))class="active"@endif><a href={{route('rule')}}>rule</a></li>
+                                        <li @if(Route::is('rule'))class="active"@endif><a href={{route('rule')}}>rules</a></li>
                                         <li @if(Route::is('userteams'))class="active"@endif><a href={{route('userteams')}}>my teams</a></li>
                                     @endif
                                 @else
