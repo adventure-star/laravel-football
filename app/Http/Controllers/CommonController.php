@@ -6,6 +6,7 @@ use App\Model\Answer;
 use App\Model\Fixture;
 use App\Model\Joined;
 use App\Model\Player;
+use App\Model\Point;
 use App\Model\QInput;
 use App\Model\Question;
 use App\Model\RealTeam;
@@ -213,16 +214,117 @@ class CommonController extends Controller
         $user = Auth::user();
         return view('guest.profile', compact('user'));
     }
-    public function userteams() {
+    public function standing(Request $request) {
 
-        if(Auth::user()->isadmin == 1) {
-            $teams = Team::orderBy('round', 'asc')->get();
+        $queryround = $request->query('round');
+
+        $rounds = Round::where('ended', '=', 2)->get();
+
+        if(!!$request->query('round') && $request->query('round') !== 'all') {
+
+            $teams = Team::leftJoin('results', 'teams.id', '=', 'results.team')
+            ->selectRaw('teams.*, results.point as point')
+            ->where('teams.round', $queryround)
+            ->groupBy('teams.id')
+            ->orderBy('point', 'desc')
+            ->get();
+
         } else {
-            $teams = Team::where('jid', '=', Auth::id())->orderBy('round', 'asc')->get();
+            $teams = Team::leftJoin('results', 'teams.id', '=', 'results.team')
+            ->selectRaw('teams.jid, sum(results.point) as point')
+            ->groupBy('teams.jid')
+            ->orderBy('point', 'desc')
+            ->get();
+
+        }
+
+        if(!!$queryround) {
+            return view('common.userteam.standing', compact('rounds', 'teams', 'queryround'));
+        } else {
+            return view('common.userteam.standing', compact('rounds', 'teams'));
         }
         
-        return view('common.userteam.list', compact('teams'));
     }
+
+    public function groupstanding(Request $request) {
+
+        $queryround = $request->query('round');
+
+        $rounds = Round::where('ended', '=', 2)->get();
+
+        if(!!$request->query('round') && $request->query('round') !== 'all') {
+
+            $teams = Team::leftJoin('results', 'teams.id', '=', 'results.team')
+            ->selectRaw('teams.*, results.point as point')
+            ->where('teams.round', $queryround)
+            ->leftJoin('users', 'teams.jid', '=', 'users.id')
+            ->selectRaw('teams.*, users.ispaid as ispaid')
+            ->where('ispaid', 1)
+            ->groupBy('teams.id')
+            ->orderBy('point', 'desc')
+            ->get();
+
+        } else {
+
+            $teams = Team::leftJoin('results', 'teams.id', '=', 'results.team')
+            ->selectRaw('teams.jid, sum(results.point) as point')
+            ->leftJoin('users', 'teams.jid', '=', 'users.id')
+            ->selectRaw('teams.*, users.ispaid as ispaid')
+            ->where('ispaid', 1)
+            ->groupBy('teams.jid')
+            ->orderBy('point', 'desc')
+            ->get();
+
+        }
+
+        if(!!$queryround) {
+            return view('common.userteam.groupstanding', compact('rounds', 'teams', 'queryround'));
+        } else {
+            return view('common.userteam.groupstanding', compact('rounds', 'teams'));
+        }
+        
+    }
+
+    public function userteams(Request $request) {
+
+        if(Auth::user()->isadmin == 1) {
+            $teams = Team::all();
+        } else {
+            $teams = Team::where('jid', Auth::user()->id)->get();
+        }
+
+        return view('common.userteam.list', compact('teams'));
+
+    }
+
+    public function pointdetails($id) {
+
+        $team = Team::find($id);
+
+        $g = Point::where('playerid', '=', $team['g'])->first();
+        $d1 = Point::where('playerid', '=', $team['d1'])->first();
+        $d2 = Point::where('playerid', '=', $team['d2'])->first();
+        $m1 = Point::where('playerid', '=', $team['m1'])->first();
+        $m2 = Point::where('playerid', '=', $team['m2'])->first();
+        $f1 = Point::where('playerid', '=', $team['f1'])->first();
+        $f2 = Point::where('playerid', '=', $team['f2'])->first();
+
+        $answers = Answer::where(['jid' => $team['jid'], 'round' => $team['round']])->get();
+
+        $detail = [
+            'g' => $g,
+            'd1' => $d1,
+            'd2' => $d2,
+            'm1' => $m1,
+            'm2' => $m2,
+            'f1' => $f1,
+            'f2' => $f2,
+        ];
+
+        return view('common.userteam.pointdetail', compact('detail', 'answers'));
+
+    }
+
 
     // public function test() {
 

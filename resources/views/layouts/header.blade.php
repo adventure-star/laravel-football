@@ -24,15 +24,42 @@
                                         <li @if(Route::is('fixtures') || Route::is('fixtures.new') || Route::is('fixtures.edit'))class="active"@endif><a href={{route('fixtures')}}>fixtures</a></li>
                                         <li @if(Route::is('players') || Route::is('players.new') || Route::is('players.edit'))class="active"@endif><a href={{route('players')}}>players</a></li>
                                         <li @if(Route::is('questions') || Route::is('questions.new') || Route::is('questions.edit') || Route::is('questions.answers') || Route::is('questions.round.edit') || Route::is('qinputs.new') || Route::is('qinputs.edit'))class="active"@endif><a href={{route('questions')}}>questions</a></li>
-                                        <li @if(Route::is('userteams'))class="active"@endif><a href={{route('userteams')}}>userteams</a></li>
+                                        <li @if(Route::is('userteams') || Route::is('standing') || Route::is('groupstanding'))class="active"@endif>
+                                            @if(!Route::is('standing') && !Route::is('groupstanding'))
+                                                <a href={{route('userteams')}}>userteams</a>
+                                                <ul>
+                                                    <li><a href={{route('standing')}}>standing</a></li>
+                                                    <li><a href={{route('groupstanding')}}>group standing</a></li>
+                                                </ul>
+                                            @endif
+                                            @if(Route::is('standing'))
+                                                <a href={{route('standing')}}>standing</a>
+                                                <ul>
+                                                    <li><a href={{route('userteams')}}>userTeams</a></li>
+                                                    <li><a href={{route('groupstanding')}}>group standing</a></li>
+                                                </ul>
+                                            @endif
+                                            @if(Route::is('groupstanding'))
+                                                <a href={{route('groupstanding')}}>group standing</a>
+                                                <ul>
+                                                    <li><a href={{route('userteams')}}>userTeams</a></li>
+                                                    <li><a href={{route('standing')}}>standing</a></li>
+                                                </ul>
+                                            @endif
+                                        </li>
                                     @else
                                         <li @if(Route::is('submit'))class="active"@endif><a href={{route('submit')}}>game</a></li>
                                         <li @if(Route::is('rule'))class="active"@endif><a href={{route('rule')}}>rules</a></li>
                                         <li @if(Route::is('userteams'))class="active"@endif><a href={{route('userteams')}}>my teams</a></li>
+                                        <li @if(Route::is('standing'))class="active"@endif><a href={{route('standing')}}>standing</a></li>
+                                        @if(Auth::user()->ispaid == 1)
+                                            <li @if(Route::is('groupstanding'))class="active"@endif><a href={{route('groupstanding')}}>group standing</a></li>
+                                        @endif
                                     @endif
                                 @else
                                     <li @if(Route::is('submit'))class="active"@endif><a href={{route('submit')}}>game</a></li>
                                     <li @if(Route::is('rule'))class="active"@endif><a href={{route('rule')}}>rules</a></li>
+                                    <li @if(Route::is('standing'))class="active"@endif><a href={{route('standing')}}>standing</a></li>
                                 @endif
                                 {{-- <li><a href={{route('pointtable')}}>point table</a></li> --}}
                                 {{-- <li><a href={{route('blog')}}>blog</a>

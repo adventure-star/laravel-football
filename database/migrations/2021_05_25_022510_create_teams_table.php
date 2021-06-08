@@ -24,11 +24,6 @@ class CreateTeamsTable extends Migration
             $table->unsignedBigInteger('m2')->default(0);
             $table->unsignedBigInteger('f1')->default(0);
             $table->unsignedBigInteger('f2')->default(0);
-            $table->unsignedBigInteger('q1')->nullable()->default(0);
-            $table->unsignedBigInteger('q2')->nullable()->default(0);
-            $table->unsignedBigInteger('q3')->nullable()->default(0);
-            $table->unsignedBigInteger('q4')->nullable()->default(0);
-            $table->unsignedBigInteger('q5')->nullable()->default(0);
             $table->timestamps();
 
             $table->foreign('round')->references('id')->on('rounds')->onDelete('cascade');
@@ -39,11 +34,6 @@ class CreateTeamsTable extends Migration
             $table->foreign('m2')->references('id')->on('players')->onDelete('cascade');
             $table->foreign('f1')->references('id')->on('players')->onDelete('cascade');
             $table->foreign('f2')->references('id')->on('players')->onDelete('cascade');
-            // $table->foreign('q1')->references('id')->on('qinputs')->onDelete('cascade');
-            // $table->foreign('q2')->references('id')->on('qinputs')->onDelete('cascade');
-            // $table->foreign('q3')->references('id')->on('qinputs')->onDelete('cascade');
-            // $table->foreign('q4')->references('id')->on('qinputs')->onDelete('cascade');
-            // $table->foreign('q5')->references('id')->on('qinputs')->onDelete('cascade');
 
         });
     }

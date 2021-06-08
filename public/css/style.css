@@ -3543,7 +3543,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   margin-bottom: 30px; }
 .submit-form form {
   margin: 0 -1%; }
-  .submit-form form input[type="text"], .submit-form form input[type="email"], .submit-form form input[type="password"], .submit-form form select {
+  .submit-form form input[type="text"], .submit-form form input[type="email"], .submit-form form input[type="password"], .submit-form form select, .submit-form form input[type="number"] {
     width: 98%;
     margin: 0 1% 20px;
     display: block;
@@ -3554,7 +3554,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     line-height: 24px;
     color: #444; }
     @media only screen and (max-width: 479px) {
-      .submit-form form input[type="text"], .submit-form form input[type="email"], .submit-form form input[type="password"], .submit-form form select {
+      .submit-form form input[type="text"], .submit-form form input[type="email"], .submit-form form input[type="password"], .submit-form form select, .submit-form form input[type="number"] {
         width: 98%; } }
   .submit-form form textarea {
     width: 98%;
@@ -4034,4 +4034,33 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .rule-subheader {
   font-size: 15px;
   font-weight: 600;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.normal-component {
+  width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  border: 1px solid #ddd;
+  height: 44px;
+  padding: 10px 20px 8px;
+  line-height: 24px;
+  color: #444; }
+  @media only screen and (max-width: 479px) {
+    .normal-component {
+      width: 98%; } }
+
+.text-bold {
+  font-weight: 700;
 }

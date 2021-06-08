@@ -27,6 +27,8 @@
                             <th>Value</th>
                             <th>Round</th>
                             <th>Edit</th>
+                            <th>Point</th>
+                            <th>New/Edit</th>
                             <th>Remove</th>
                         </tr>
                         @if(isset($players) && count($players) > 0)
@@ -43,6 +45,10 @@
                                     <td>
                                         <a href="{{route('players.edit', $item['id'])}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>
                                     </td>
+                                    <td>{{App\Model\Point::where('playerid', $item["id"])->first() ? App\Model\Point::where('playerid', $item["id"])->first()->pointtot : ""}}</td>
+                                    <td>
+                                        <a href="{{route('players.pointedit', $item['id'])}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>
+                                    </td>
                                     <td>
                                         <a class="btn btn-success-rgba" onclick="deletePlayer({{$item['id']}})"><i class="fa fa-remove"></i></a>
                                     </td>
@@ -54,8 +60,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-10 col-md-offset-1 col-xs-12">
-                <p class="text-right py-4">
+            <div class="col-sm-6 col-xs-12">
+                <p class="text-left-center py-4">
+                    <a href="{{route('points')}}" class="underline text-primary text-xl-right">Import Points</a>
+                </p>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+                <p class="text-right-center py-4">
                     <a href="{{route('players.new')}}" class="underline text-primary text-xl-right">Add New Player</a>
                 </p>
             </div>

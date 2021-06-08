@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQinputsTable extends Migration
+class CreateResultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateQinputsTable extends Migration
      */
     public function up()
     {
-        Schema::create('qinputs', function (Blueprint $table) {
+        Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('qid');
-            $table->string('input');
+            $table->unsignedBigInteger('round');
+            $table->unsignedBigInteger('team');
             $table->integer('point');
             $table->timestamps();
 
-            $table->foreign('qid')->references('id')->on('questions')->onDelete('cascade');
+            $table->foreign('team')->references('id')->on('teams')->onDelete('cascade');
 
         });
     }
@@ -32,6 +32,6 @@ class CreateQinputsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qinputs');
+        Schema::dropIfExists('results');
     }
 }

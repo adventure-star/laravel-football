@@ -20,6 +20,7 @@
                     <table class="table">
                         <tr>
                             <th>Content</th>
+                            <th>Point</th>
                             <th>Edit</th>
                             <th>Remove</th>
                         </tr>
@@ -28,6 +29,7 @@
                             @foreach($question->qinputs as $key=>$value)
                                 <tr>
                                     <td>{{$value["input"]}}</td>
+                                    <td>{{$value["point"]}}</td>
                                     <td>
                                         <a href="{{route('qinputs.edit', $value['id'])}}" class="btn btn-success-rgba"><i class="fa fa-edit"></i></a>
                                     </td>

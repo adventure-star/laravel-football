@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Answer;
 use App\Model\Fixture;
 use App\Model\Player;
+use App\Model\Point;
 use App\Model\QInput;
 use App\Model\Question;
 use App\Model\RealTeam;
+use App\Model\Result;
 use App\Model\Round;
 use App\Model\Team;
 use App\User;
@@ -14,6 +17,7 @@ use Exception;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -170,6 +174,7 @@ class AdminController extends Controller
         $teams = RealTeam::all();
 
         return view('admin.player.edit', compact('player', 'id', 'rounds', 'teams'));
+
     }
 
     public function playerupdate(Request $request) {
@@ -472,11 +477,19 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(),
         [
-            'input' => 'required|string'
+            'input' => 'required|string',
+            'point' => 'required|numeric'
         ]);
 
+        $qinput = QInput::where(['qid' => QInput::find($request->id)->qid, 'input' => $request->input])->first();
+
+        if(!!$qinput && $qinput->id != $request->id) {
+            return redirect()->back()->withInput();
+        }
+
         $data = ([
-            'input' => $request->input
+            'input' => $request->input,
+            'point' => $request->point
         ]);
 
         if ($validator->fails()) {
@@ -497,15 +510,23 @@ class AdminController extends Controller
         [
             'qid' => 'required|string',
             'input' => 'required|string',
+            'point' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        $qinput = QInput::where(['qid' => $request->qid, 'input' => $request->input])->first();
+
+        if(!!$qinput) {
+            return redirect()->back()->withInput();
+        }
+
         $new = new QInput();
         $new->qid = $request->qid;
         $new->input = $request->input;
+        $new->point = $request->point;
         $new->save();
 
         if($new->id) {
@@ -538,7 +559,7 @@ class AdminController extends Controller
                     return redirect()->back()->withInput();
                 }
     
-                if(!Player::where(['name' =>  $array['name'], 'position' =>  $array['position'], 'value' =>  $array['value']])->first()) {
+                if(!Player::where(['round' =>  $array['round'], 'name' =>  $array['name'], 'position' =>  $array['position'], 'value' =>  $array['value']])->first()) {
 
                     $new = new Player();
     
@@ -604,5 +625,237 @@ class AdminController extends Controller
         }
         
         return $data;
+    }
+
+    public function uploadPoint(Request $request) {
+
+        $path = $request->file('file')->getRealPath();
+
+        $pointArr = $this->csvToArray($path);
+
+        try {
+            for ($i = 0; $i < count($pointArr); $i ++)
+            {
+                $array = [];
+                $keys = [];
+    
+                foreach($pointArr[$i] as $key => $value) {
+                    $array[strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $key))] = $value;
+                    array_push($keys, strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $key)));
+                }
+
+                if($keys != ['round', 'team', 'playerno', 'playing', '60min', 'goal', 'assist', 'decisivegoal', 'owngoal', 'sot', 'penaltywon', 'penaltycommitted', 'penaltysaved', 'penaltymissed', 'bigchancemissed', 'blockedshots', 'saves', 'goalagainst', 'yellow', 'directred', 'mom', 'pointtot']) {
+                    return redirect()->back()->withInput();
+                }
+
+                $player = Player::where(['round' => Round::where('roundno', $array['round'])->first()->id , 'team' => $array['team'], 'no' => $array['playerno']])->first();
+
+                if(!!$player) {
+
+                    $point = Point::where('playerid', $player->id)->first();
+
+                    if($point) {
+
+                        $data = [];
+
+                        foreach($pointArr[$i] as $key => $value) {
+                        
+                            if(!str_contains($key, 'Round') && !str_contains($key, 'Team') && !str_contains($key, 'Player no')) {
+                                $data[strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $key))] = $value;
+                            }
+                        }
+
+                        Point::where('playerid', $player->id)->update($data);
+
+                    } else {
+                        $new = new Point();
+
+                        $new->playerid = $player->id;
+    
+                        foreach($pointArr[$i] as $key => $value) {
+                        
+                            if(!str_contains($key, 'Round') && !str_contains($key, 'Team') && !str_contains($key, 'Player no')) {
+                                $new[strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $key))] = $value;
+                            }
+                        }
+                        $new->saveOrFail();
+                    }
+                    
+                }
+                
+            }
+        } catch(Exception $e) {
+            return redirect()->back()->withInput();
+        }
+     
+        return redirect()->route('players');
+    }
+
+    public function points() {
+        return view('admin.point.upload');
+    }
+    public function pointedit($id) {
+
+        $point = Point::where('playerid', $id)->first();
+
+        return view('admin.point.edit', compact('id', 'point'));
+
+    }
+    public function pointupdateorsave(Request $request) {
+
+        $validator = Validator::make($request->all(),
+        [
+            'playing' => 'required|numeric',
+            '60min' => 'required|numeric',
+            'goal' => 'required|numeric',
+            'assist' => 'required|numeric',
+            'decisivegoal' => 'required|numeric',
+            'owngoal' => 'required|numeric',
+            'sot' => 'required|numeric',
+            'penaltywon' => 'required|numeric',
+            'penaltycommitted' => 'required|numeric',
+            'penaltysaved' => 'required|numeric',
+            'penaltymissed' => 'required|numeric',
+            'bigchancemissed' => 'required|numeric',
+            'blockedshots' => 'required|numeric',
+            'saves' => 'required|numeric',
+            'goalagainst' => 'required|numeric',
+            'yellow' => 'required|numeric',
+            'directred' => 'required|numeric',
+            'mom' => 'required|numeric',
+            'pointtot' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $point = Point::where('playerid', $request->id)->first();
+
+        if(!!$point) {
+
+            $data = ([
+                'playing' => $request->playing,
+                '60min' => $request['60min'],
+                'goal' => $request->goal,
+                'assist' => $request->assist,
+                'decisivegoal' => $request->decisivegoal,
+                'owngoal' => $request->owngoal,
+                'sot' => $request->sot,
+                'penaltywon' => $request->penaltywon,
+                'penaltycommitted' => $request->penaltycommitted,
+                'penaltysaved' => $request->penaltysaved,
+                'penaltymissed' => $request->penaltymissed,
+                'bigchancemissed' => $request->bigchancemissed,
+                'blockedshots' => $request->blockedshots,
+                'saves' => $request->saves,
+                'goalagainst' => $request->goalagainst,
+                'yellow' => $request->yellow,
+                'directred' => $request->directred,
+                'mom' => $request->mom,
+                'pointtot' => $request->pointtot
+            ]);
+
+            $updated = Point::where('playerid', $request->id)->update($data);
+
+
+        } else {
+
+            $new = new Point();
+
+            $new->playerid = $request->id;
+
+            $new->playing = $request->playing;
+            $new['60min'] = $request['60min'];
+            $new->goal = $request->goal;
+            $new->assist = $request->assist;
+            $new->decisivegoal = $request->decisivegoal;
+            $new->owngoal = $request->owngoal;
+            $new->sot = $request->sot;
+            $new->penaltywon = $request->penaltywon;
+            $new->penaltycommitted = $request->penaltycommitted;
+            $new->penaltysaved = $request->penaltysaved;
+            $new->penaltymissed = $request->penaltymissed;
+            $new->bigchancemissed = $request->bigchancemissed;
+            $new->blockedshots = $request->blockedshots;
+            $new->saves = $request->saves;
+            $new->goalagainst = $request->goalagainst;
+            $new->yellow = $request->yellow;
+            $new->directred = $request->directred;
+            $new->mom = $request->mom;
+            $new->pointtot = $request->pointtot;
+
+            $new->save();
+        }
+
+        return redirect()->route('players');
+
+    }
+
+    public function pointcalculate() {
+
+        $rounds = Round::where('ended', 2)->get();
+
+        try {
+
+            for($index = 0 ; $index < count($rounds) ; $index ++) {
+    
+                $teams = Team::where('round', $rounds[$index]->id)->get();
+
+                foreach($teams as $key => $team) {
+
+                    $point = 0;
+    
+                    $point += Point::where('playerid', Player::find($team['g'])->id)->first() ? Point::where('playerid', Player::find($team['g'])->id)->first()->pointtot : 0; 
+                    $point += Point::where('playerid', Player::find($team['d1'])->id)->first() ? Point::where('playerid', Player::find($team['d1'])->id)->first()->pointtot : 0; 
+                    $point += Point::where('playerid', Player::find($team['d2'])->id)->first() ? Point::where('playerid', Player::find($team['d2'])->id)->first()->pointtot : 0; 
+                    $point += Point::where('playerid', Player::find($team['m1'])->id)->first() ? Point::where('playerid', Player::find($team['m1'])->id)->first()->pointtot : 0; 
+                    $point += Point::where('playerid', Player::find($team['m2'])->id)->first() ? Point::where('playerid', Player::find($team['m2'])->id)->first()->pointtot : 0; 
+                    $point += Point::where('playerid', Player::find($team['f1'])->id)->first() ? Point::where('playerid', Player::find($team['f1'])->id)->first()->pointtot : 0; 
+                    $point += Point::where('playerid', Player::find($team['f2'])->id)->first() ? Point::where('playerid', Player::find($team['f2'])->id)->first()->pointtot : 0;
+
+                    $answers = Answer::where(['jid' => $team['jid'], 'round' => $team['round']])->get();
+
+                    foreach($answers as $key => $answer) {
+
+                        $qinput = QInput::find($answer['qinput']);
+
+                        if(!!$qinput) {
+                            $point += $qinput->point;
+                        }
+
+                    }
+        
+                    $result = Result::where(['round' => $rounds[$index]->id, 'team' => $team->id])->first();
+        
+                    if($result) {
+        
+                        $data = [
+                            'point' => $point
+                        ];
+        
+                        $updated = Result::where('id', $result->id)->update($data);
+        
+                    } else {
+        
+                        $new = new Result();
+        
+                        $new->round = $rounds[$index]->id;
+                        $new->team = $team->id;
+                        $new->point = $point;
+            
+                        $new->save();
+                        
+                    }
+                }
+              
+            }
+
+            return 1;
+
+        } catch (Exception $e) {
+            return 0;
+        }
+
     }
 }

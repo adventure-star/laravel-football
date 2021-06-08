@@ -13,7 +13,6 @@
 <div id="fixtures-area" class="fixtures-area section pb-120 pt-120">
     <div class="container">
         <div class="row">
-            
             <div class="col-md-12 col-xs-12 text-center">
                 <!-- Fixtures Table -->
                 <div class="table-responsive fixtures-table">
@@ -36,7 +35,7 @@
                             @foreach($teams as $key => $item)
                                 <tr>
                                     <td>{{App\User::find($item["jid"])["teamname"]}}</td>
-                                    <td>{{$item["round"]}}</td>
+                                    <td>{{App\Model\Round::find($item["round"])["roundno"] }}</td>
                                     <td>{{App\Model\Player::find($item["g"])["name"]}}</td>
                                     <td>{{App\Model\Player::find($item["d1"])["name"]}}</td>
                                     <td>{{App\Model\Player::find($item["d2"])["name"]}}</td>

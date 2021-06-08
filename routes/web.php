@@ -46,6 +46,9 @@ Route::get('/profile', 'CommonController@profile')->name('profile')->middleware(
 
 // Common routes
 Route::get('/userteams', 'CommonController@userteams')->name('userteams')->middleware('auth');
+Route::get('/standing', 'CommonController@standing')->name('standing');
+Route::get('/group-standing', 'CommonController@groupstanding')->name('groupstanding')->middleware('auth')->middleware('paid');
+Route::get('/pointdetails/{id}', 'CommonController@pointdetails')->name('pointdetails')->middleware('auth');
 
 
 // Admin routes
@@ -69,6 +72,8 @@ Route::get('/players', 'AdminController@players')->name('players');
 Route::get('/players/new', 'AdminController@playernew')->name('players.new');
 Route::post('/players/add', 'AdminController@playeradd')->name('players.new.save');
 Route::get('/players/edit/{id}', 'AdminController@playeredit')->name('players.edit');
+Route::get('/players/point/edit/{id}', 'AdminController@pointedit')->name('players.pointedit');
+Route::post('/players/point/update', 'AdminController@pointupdateorsave')->name('players.pointupdate');
 Route::post('/players/update', 'AdminController@playerupdate')->name('players.update');
 Route::post('/players/delete', 'AdminController@playerdelete')->name('players.delete');
 
@@ -99,6 +104,11 @@ Route::post('/qinputs/update', 'AdminController@qinputupdate')->name('qinputs.up
 Route::post('/qinputs/delete', 'AdminController@qinputdelete')->name('qinputs.delete');
 
 Route::post('/uploads/player', 'AdminController@uploadplayer')->name('uploads.player');
+Route::post('/uploads/point', 'AdminController@uploadpoint')->name('uploads.point');
+
+Route::get('/points', 'AdminController@points')->name('points');
+Route::post('/points/calculate', 'AdminController@pointcalculate')->name('points.calculate');
+
 
 
 

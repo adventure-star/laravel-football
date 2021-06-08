@@ -21,10 +21,16 @@
                         <h4>New Answer</h4>
                         <input class="hidden" name="qid" value={{$id}} />
                         <div class="row">
-                            <div class="col-md-6 col-md-offset-3 col-xs-12">
+                            <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Content</p>
                                     <input type="text" name="input" value="{{old('input')}}" required />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="w-100 maxwidth-200 mx-auto">
+                                    <p class="player-label">Point</p>
+                                    <input type="number" name="point" value="{{old('point')}}" required />
                                 </div>
                             </div>
                         </div>

@@ -21,10 +21,16 @@
                         <h4>Edit QInput</h4>
                         <input class="hidden" name="id" value={{$id}} />
                         <div class="row">
-                            <div class="col-md-6 col-md-offset-3 col-xs-12">
+                            <div class="col-md-6 col-xs-12">
                                 <div class="w-100 maxwidth-200 mx-auto">
                                     <p class="player-label">Content</p>
                                     <input type="text" name="input" @if(isset($qinput)) value="{{$qinput["input"]}}"@endif />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="w-100 maxwidth-200 mx-auto">
+                                    <p class="player-label">Point</p>
+                                    <input type="number" name="point" @if(isset($qinput)) value="{{$qinput["point"]}}"@endif />
                                 </div>
                             </div>
                         </div>
