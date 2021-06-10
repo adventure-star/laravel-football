@@ -52,9 +52,15 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(),
         [
-            'roundno' => 'required|string|unique:rounds',
+            'roundno' => 'required|string',
             'ended' => 'required|string',
         ]);
+
+        $round = Round::where(['roundno' => $request->roundno])->first();
+
+        if(!!$round && $round->id != $request->id) {
+            return redirect()->back()->withInput();
+        }
 
         $data = ([
             'roundno' => $request->roundno,
@@ -115,12 +121,18 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(),
         [
-            'name' => 'required|string|unique:realteams',
+            'name' => 'required|string',
         ]);
 
         $data = ([
             'name' => $request->name,
         ]);
+
+        $team = RealTeam::where(['name' => $request->name])->first();
+
+        if(!!$team && $team->id != $request->id) {
+            return redirect()->back()->withInput();
+        }
 
         if ($validator->fails() && $request->id != RealTeam::where('name', '=',$request->name)->first()->id) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -195,6 +207,12 @@ class AdminController extends Controller
             'position' => $request->position,
             'value' => $request->value,
         ]);
+
+        $player = Player::where(['name' => $request->name, 'team' => $request->team, 'round' => $request->round])->first();
+
+        if(!!$player && $player->id != $request->id) {
+            return redirect()->back()->withInput();
+        }
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -294,6 +312,12 @@ class AdminController extends Controller
             'cet' => 'required|string',
         ]);
 
+        $fixture = Fixture::where(['round' => $request->round, 'teama' => $request->teama, 'teamb' => $request->teamb])->first();
+
+        if(!!$fixture && $fixture->id != $request->id) {
+            return redirect()->back()->withInput();
+        }
+
         if($request->teama == $request->teamb) {
             return redirect()->back()->withInput();
         }
@@ -332,6 +356,12 @@ class AdminController extends Controller
             'date' => 'required|string',
             'cet' => 'required|string',
         ]);
+
+        $fixture = Fixture::where(['round' => $request->round, 'teama' => $request->teama, 'teamb' => $request->teamb])->first();
+
+        if(!!$fixture) {
+            return redirect()->back()->withInput();
+        }
 
         if($request->teama == $request->teamb) {
             return redirect()->back()->withInput();
@@ -399,12 +429,21 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(),
         [
+            'number' => 'required|string',
             'text' => 'required|string'
         ]);
 
         $data = ([
+            'number' => $request->number,
             'text' => $request->text
         ]);
+
+        
+        $question = Question::where(['number' => $request->number, 'text' => $request->text])->first();
+
+        if(!!$question && $question->id != $request->id) {
+            return redirect()->back()->withInput();
+        }
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();

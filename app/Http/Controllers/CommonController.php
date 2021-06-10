@@ -290,7 +290,7 @@ class CommonController extends Controller
         if(Auth::user()->isadmin == 1) {
             $teams = Team::all();
         } else {
-            $teams = Team::where('jid', Auth::user()->id)->get();
+            $teams = Team::where('jid', Auth::user()->id)->orderBy('round', 'asc')->get();
         }
 
         return view('common.userteam.list', compact('teams'));
