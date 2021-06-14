@@ -402,12 +402,14 @@ class AdminController extends Controller
      
         $rounds = Round::all();
 
+        $rawquestions = Question::all();
+
         for($x = 0 ; $x < count($rounds) ; $x++) {
 
             $state = true;
 
-            for($y = 1 ; $y <= count($questions) ; $y++) {
-                if($rounds[$x]['id'] == $questions[$y][0]['round']) {
+            for($y = 0 ; $y < count($rawquestions) ; $y++) {
+                if($rounds[$x]['id'] == $rawquestions[$y]['round']) {
                     $state = false;
                 }
             }
@@ -475,7 +477,11 @@ class AdminController extends Controller
     }
     public function questionadd(Request $request) {
 
-        $questions = Question::where('round', '=', $request->round)->get();
+        $question = Question::where(['round' => $request->round, 'number' => $request->number])->first();
+
+        if(!!$question) {
+            return redirect()->back()->withInput();
+        }
 
         $validator = Validator::make($request->all(),
         [

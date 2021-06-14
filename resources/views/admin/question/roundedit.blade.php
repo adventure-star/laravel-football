@@ -15,7 +15,7 @@
         <div class="row text-center">
             <!-- Contact Form -->
             <div class="col-sm-10 col-sm-offset-1 col-xs-12 mb-30">
-                <p class="question-title pb-10">Round: @if(isset($id)) {{$id}} @endif</p>
+                <p class="question-title pb-10">Round: @if(isset($id)) {{App\Model\Round::find($id)['roundno']}} @endif</p>
                 <div class="table-responsive fixtures-table">
                     <table class="table">
                         <tr>
