@@ -39,9 +39,31 @@
                                         <input type="checkbox" class="cursor-pointer" @if($item["ispaid"] == 1) checked @endif onchange="changepaidstate({{$item['id']}})" />
                                     </td>
                                     <td>
-                                        <a class="btn btn-success-rgba" onclick="deleteUser({{$item['id']}})"><i class="fa fa-remove"></i></a>
+                                        <a class="btn btn-success-rgba" data-toggle="modal" data-target="#deletemodal{{$item['id']}}"><i class="fa fa-remove"></i></a>
                                     </td>
                                 </tr>
+                                <div class="modal fade" id="deletemodal{{$item['id']}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="vertical-alignment-helper">
+                                        <div class="modal-dialog vertical-align-center">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                                
+                                                    </button>
+                                                    <h4 class="modal-title" id="myModalLabel">Sofa League</h4>
+                                
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="font-24">Do you want to remove this user?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary float-left" data-dismiss="modal">No</button>
+                                                    <button type="button" class="btn btn-danger" onclick="deleteUser({{$item['id']}})">Yes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
                         @endif
                     </table>

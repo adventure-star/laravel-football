@@ -4064,3 +4064,41 @@ input[type=number] {
 .text-bold {
   font-weight: 700;
 }
+.pt-4 {
+  padding-top: 20px;
+}
+
+.vertical-alignment-helper {
+  display:table;
+  height: 100%;
+  width: 100%;
+  pointer-events:none;
+}
+.vertical-align-center {
+  /* To center vertically */
+  display: table-cell;
+  vertical-align: middle;
+  pointer-events:none;
+}
+.modal-content {
+  /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+  width:inherit;
+  max-width:inherit; /* For Bootstrap 4 - to avoid the modal window stretching full width */
+  height:inherit;
+  /* To center horizontally */
+  margin: 0 auto;
+  pointer-events:all;
+}
+
+.modal-dialog {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.font-24 {
+  font-size: 24px;
+}
+
+.font-14 {
+  font-size: 14px;
+}
